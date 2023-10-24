@@ -4,6 +4,7 @@ namespace MyCareerServer.FreelanceModels
 {
     public class Education
     {
+        public int? Id { get; set; }
         public string? InstituteName { get; set; }
         public string? Degree { get; set; }
         public string? Major { get; set; }

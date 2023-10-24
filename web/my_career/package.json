@@ -8,7 +8,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vitejs/plugin-vue-jsx": "^3.0.2",
     "axios": "^1.5.1",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4",
     "vuex": "^4.1.0",

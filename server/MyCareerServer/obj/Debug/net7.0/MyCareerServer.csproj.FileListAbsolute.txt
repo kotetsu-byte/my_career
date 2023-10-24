@@ -40,3 +40,5 @@ D:\Jobs\NAPA\Internship\Tasks\MyCareer\server\MyCareerServer\obj\Debug\net7.0\re
 D:\Jobs\NAPA\Internship\Tasks\MyCareer\server\MyCareerServer\obj\Debug\net7.0\MyCareerServer.pdb
 D:\Jobs\NAPA\Internship\Tasks\MyCareer\server\MyCareerServer\obj\Debug\net7.0\MyCareerServer.genruntimeconfig.cache
 D:\Jobs\NAPA\Internship\Tasks\MyCareer\server\MyCareerServer\obj\Debug\net7.0\ref\MyCareerServer.dll
+D:\Jobs\NAPA\Internship\Tasks\MyCareer\server\MyCareerServer\bin\Debug\net7.0\Npgsql.dll
+D:\Jobs\NAPA\Internship\Tasks\MyCareer\server\MyCareerServer\bin\Debug\net7.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll

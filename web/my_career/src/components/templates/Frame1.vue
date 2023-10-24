@@ -98,6 +98,9 @@ export default {
             
         }
     },
+    props: {
+        className: String
+    },
     methods: {
         setVerticalHrWith() {
             var height = document.getElementById("for-hr").offsetHeight;
@@ -117,7 +120,6 @@ export default {
 <style scoped>
 .container {
     width: 600px;
-    min-width: 600px;
     height: max-content;
     border-radius: 12px;
 }
@@ -143,6 +145,6 @@ main {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-self: center;
+    align-items: center;
 }
 </style>

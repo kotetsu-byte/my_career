@@ -1,10 +1,10 @@
 ﻿using MyCareerServer.FreelanceModels;
 
-namespace MyCareerServer.Interfaces
+namespace MyCareerServer.Freelance_Interfaces
 {
-    public interface IFreelanceRepository
+    public interface IResumeRepository
     {
-        Task<Resume> GetResumeByEmail(string email);
+        Task<IEnumerable<Resume>> GetResumesByEmailAsync(string email);
         bool Create(Resume resume);
         bool Update(Resume resume);
         bool Delete(Resume resume);
