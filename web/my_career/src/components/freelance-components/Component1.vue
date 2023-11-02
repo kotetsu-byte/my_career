@@ -1,31 +1,31 @@
 <template>    
-    <div style="text-align: center; margin-bottom: 10px;">
+    <div class="text-center mb-10">
         <div class="file-upload"> 
             <label for="photo-input">
-                <img src="../../assets/icons/photo/photo.png" width="100" height="100" style="cursor: pointer;" alt="" id="photo">
+                <img class="pointer" :src="photo" width="100" height="100" id="photo" />
             </label>
-            <input type="file" id="photo-input" style="display: none;" @change="addPhoto">
+            <input class="display-none" type="file" id="photo-input" @change="addPhoto($event)">
         </div>
-        <p style="font-size: 18px; font-weight: 500; color: #808080;">Add your profile photo</p>
+        <p class="f-18-w-500 color-1">Add your profile photo</p>
     </div>
-    <div class="flex-div" style="margin: 10px 0;">
-        <div style="margin-right: 10px;">
-            <label><span style="font-size: 18px; font-weight: 500; color: #323232;">First name*</span></label><br>
-            <input v-model="firstName" type="text" @input="" style="padding: 15px 20px; border-radius: 8px; border: 1px solid #CDCDCD; font-size: 20px; font-weight: 500; width: 80%;">
+    <div ref="" class="flex-div mtb-10">
+        <div class="mr-10">
+            <label><span class="f-18-w-500 color-2">First name*</span></label><br>
+            <input class="input" v-model="firstName" type="text">
         </div>
         <div>
-            <label><span style="font-size: 18px; font-weight: 500; color: #323232;">Last name*</span></label><br>
-            <input v-model="lastName" type="text" @input="" style="padding: 15px 20px; border-radius: 8px; border: 1px solid #CDCDCD; font-size: 20px; font-weight: 500; width: 80%;">
+            <label><span class="f-18-w-500 color-2">Last name*</span></label><br>
+            <input class="input" v-model="lastName" type="text">
         </div>
     </div>
     <div class="flex-div" style="margin: 5px 0;">
         <div style="margin-right: 10px;">
-            <label><span style="font-size: 18px; font-weight: 500; color: #323232;">E-mail*</span></label><br>
-            <input v-model="email" type="email" @input="" style="padding: 15px 20px; border-radius: 8px; border: 1px solid #CDCDCD; font-size: 20px; font-weight: 500; width: 80%;">
+            <label><span class="f-18-w-500 color-2">E-mail*</span></label><br>
+            <input class="input" v-model="email" type="email">
         </div>
         <div>
-            <label><span style="font-size: 18px; font-weight: 500; color: #323232;">Phone number*</span></label><br>
-            <input v-model="phoneNumber" type="tel" @input="" style="padding: 15px 20px; border-radius: 8px; border: 1px solid #CDCDCD; font-size: 20px; font-weight: 500; width: 80%;">
+            <label><span class="f-18-w-500 color-2">Phone number*</span></label><br>
+            <input class="input" v-model="phoneNumber" type="tel">
         </div>    
     </div>
 </template>
@@ -38,7 +38,7 @@ export default {
     components: {},
     data() {
         return {
-            photo: '',
+            photo: '../../src/assets/icons/photo/photo.png',
             firstName: '',
             lastName: '',
             email: '',
@@ -50,16 +50,16 @@ export default {
     },
     methods: {
         ...mapActions(['setComponent1Data']),
-        addPhoto() {
-            var image = document.querySelector("#photo-input").files[0];
-            console.log(image);
-            this.photo = image;
-            var reader = new FileReader();
-            reader.readAsDataURL(image);
-            reader.onload = function() {
-                document.querySelector("#photo").src = reader.result;
+        addPhoto(event) {
+            let reader = new FileReader();
+            reader.readAsDataURL(event.target.files[0]);
+            reader.onloadend = () => {
+                this.photo = reader.result;
                 console.log(reader.result);
             }
+        },
+        saveImg() {
+
         },
         sendComponentDataToStore() {
             var obj = {
@@ -70,7 +70,7 @@ export default {
                 phoneNumber: this.phoneNumber
             };
             this.setComponent1Data(obj);
-            this.$emit('nextPage', null);
+            this.$emit('nextPrevPage', null);
         }
     },
     watch: {
@@ -118,5 +118,51 @@ export default {
 .grid-div {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.display-none {
+    display: none;
+}
+
+.f-18-w-500 {
+    font-size: 18px; 
+    font-weight: 500; 
+}
+
+.color-1 {
+    color: #808080;
+}
+
+.color-2 {
+    color: #323232;
+}
+
+.input {
+    padding: 15px 20px; 
+    border-radius: 8px; 
+    border: 1px solid #CDCDCD; 
+    font-size: 20px; 
+    font-weight: 500; 
+    width: 80%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.mtb-10 {
+    margin: 10px 0;
+}
+
+.mr-10 {
+    margin-right: 10px 0;
 }
 </style>

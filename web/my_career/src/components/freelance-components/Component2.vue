@@ -1,16 +1,16 @@
 <template>
-    <p style="font-size: 30px; font-weight: 700; margin-bottom: 10px;">Welcome dilmurod</p>
-    <p style="font-size: 18px; font-weight: 500; color: #323232; margin-bottom: 10px;">Complete your profile to join our global community of freelancers and start selling your services to our growing network of businesses.</p>
-    <label for=""><span style="font-size: 18px; font-weight: 500; color: #323232;">Living address</span></label>
-    <div class="flex-div" style="margin: 10px 0;">
-        <div style="margin-right: 10px 0;">
-            <input type="text" v-model="country" placeholder="Country*" style="padding: 15px 20px; border-radius: 8px; border: 1px solid #CDCDCD; font-size: 20px; font-weight: 500; width: 80%;">
+    <p class="f-30-w-700 mb-10">Welcome dilmurod</p>
+    <p class="f-18-w-500-c mb-10">Complete your profile to join our global community of freelancers and start selling your services to our growing network of businesses.</p>
+    <label for=""><span class="f-18-w-500">Living address</span></label>
+    <div class="flex-div mtb-10">
+        <div class="mr-10">
+            <input class="input w-80" type="text" v-model="country" placeholder="Country*">
         </div>
         <div>
-            <input type="text" v-model="region" placeholder="Region*" style="padding: 15px 20px; border-radius: 8px; border: 1px solid #CDCDCD; font-size: 20px; font-weight: 500; width: 80%;">
+            <input class="input w-80" type="text" v-model="region" placeholder="Region*">
         </div>
     </div>
-    <input type="text" v-model="street" placeholder="Street, apartment" style="padding: 15px 20px; border-radius: 8px; border: 1px solid #CDCDCD; font-size: 20px; font-weight: 500; width: 90%;"><br>
+    <input class="input w-90" type="text" v-model="street" placeholder="Street, apartment"><br>
 </template>
 
 <script>
@@ -38,7 +38,7 @@ export default {
                 street: this.street
             };
             this.setComponent2Data(obj);
-            this.$emit('nextPage', null);
+            this.$emit('nextPrevPage', null);
         }
     },
     watch: {
@@ -84,5 +84,49 @@ export default {
 .grid-div {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+}
+
+.f-30-w-700 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.f-18-w-500 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.f-18-w-500-c {
+    font-size: 18px; 
+    font-weight: 500; 
+    color: #323232;
+}
+
+.mtb-10 {
+    margin: 10px 0;
+}
+
+.mr-10 {
+    margin-right: 10px 0;
+}
+
+.input {
+    padding: 15px 20px; 
+    border-radius: 8px; 
+    border: 1px solid #CDCDCD; 
+    font-size: 20px; 
+    font-weight: 500;
+}
+
+.w-80 {
+    width: 80%;
+}
+
+.w-90 {
+    width: 90%;
 }
 </style>

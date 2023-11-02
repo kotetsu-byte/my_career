@@ -1,10 +1,12 @@
 ﻿using MyCareerServer.FreelanceModels;
 
-namespace MyCareerServer.Freelance_Interfaces
-{
-    public interface IEducationRepository
-    {
-        Task<IEnumerable<Education>> GetEducationsById(int id);
+namespace MyCareerServer.Freelance_Interfaces;
 
-    }
+public interface IEducationRepository
+{
+    Task<IEnumerable<Education>> GetEducations(int resumeId);
+    bool Create(Education education);
+    bool Update(Education education);
+    bool Delete(Education education);
+    bool Save();
 }

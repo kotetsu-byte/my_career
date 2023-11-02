@@ -1,0 +1,129 @@
+<template>
+    <div class="super-container">
+        <div style="margin: auto; width: 50%;">
+            <p style="font-size: 50px; font-weight: 700; text-align: center;">Your Resume<br> is Done!</p>
+            <div style="background-color: white; background-image: none;">
+                <component 
+                    :is="frameName"
+                    :photo="getComponent1Data.photo"
+                    :firstName="getComponent1Data.firstName"
+                    :lastName="getComponent1Data.lastName"
+                    :email="getComponent1Data.email"
+                    :phoneNumber="getComponent1Data.phoneNumber"
+                    :country="getComponent2Data.country"
+                    :region="getComponent2Data.region"
+                    :street="getComponent2Data.street"
+                    :position="getComponent3Data.position"
+                    :dateOfBirth="getComponent3Data.dateOfBirth"
+                    :skills="getComponent3Data.skills"
+                    :hobbies="getComponent3Data.hobbies"
+                    :selfDescription="getComponent3Data.selfDescription"
+                    :languages="getComponent4Data"
+                    :experience="getComponent5Data"
+                    :education="getComponent6Data"
+                    :contacts="getComponent7Data.contacts"
+                ></component>
+            </div>
+        </div>
+        <div style="float: right; text-align: center; width: 20%;">
+            <button @click="sendDataToBackend()">Finish</button>
+        </div>
+    </div>
+</template>
+
+<script>
+import Frame1 from '../components/templates/Frame1.vue';
+import Frame2 from '../components/templates/Frame2.vue';
+import Frame3 from '../components/templates/Frame3.vue';
+import Frame4 from '../components/templates/Frame4.vue';
+import Frame5 from '../components/templates/Frame5.vue';
+import Frame6 from '../components/templates/Frame6.vue';
+import { mapGetters } from 'vuex';
+import API from '../api/index.js';
+
+export default {
+    name: 'Ready',
+    components: {Frame1, Frame2, Frame3, Frame4, Frame5, Frame6},
+    data() {
+        return {
+            frameName: '',
+        }
+    },
+    methods: {
+        getFrameByNo(number) {
+            console.log(number);
+            switch(number) {
+                case 1:
+                    this.frameName = 'Frame1';
+                    break;
+                case 2:
+                    this.frameName = 'Frame2';
+                    break;
+                case 3:
+                    this.frameName = 'Frame3';
+                    break;
+                case 4:
+                    this.frameName = 'Frame4';
+                    break;
+                case 5:
+                    this.frameName = 'Frame5';
+                    break;
+                case 6:
+                    this.frameName = 'Frame6';
+                    break;
+            }
+        },
+        sendDataToBackend() {
+            var obj = 
+            {
+                firstName: this.getComponent1Data.firstName,
+                lastName: this.getComponent1Data.lastName,
+                email: this.getComponent1Data.email,
+                phoneNumber: this.getComponent1Data.phoneNumber,
+                imageURL: this.getComponent1Data.photo,
+                country: this.getComponent2Data.country,
+                region: this.getComponent2Data.region,
+                street: this.getComponent2Data.street,
+                position: this.getComponent3Data.position,
+                dateOfBirth: this.getComponent3Data.dateOfBirth,
+                skills: this.getComponent3Data.skills,
+                hobbies: this.getComponent3Data.hobbies,
+                aboutSelf: this.getComponent3Data.selfDescription,
+                templateNo: this.getComponent8Data.selectedTemplate,
+            }
+            API.post('/api/Freelance', obj)
+                .then(res => {
+                    var resumeId = res.data;
+                    API.post('/api/Freelance/')
+                        .then(res => {
+                            
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        });
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+    },
+    computed: {
+        ...mapGetters(['getComponent1Data', 'getComponent2Data', 'getComponent3Data', 'getComponent4Data', 'getComponent5Data', 'getComponent6Data', 'getComponent7Data', 'getComponent8Data']),
+        getComponentsData() {
+            this.getFrameByNo(this.getComponent8Data.selectedTemplate);
+            console.log(this.getComponent5Data);
+        }
+    },
+    mounted() {
+        this.getComponentsData;
+    }
+}
+</script>
+
+<style scoped>
+.super-container {
+    padding-top: 200px;
+    width: 100%;
+    background: url(../assets/img/logo.png) no-repeat;
+}
+</style>

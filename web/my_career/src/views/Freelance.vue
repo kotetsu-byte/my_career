@@ -1,19 +1,19 @@
-<template> 
+<template>
     <div id="cont">
         <button onclick="location.href = '/login'">Back to log in</button>
         <div class="container">
-            <component :is="componentName" :saveToStore="savingCompnentsData" @nextPage="next" @hideNavigation="hideNav" @showNavigation="showNav"></component>
+            <component :is="componentName" :saveToStore="savingCompnentsData" @nextPrevPage="nextOrPrev" @hideNavigation="hideNav" @showNavigation="showNav"></component>
             <div style="text-align: right;">
-                <div id="navigation">
-                    <button v-if="!(sectionNo == 1)" @click="prev()" style="margin-top: 10px; background-color: white; border: 1px solid #1D71B8; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px;">Prev</button>
-                    <button v-if="!(sectionNo == 8)" @click="save()" style="margin-top: 10px; background-color: white; border: 1px solid #1D71B8; padding: 10px 20px; border-radius: 8px; cursor: pointer;">Next</button>
+                <div id="navigation" v-if="isNavShown">
+                    <button v-if="!(sectionNo == 1)" @click="save('prev')" style="margin-top: 10px; background-color: white; border: 1px solid #1D71B8; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px;">Prev</button>
+                    <button @click="save('next')" style="margin-top: 10px; background-color: white; border: 1px solid #1D71B8; padding: 10px 20px; border-radius: 8px; cursor: pointer;">Next</button>
                 </div>
             </div>
         </div>
     </div>
 </template>
 
-<script lang="jsx">
+<script>
 import Component1 from '../components/freelance-components/Component1.vue';
 import Component2 from '../components/freelance-components/Component2.vue';
 import Component3 from '../components/freelance-components/Component3.vue';
@@ -22,7 +22,6 @@ import Component5 from '../components/freelance-components/Component5.vue';
 import Component6 from '../components/freelance-components/Component6.vue';
 import Component7 from '../components/freelance-components/Component7.vue';
 import Component8 from '../components/freelance-components/Component8.vue';
-
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -31,21 +30,32 @@ export default {
     data() {
         return {
             sectionNo: 0,
-            compo: null,
-            savingCompnentsData: false
+            componentName: null,
+            savingCompnentsData: false,
+            isNext: null,
+            isNavShown: true
         }
     },
     methods: {
         ...mapActions(['setSectionNo']),
-        save() {
-            if((this.sectionNo > 4) && (this.sectionNo < 8))
+        save(where) {
+            if(where == 'prev') {
+                this.isNext = false;
+            }
+            if(where == 'next') {
+                this.isNext = true;
+            }
+            if((this.sectionNo > 4) && (this.sectionNo < 7))
             {
-                this.next();
+                this.nextOrPrev();
             } else {
                 this.savingCompnentsData = true;
             }
         },
         next() {
+            if(this.sectionNo >= 8) {
+                this.$router.push('/ready');
+            }
             if(this.sectionNo < 8) {
                 this.sectionNo++;
             }
@@ -59,6 +69,15 @@ export default {
             }
             this.setSectionNo(this.sectionNo);
             this.showComponenet();
+            this.savingCompnentsData = false;
+        },
+        nextOrPrev() {
+            if(this.isNext === true) {
+                this.next();
+            }
+            if(this.isNext === false) {
+                this.prev();
+            }
         },
         showComponenet() {
             switch(this.sectionNo) {
@@ -89,10 +108,10 @@ export default {
             }
         },
         hideNav() {
-            document.querySelector('#navigation').style.display = 'none';
+            this.isNavShown = false;
         },
         showNav() {
-            document.querySelector('#navigation').style.display = 'block';
+            this.isNavShown = true;
         },
     },
     computed: {

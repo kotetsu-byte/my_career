@@ -4,12 +4,19 @@ import Login from '../views/Login.vue';
 import ResumeType from '../views/ResumeType.vue'
 import Freelance from '../views/Freelance.vue'
 import Company from '../views/Company.vue'
+import Ready from '../views/Ready.vue';
 import Frame1 from '../components/templates/Frame1.vue';
 import Frame2 from '../components/templates/Frame2.vue';
 import Frame3 from '../components/templates/Frame3.vue';
 import Frame4 from '../components/templates/Frame4.vue';
 import Frame5 from '../components/templates/Frame5.vue';
 import Frame6 from '../components/templates/Frame6.vue';
+import CompanyFrame1 from '../components/company-templates/Frame1.vue';
+import CompanyFrame2 from '../components/company-templates/Frame2.vue';
+import CompanyFrame3 from '../components/company-templates/Frame3.vue';
+import CompanyFrame4 from '../components/company-templates/Frame4.vue';
+import CompanyFrame5 from '../components/company-templates/Frame5.vue';
+import CompanyFrame6 from '../components/company-templates/Frame6.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +47,11 @@ const router = createRouter({
       component: Company
     },
     {
+      path: '/ready',
+      name: 'Ready',
+      component: Ready
+    },
+    {
       path: '/frame1',
       name: 'Frame 1',
       component: Frame1
@@ -68,6 +80,36 @@ const router = createRouter({
       path: '/frame6',
       name: 'Frame 6',
       component: Frame6
+    },
+    {
+      path: '/company-frame-1',
+      name: 'Company Frame 1',
+      component: CompanyFrame1
+    },
+    {
+      path: '/company-frame-2',
+      name: 'Company Frame 2',
+      component: CompanyFrame2
+    },
+    {
+      path: '/company-frame-3',
+      name: 'Company Frame 3',
+      component: CompanyFrame3
+    },
+    {
+      path: '/company-frame-4',
+      name: 'Company Frame 4',
+      component: CompanyFrame4
+    },
+    {
+      path: '/company-frame-5',
+      name: 'Company Frame 5',
+      component: CompanyFrame5
+    },
+    {
+      path: '/company-frame-6',
+      name: 'Company Frame 6',
+      component: CompanyFrame6
     }
   ]
 })

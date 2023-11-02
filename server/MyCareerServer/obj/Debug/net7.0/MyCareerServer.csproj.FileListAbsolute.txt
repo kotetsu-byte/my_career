@@ -42,3 +42,4 @@ D:\Jobs\NAPA\Internship\Tasks\MyCareer\server\MyCareerServer\obj\Debug\net7.0\My
 D:\Jobs\NAPA\Internship\Tasks\MyCareer\server\MyCareerServer\obj\Debug\net7.0\ref\MyCareerServer.dll
 D:\Jobs\NAPA\Internship\Tasks\MyCareer\server\MyCareerServer\bin\Debug\net7.0\Npgsql.dll
 D:\Jobs\NAPA\Internship\Tasks\MyCareer\server\MyCareerServer\bin\Debug\net7.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\Jobs\NAPA\Internship\Tasks\MyCareer\server\MyCareerServer\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

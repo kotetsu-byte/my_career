@@ -16,7 +16,6 @@
                     </div>
                 </div>
             </div>
-            
         </div>
         <div id="right">
             <button>&lt; Back</button><br>

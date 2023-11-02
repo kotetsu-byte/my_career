@@ -16,7 +16,6 @@
             <img style="margin-right: 20px;" src="../assets/icons/outer-register/google.png" alt="Google">
             <img src="../assets/icons/outer-register/apple.png" alt="Apple">
         </div>
-        
     </div>
     <div id="container-2">
         <p style="text-align: center; font-size: 30px; font-weight: 700;">Check your email</p>

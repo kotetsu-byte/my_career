@@ -19,19 +19,23 @@ namespace MyCareerServer.Data
 
             modelBuilder.Entity<Language>()
                 .HasOne(r => r.Resume)
-                .WithMany(l => l.Languages);
+                .WithMany(l => l.Languages)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Experience>()
                 .HasOne(r => r.Resume)
-                .WithMany(e => e.Experinces);
+                .WithMany(e => e.Experinces)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Education>()
                 .HasOne(r => r.Resume)
-                .WithMany(e => e.Educations);
+                .WithMany(e => e.Educations)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Contact>()
                 .HasOne(r => r.Resume)
-                .WithMany(c => c.Contacts);
+                .WithMany(c => c.Contacts)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

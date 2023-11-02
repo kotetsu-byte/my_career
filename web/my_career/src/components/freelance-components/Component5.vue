@@ -14,7 +14,7 @@
         </div>
         <button @click="createNew()" style="padding: 15px 20px; border: 1px solid #1D71B8; border-radius: 8px; color: #1D71B8; width: 100%; margin: 10px 0; background-color: inherit;">+ Add new</button><br>
     </div>
-    <div id="new" style="display: none;">
+    <div v-if="true" id="new" style="display: none;">
         <input v-model="template.companyName" type="text" placeholder="Company name" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
         <input v-model="template.job" type="text" placeholder="Job" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
         <input v-model="template.working" type="checkbox" style="border: 1px solid #1D71B8; border-radius: 6px;"><span style="font-size: 18px; font-weight: 500;"> I am currently working in this role</span><br>
@@ -102,7 +102,7 @@ export default {
             }
             this.$emit('showNavigation');
             document.querySelector('#new').style.display = 'none';
-            document.querySelector('#display').style.display = 'block';
+            document.querySelector('#display').style.display = 'block'; 
             this.template.companyName = '';
             this.template.job = '';
             this.template.working = '';
