@@ -127,7 +127,7 @@ export default {
     },
     methods: {
         setVerticalHrWith() {
-            var height = document.getElementById("for-hr").offsetHeight;
+            let height = document.getElementById("for-hr").offsetHeight;
             document.getElementById("vertical-hr").style.height = height + 'px';
         }
     },

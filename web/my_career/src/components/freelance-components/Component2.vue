@@ -32,7 +32,7 @@ export default {
     methods: {
         ...mapActions(['setComponent2Data']),
         sendComponentDataToStore() {
-            var obj = {
+            let obj = {
                 country: this.country,
                 region: this.region,
                 street: this.street

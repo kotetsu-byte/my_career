@@ -16,7 +16,7 @@ namespace MyCareerServer.Freelance_Repositories
 
         public async Task<IEnumerable<Resume>> GetResumesByEmailAsync(string email)
         {
-            return await _dbContext.Resumes.Where(r => r.Email == email).ToListAsync();
+            return await _dbContext.Resumes.Where(r => r.User.Email == email).ToListAsync();
         }
 
         public bool Create(Resume resume)

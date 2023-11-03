@@ -34,7 +34,7 @@ export default {
     methods: {
         ...mapActions(['setComapnyComponent2Data']),
         sendComponentDataToStore() {
-            var obj = {
+            let obj = {
                 photo: this.photo,
                 companyName: this.companyName,
                 companyPhoneNumber: this.companyPhoneNumber

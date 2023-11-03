@@ -41,8 +41,8 @@ export default {
     },
     methods: {
         displayEmail() {
-            var container1 = document.getElementById("container-1");
-            var container2 = document.getElementById("container-2");
+            let container1 = document.getElementById("container-1");
+            let container2 = document.getElementById("container-2");
             container1.style.display = 'none';
             container2.style.display = 'block';
         }

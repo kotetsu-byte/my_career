@@ -25,7 +25,7 @@ export default {
     methods: {
         ...mapActions(['setCompanyComponent3Data']),
         sendComponentDataToStore() {
-            var obj = {
+            let obj = {
                 address: this.address,
                 description: this.description
             };

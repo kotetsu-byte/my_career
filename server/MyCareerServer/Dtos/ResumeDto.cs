@@ -18,5 +18,12 @@ namespace MyCareerServer.Dtos
         public string? Hobbies { get; set; }
         public string? AboutSelf { get; set; }
         public int? TemplateNo { get; set; }
+        public string? Website { get; set; }
+        public string? Whatsapp { get; set; }
+        public string? Facebook { get; set; }
+        public string? Instagram { get; set; }
+        public string? Telegram { get; set; }
+        public string? Github { get; set; }
+        public string? Twitter { get; set; }
     }
 }

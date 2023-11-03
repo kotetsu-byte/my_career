@@ -48,7 +48,7 @@ export default {
     methods: {
         ...mapActions(['setComapnyComponent1Data']),
         sendComponentDataToStore() {
-            var obj = {
+            let obj = {
                 firstName: this.firstName,
                 lastName: this.lastName,
                 email: this.email,

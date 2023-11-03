@@ -5,7 +5,7 @@
         <div class="job flex-div" v-for="(item, index) in experiences" :key="index" style="border: 1px solid #CDCDCD; border-radius: 10px; padding: 10px; margin: 10px 0;">
             <div>
                 <p style="font-size: 20px; font-weight: 600;">{{ item.companyName }}</p>
-                <p style="font-size: 16px; font-weight: 500; color: #808080;">{{ item.job }}</p>
+                <p style="font-size: 16px; font-weight: 500; color: #808080;">{{ item.position }}</p>
             </div>
             <div>
                 <button @click="edit(index)" style="padding: 14px 16px; border: 1px solid #1D71B8; border-radius: 6px; margin-right: 5px;"><img src="../../assets/icons/experience_education/Edit.png" alt=""></button>
@@ -16,16 +16,16 @@
     </div>
     <div v-if="true" id="new" style="display: none;">
         <input v-model="template.companyName" type="text" placeholder="Company name" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
-        <input v-model="template.job" type="text" placeholder="Job" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
-        <input v-model="template.working" type="checkbox" style="border: 1px solid #1D71B8; border-radius: 6px;"><span style="font-size: 18px; font-weight: 500;"> I am currently working in this role</span><br>
+        <input v-model="template.position" type="text" placeholder="Job" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
+        <input v-model="template.isWorking" type="checkbox" style="border: 1px solid #1D71B8; border-radius: 6px;"><span style="font-size: 18px; font-weight: 500;"> I am currently working in this role</span><br>
         <div class="flex-div">
             <div style="margin-right: 10px;">
                 <label for="">Date from</label><br>
-                <input v-model="template.from" type="date" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
+                <input v-model="template.begin" type="date" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
             </div>
             <div>
                 <label for="To">To</label><br>
-                <input v-model="template.to" type="date" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
+                <input v-model="template.end" type="date" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
             </div>
         </div>
         <textarea v-model="template.description" placeholder="Description" cols="30" rows="10" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%; resize: none; margin: 10px 0;"></textarea><br>
@@ -49,11 +49,11 @@ export default {
             ],
             template: {
                 companyName: '',
-                job: '',
-                working: false,
-                from: '',
-                to: '',
-                description: ''
+                position: '',
+                begin: '',
+                end: '',
+                description: '',
+                isWorking: false,
             },
             savingMode: 0,
             experienceId: 0
@@ -74,27 +74,27 @@ export default {
             switch(mode) {
                 case 0:
                     {
-                        var obj = {
+                        let obj = {
                             companyName: this.template.companyName,
-                            job: this.template.job,
-                            working: this.template.working,
-                            from: this.template.from,
-                            to: this.template.to,
-                            description: this.template.description
+                            position: this.template.position,
+                            begin: this.template.begin,
+                            end: this.template.end,
+                            description: this.template.description,
+                            isWorking: this.template.isWorking,
                         }
                         this.setComponent5Data(obj);
                         break;
                     }
                 case 1:
                     {
-                        var id = this.experienceId;
-                        var obj = {
+                        let id = this.experienceId;
+                        let obj = {
                             companyName: this.template.companyName,
-                            job: this.template.job,
-                            working: this.template.working,
-                            from: this.template.from,
-                            to: this.template.to,
-                            description: this.template.description
+                            position: this.template.position,
+                            begin: this.template.begin,
+                            end: this.template.end,
+                            description: this.template.description,
+                            isWorking: this.template.isWorking,
                         }
                         this.editComponent5DataById({id: id, obj: obj});
                         break;
@@ -104,11 +104,11 @@ export default {
             document.querySelector('#new').style.display = 'none';
             document.querySelector('#display').style.display = 'block'; 
             this.template.companyName = '';
-            this.template.job = '';
-            this.template.working = '';
-            this.template.from = '';
-            this.template.to = '';
+            this.template.position = '';
+            this.template.begin = '';
+            this.template.end = '';
             this.template.description = '';
+            this.template.isWorking = '';
             this.getComponentData;
         },
         cancel() {
@@ -121,13 +121,13 @@ export default {
             this.$emit('hideNavigation');
             document.querySelector('#display').style.display = 'none';
             document.querySelector('#new').style.display = 'block';
-            var entity = this.experiences[id];
+            let entity = this.experiences[id];
             this.template.companyName = entity.companyName;
-            this.template.job = entity.job;
-            this.template.working = entity.working;
-            this.template.from = entity.from;
-            this.template.to = entity.to;
+            this.template.position = entity.position;
+            this.template.begin = entity.begin;
+            this.template.end = entity.end;
             this.template.description = entity.description;
+            this.template.isWorking = entity.isWorking;
             this.experienceId = id;
         },
         del(id) {

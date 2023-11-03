@@ -38,7 +38,7 @@ export default {
     methods: {
         ...mapActions(['setComponent3Data']),
         sendComponentDataToStore() {
-            var obj = {
+            let obj = {
                 position: this.position,
                 dateOfBirth: this.dateOfBirth,
                 skills: this.skills,

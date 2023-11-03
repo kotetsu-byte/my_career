@@ -46,7 +46,7 @@ export default {
         },
         next() {
             if(this.sectionNo >= 5) {
-                this.$router.push('/ready');
+                this.$router.push('/company-ready');
             }
             if(this.sectionNo < 5) {
                 this.sectionNo++;

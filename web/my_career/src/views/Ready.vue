@@ -74,7 +74,7 @@ export default {
             }
         },
         sendDataToBackend() {
-            var obj = 
+            let resumeObj = 
             {
                 firstName: this.getComponent1Data.firstName,
                 lastName: this.getComponent1Data.lastName,
@@ -90,17 +90,50 @@ export default {
                 hobbies: this.getComponent3Data.hobbies,
                 aboutSelf: this.getComponent3Data.selfDescription,
                 templateNo: this.getComponent8Data.selectedTemplate,
+                website: this.getComponent7Data.website,
+                whatsapp: this.getComponent7Data.whatsapp,
+                facebook: this.getComponent7Data.facebook,
+                instagram: this.getComponent7Data.instagram,
+                telegram: this.getComponent7Data.telegram,
+                github: this.getComponent7Data.github,
+                twitter: this.getComponent7Data.twitter
             }
-            API.post('/api/Freelance', obj)
+            let educationObj = this.getComponent6Data;
+            let experienceObj = this.getComponent5Data;
+            let languageObj = this.getComponent4Data;
+            API.post('/api/Resume', resumeObj)
                 .then(res => {
-                    var resumeId = res.data;
-                    API.post('/api/Freelance/')
+                    let resumeId = res.data;
+                    educationObj.forEach(education => {
+                        education.resumeId = resumeId;
+                        API.post(`/api/Education/`, education)
                         .then(res => {
-                            
+                            console.log(res.data)
                         })
                         .catch(err => {
                             console.log(err);
                         });
+                    });
+                    experienceObj.forEach(experience => {
+                        experience.resumeId = resumeId;
+                        API.post(`/api/Experience/`, experience)
+                            .then(res => {
+                                console.log(res.data);
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            })    
+                    })
+                    languageObj.forEach(language => {
+                        language.resumeId = resumeId;
+                        API.post(`/api/Language/`, language)
+                            .then(res => {
+                                console.log(res.data);
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            })
+                    })
                 })
                 .catch(err => {
                     console.log(err);

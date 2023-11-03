@@ -5,7 +5,7 @@
     <div class="language" v-if="languages.length == 1 ? true : false">
         <div class="flex-div">
             <div class="mr-10">
-                <input class="input w-80" type="text" v-model="languages[0].language" placeholder="Language">
+                <input class="input w-80" type="text" v-model="languages[0].lang" placeholder="Language">
             </div>
             <div>
                 <input class="input w-80" type="text" v-model="languages[0].level" placeholder="Level">
@@ -15,7 +15,7 @@
     <div class="languages" v-if="languages.length > 1 ? true : false">
         <div class="flex-div" v-for="(item, index) in languages" :key="index">
             <div style="margin-right: 10px 0;">
-                <input class="input w-80" type="text" v-model="item.language" placeholder="Language">
+                <input class="input w-80" type="text" v-model="item.lang" placeholder="Language">
             </div>
             <div>
                 <input class="input w-80" type="text" v-model="item.level" placeholder="Level">
@@ -38,7 +38,7 @@ export default {
         return {
             languages: [
                 {
-                    language: '',
+                    lang: '',
                     level: ''
                 }
             ],
@@ -55,7 +55,7 @@ export default {
         },
         addNewLanguage() {
             let obj = {
-                language: '',
+                lang: '',
                 level: ''
             }
             this.languages.push(obj);
@@ -74,8 +74,12 @@ export default {
     computed: {
         ...mapGetters(['getComponent4Data']),
         getComponentData() {
-            this.language = this.getComponent4Data.language;
-            this.level = this.getComponent4Data.level;
+            if(this.languages) {
+                this.languages = [];
+                this.getComponent4Data.forEach(elem => {
+                    this.languages.push(elem);
+                });
+            }
         }
     },
     mounted() {

@@ -26,14 +26,14 @@
         <div class="flex-div">
             <div>
                 <label for="">Date from</label><br>
-                <input type="date" v-model="template.from" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%; margin-right: 10px;">
+                <input type="date" v-model="template.begin" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%; margin-right: 10px;">
             </div>
             <div>
                 <label for="">To</label><br>
-                <input type="date" v-model="template.to" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
+                <input type="date" v-model="template.end" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
             </div>
         </div>
-        <input type="checkbox" v-model="template.currently"> I currently attend here<br>
+        <input type="checkbox" v-model="template.isCurrently"> I currently attend here<br>
         <div style="text-align: right;">
             <button @click="cancel()" style="margin-top: 10px; background-color: white; border: 1px solid #1D71B8; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px;">Cancel</button>
             <button @click="save(savingMode)" style="margin-top: 10px; background-color: white; border: 1px solid #1D71B8; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px;">Save</button>
@@ -58,9 +58,9 @@ export default {
                 degree: '',
                 typeOfStudy: '',
                 location: '',
-                from: '',
-                to: '',
-                currently: false
+                begin: '',
+                end: '',
+                isCurrently: false
             },
             savingMode: 0,
             educationId: 0
@@ -80,27 +80,27 @@ export default {
         save(mode) {
             switch(mode) {
                 case 0:
-                    var obj = {
+                    let obj = {
                         schoolName: this.template.schoolName,
                         degree: this.template.degree,
                         typeOfStudy: this.template.typeOfStudy,
                         location: this.template.location,
-                        from: this.template.from,
-                        to: this.template.to,
-                        currently: this.template.currently
+                        beign: this.template.begin,
+                        end: this.template.end,
+                        isCurrently: this.template.isCurrently
                     }
                     this.setComponent6Data(obj);
                     break;
                 case 1:
-                    var id = this.educationId;
-                    var obj = {
+                    let id = this.educationId;
+                    obj = {
                         schoolName: this.template.schoolName,
                         degree: this.template.degree,
                         typeOfStudy: this.template.typeOfStudy,
                         location: this.template.location,
-                        from: this.template.from,
-                        to: this.template.to,
-                        currently: this.template.currently
+                        beign: this.template.begin,
+                        end: this.template.end,
+                        isCurrently: this.template.isCurrently
                     }
                     this.editComponent6DataById({id: id, obj: obj});
                     break;
@@ -112,9 +112,9 @@ export default {
             this.template.degree = '';
             this.template.typeOfStudy = '';
             this.template.location = '';
-            this.template.from = '';
-            this.template.to = '';
-            this.template.currently = '';
+            this.template.begin = '';
+            this.template.end = '';
+            this.template.isCurrently = '';
             this.getComponentData;
         },
         cancel() {
@@ -127,14 +127,14 @@ export default {
             this.$emit('hideNavigation');
             document.querySelector('#display').style.display = 'none';
             document.querySelector('#new').style.display = 'block';
-            var entity = this.educations[id];
+            let entity = this.educations[id];
             this.template.schoolName = entity.schoolName;
             this.template.degree = entity.degree;
             this.template.typeOfStudy = entity.typeOfStudy;
             this.template.location = entity.location;
-            this.template.from = entity.from;
-            this.template.to = entity.to;
-            this.template.currently = entity.currently;
+            this.template.begin = entity.begin;
+            this.template.end = entity.end;
+            this.template.isCurrently = entity.isCurrently;
             this.educationId = id;
         },
         del(id) {

@@ -43,7 +43,7 @@ export default {
         choose(app) {
             switch(app) {
                 case 'whatsapp':
-                    var obj = {
+                    let obj = {
                         id: 1,
                         name: 'whatsapp',
                         icon: '../../src/assets/icons/contacts/whatsapp.png',
@@ -53,7 +53,7 @@ export default {
                     this.whatsappIsChosen = true;
                     break;
                 case 'facebook':
-                var obj = {
+                obj = {
                         id: 2,
                         name: 'facebook',
                         icon: '../../src/assets/icons/contacts/facebook.png',
@@ -63,7 +63,7 @@ export default {
                     this.facebookIsChosen = true;
                     break;
                 case 'instagram':
-                var obj = {
+                obj = {
                         id: 3,
                         name: 'instagram',
                         icon: '../../src/assets/icons/contacts/instagram.png',
@@ -73,7 +73,7 @@ export default {
                     this.instagramIsChosen = true;
                     break;
                 case 'telegram':
-                var obj = {
+                obj = {
                         id: 4,
                         name: 'telegram',
                         icon: '../../src/assets/icons/contacts/telegram.png',
@@ -83,7 +83,7 @@ export default {
                     this.telegramIsChosen = true;
                     break;
                 case 'github':
-                var obj = {
+                obj = {
                         id: 5,
                         name: 'github',
                         icon: '../../src/assets/icons/contacts/github.png',
@@ -93,7 +93,7 @@ export default {
                     this.githubIsChosen = true;
                     break;
                 case 'twitter':
-                var obj = {
+                obj = {
                         id: 6,
                         name: 'twitter',
                         icon: '../../src/assets/icons/contacts/twitter.png',
@@ -128,37 +128,37 @@ export default {
             }
         },
         sendComponentDataToStore() {
-            var whatsappLink = '';
-            var facebookLink = '';
-            var instagramLink = '';
-            var telegramLink = '';
-            var githubLink = '';
-            var twitterLink = '';
+            let whatsappLink = '';
+            let facebookLink = '';
+            let instagramLink = '';
+            let telegramLink = '';
+            let githubLink = '';
+            let twitterLink = '';
             if(this.whatsappIsChosen) {
-                var whatsapp = this.chosen.find(item => item.id == 1);
+                let whatsapp = this.chosen.find(item => item.id == 1);
                 whatsappLink = whatsapp.link;
             }
             if(this.facebookIsChosen) {
-                var facebook = this.chosen.find(item => item.id == 2);
+                let facebook = this.chosen.find(item => item.id == 2);
                 facebookLink = facebook.link;
             }
             if(this.instagramIsChosen) {
-                var instagram = this.chosen.find(item => item.id == 3);
+                let instagram = this.chosen.find(item => item.id == 3);
                 instagramLink = instagram.link;
             }
             if(this.telegramIsChosen) {
-                var telegram = this.chosen.find(item => item.id == 4);
+                let telegram = this.chosen.find(item => item.id == 4);
                 telegramLink = telegram.link;
             }
             if(this.githubIsChosen) {
-                var github = this.chosen.find(item => item.id == 5);
+                let github = this.chosen.find(item => item.id == 5);
                 githubLink = github.link;
             }
             if(this.twitterIsChosen) {
-                var twitter = this.chosen.find(item => item.id == 6);
+                let twitter = this.chosen.find(item => item.id == 6);
                 twitterLink = twitter.link;
             }
-            var obj = {
+            let obj = {
                 website: this.website,
                 whatsapp: whatsappLink,
                 facebook: facebookLink,
@@ -183,18 +183,18 @@ export default {
         ...mapGetters(['getCompanyComponent4Data']),
         getComponentData() {
             console.log(this.getCompanyComponent4Data);
-            var website = this.getCompanyComponent4Data.website;
-            var whatsappLink = this.getCompanyComponent4Data.whatsapp;
-            var facebookLink = this.getCompanyComponent4Data.facebook;
-            var instagramLink = this.getCompanyComponent4Data.instagram;
-            var telegramLink = this.getCompanyComponent4Data.telegram;
-            var githubLink = this.getCompanyComponent4Data.github;
-            var twitterLink = this.getCompanyComponent4Data.twitter;
+            let website = this.getCompanyComponent4Data.website || '';
+            let whatsappLink = this.getCompanyComponent4Data.whatsapp || '';
+            let facebookLink = this.getCompanyComponent4Data.facebook;
+            let instagramLink = this.getCompanyComponent4Data.instagram;
+            let telegramLink = this.getCompanyComponent4Data.telegram;
+            let githubLink = this.getCompanyComponent4Data.github;
+            let twitterLink = this.getCompanyComponent4Data.twitter;
             if(website) {
                 this.website = website;
             }
             if(whatsappLink) {
-                var obj = {
+                let obj = {
                     id: 1,
                     name: 'whatsapp',
                     icon: '../../src/assets/icons/contacts/whatsapp.png',
@@ -204,7 +204,7 @@ export default {
                 this.whatsappIsChosen = true;
             }
             if(facebookLink) {
-                var obj = {
+                let obj = {
                     id: 2,
                     name: 'facebook',
                     icon: '../../src/assets/icons/contacts/facebook.png',
@@ -214,7 +214,7 @@ export default {
                 this.facebookIsChosen = true;
             }
             if(instagramLink) {
-                var obj = {
+                let obj = {
                     id: 3,
                     name: 'instagram',
                     icon: '../../src/assets/icons/contacts/instagram.png',
@@ -224,7 +224,7 @@ export default {
                 this.instagramIsChosen = true;
             }
             if(telegramLink) {
-                var obj = {
+                let obj = {
                     id: 4,
                     name: 'telegram',
                     icon: '../../src/assets/icons/contacts/telegram.png',
@@ -234,7 +234,7 @@ export default {
                 this.telegramIsChosen = true;
             }
             if(githubLink) {
-                var obj = {
+                let obj = {
                     id: 5,
                     name: 'github',
                     icon: '../../src/assets/icons/contacts/github.png',
@@ -244,7 +244,7 @@ export default {
                 this.githubIsChosen = true;
             }
             if(twitterLink) {
-                var obj = {
+                let obj = {
                     id: 6,
                     name: 'twitter',
                     icon: '../../src/assets/icons/contacts/twitter.png',

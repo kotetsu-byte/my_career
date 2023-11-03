@@ -17,6 +17,7 @@ import CompanyFrame3 from '../components/company-templates/Frame3.vue';
 import CompanyFrame4 from '../components/company-templates/Frame4.vue';
 import CompanyFrame5 from '../components/company-templates/Frame5.vue';
 import CompanyFrame6 from '../components/company-templates/Frame6.vue';
+import CompanyReady from '../views/CompanyReady.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -110,6 +111,11 @@ const router = createRouter({
       path: '/company-frame-6',
       name: 'Company Frame 6',
       component: CompanyFrame6
+    },
+    {
+      path: '/company-ready',
+      name: 'Company Ready',
+      component: CompanyReady
     }
   ]
 })

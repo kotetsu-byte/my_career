@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MyCareerServer.CompanyModels;
 using MyCareerServer.Dtos;
 using MyCareerServer.FreelanceModels;
 
@@ -16,6 +17,8 @@ namespace MyCareerServer.Helpers
             CreateMap<EducationDto,  Education>();
             CreateMap<Experience, ExperienceDto>();
             CreateMap<ExperienceDto, Experience>();
+            CreateMap<CompanyResume, CompanyResumeDto>();
+            CreateMap<CompanyResumeDto, CompanyResume>();
         }
     }
 }

@@ -62,7 +62,7 @@ export default {
 
         },
         sendComponentDataToStore() {
-            var obj = {
+            let obj = {
                 photo: this.photo,
                 firstName: this.firstName,
                 lastName: this.lastName,

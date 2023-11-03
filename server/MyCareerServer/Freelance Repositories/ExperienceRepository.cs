@@ -14,7 +14,7 @@ namespace MyCareerServer.Freelance_Repositories
             _dbContext = dBContext;
         }
 
-        public async Task<IEnumerable<Experience>> GetExperiencesById(int id)
+        public async Task<IEnumerable<Experience>> GetExperiences(int id)
         {
             return await _dbContext.Experiences.Where(e => e.Id == id).ToListAsync();
         }

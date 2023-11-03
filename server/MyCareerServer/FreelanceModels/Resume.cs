@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using MyCareerServer.User_Model;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyCareerServer.FreelanceModels
 {
@@ -29,5 +30,8 @@ namespace MyCareerServer.FreelanceModels
         public IEnumerable<Language>? Languages { get; set; }
         public IEnumerable<Experience>? Experinces { get; set; }
         public IEnumerable<Education>? Educations { get; set; }
+        [ForeignKey("User")]
+        public int? UserId { get; set; }
+        public User? User { get; set; }
     }
 }

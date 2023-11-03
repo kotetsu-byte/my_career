@@ -131,7 +131,7 @@ export default {
             document.querySelectorAll('.frame')[num - 1].classList.add('selected');
         },
         sendComponentDataToStore() {
-            var obj = {
+            let obj = {
                 selectedTemplate: this.selectedTemplate
             };
             this.setCompanyComponent5Data(obj);

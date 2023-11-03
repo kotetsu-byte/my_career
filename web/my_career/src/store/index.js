@@ -1,4 +1,3 @@
-import { toRaw } from 'vue';
 import Vuex from 'vuex';
 import VuexPersistence from 'vuex-persist';
 
@@ -74,7 +73,7 @@ const store = new Vuex.Store({
                     {
                         selectedTemplate: 0
                     }
-                ]
+                ],
             }
         }
     },
@@ -121,7 +120,6 @@ const store = new Vuex.Store({
             return state.company.components[2];
         },
         getCompanyComponent4Data: state => {
-            console.log(state.company.components[3]);
             return state.company.components[3];
         },
         getCompanyComponent5Data: state => {

@@ -14,7 +14,7 @@ namespace MyCareerServer.Freelance_Repositories
             _dbContext = dBContext;
         }
 
-        public async Task<IEnumerable<Language>> GetLanguagesById(int id)
+        public async Task<IEnumerable<Language>> GetLanguages(int id)
         {
             return await _dbContext.Languages.Where(l => l.Id == id).ToListAsync();
         }

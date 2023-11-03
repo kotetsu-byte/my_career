@@ -1,0 +1,23 @@
+﻿namespace MyCareerServer.Dtos
+{
+    public class CompanyResumeDto
+    {
+        public string? Photo { get; set; }
+        public string? CompanyName { get; set; }
+        public string? CompanyPhoneNumber { get; set; }
+        public string? Address { get; set; }
+        public string? Contacts { get; set; }
+        public string? Description { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Email { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? Website { get; set; }
+        public string? Whatsapp { get; set; }
+        public string? Facebook { get; set; }
+        public string? Instagram { get; set; }
+        public string? Telegram { get; set; }
+        public string? Github { get; set; }
+        public string? Twitter { get; set; }
+    }
+}

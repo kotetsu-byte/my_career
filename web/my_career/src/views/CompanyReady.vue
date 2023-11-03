@@ -5,23 +5,16 @@
             <div style="background-color: white; background-image: none;">
                 <component 
                     :is="frameName"
-                    :photo="getComponent1Data.photo"
-                    :firstName="getComponent1Data.firstName"
-                    :lastName="getComponent1Data.lastName"
-                    :email="getComponent1Data.email"
-                    :phoneNumber="getComponent1Data.phoneNumber"
-                    :country="getComponent2Data.country"
-                    :region="getComponent2Data.region"
-                    :street="getComponent2Data.street"
-                    :position="getComponent3Data.position"
-                    :dateOfBirth="getComponent3Data.dateOfBirth"
-                    :skills="getComponent3Data.skills"
-                    :hobbies="getComponent3Data.hobbies"
-                    :selfDescription="getComponent3Data.selfDescription"
-                    :languages="getComponent4Data"
-                    :experience="getComponent5Data"
-                    :education="getComponent6Data"
-                    :contacts="getComponent7Data.contacts"
+                    :photo="getCompanyComponent2Data.photo"
+                    :companyName="getCompanyComponent2Data.companyName"
+                    :companyPhoneNumber="getCompanyComponent2Data.companyPhoneNumber"
+                    :address="getCompanyComponent3Data.address"
+                    :contacts="getCompanyComponent4Data"
+                    :description="getCompanyComponent3Data.description"
+                    :firstName="getCompanyComponent1Data.firstName"
+                    :lastName="getCompanyComponent1Data.lastName"
+                    :email="getCompanyComponent1Data.email"
+                    :phoneNumber="getCompanyComponent1Data.phoneNumber"
                 ></component>
             </div>
         </div>
@@ -32,17 +25,17 @@
 </template>
 
 <script>
-import Frame1 from '../components/templates/Frame1.vue';
-import Frame2 from '../components/templates/Frame2.vue';
-import Frame3 from '../components/templates/Frame3.vue';
-import Frame4 from '../components/templates/Frame4.vue';
-import Frame5 from '../components/templates/Frame5.vue';
-import Frame6 from '../components/templates/Frame6.vue';
+import Frame1 from '../components/company-templates/Frame1.vue';
+import Frame2 from '../components/company-templates/Frame2.vue';
+import Frame3 from '../components/company-templates/Frame3.vue';
+import Frame4 from '../components/company-templates/Frame4.vue';
+import Frame5 from '../components/company-templates/Frame5.vue';
+import Frame6 from '../components/company-templates/Frame6.vue';
 import { mapGetters } from 'vuex';
 import API from '../api/index.js';
 
 export default {
-    name: 'Ready',
+    name: 'CompanyReady',
     components: {Frame1, Frame2, Frame3, Frame4, Frame5, Frame6},
     data() {
         return {
@@ -74,33 +67,26 @@ export default {
             }
         },
         sendDataToBackend() {
-            var obj = 
+            let obj = 
             {
-                firstName: this.getComponent1Data.firstName,
-                lastName: this.getComponent1Data.lastName,
-                email: this.getComponent1Data.email,
-                phoneNumber: this.getComponent1Data.phoneNumber,
-                imageURL: this.getComponent1Data.photo,
-                country: this.getComponent2Data.country,
-                region: this.getComponent2Data.region,
-                street: this.getComponent2Data.street,
-                position: this.getComponent3Data.position,
-                dateOfBirth: this.getComponent3Data.dateOfBirth,
-                skills: this.getComponent3Data.skills,
-                hobbies: this.getComponent3Data.hobbies,
-                aboutSelf: this.getComponent3Data.selfDescription,
-                templateNo: this.getComponent8Data.selectedTemplate,
+                firstName: this.getCompanyComponent1Data.firstName,
+                lastName: this.getCompanyComponent1Data.lastName,
+                email: this.getCompanyComponent1Data.email,
+                phoneNumber: this.getCompanyComponent1Data.phoneNumber,
+                imageURL: this.getCompanyComponent1Data.photo,
+                country: this.getCompanyComponent2Data.country,
+                region: this.getCompanyComponent2Data.region,
+                street: this.getCompanyComponent2Data.street,
+                position: this.getCompanyComponent3Data.position,
+                dateOfBirth: this.getCompanyComponent3Data.dateOfBirth,
+                skills: this.getCompanyComponent3Data.skills,
+                hobbies: this.getCompanyComponent3Data.hobbies,
+                aboutSelf: this.getCompanyComponent3Data.selfDescription,
+                templateNo: this.getCompanyComponent8Data.selectedTemplate,
             }
-            API.post('/api/Freelance', obj)
+            API.post('/api/F', obj)
                 .then(res => {
-                    var resumeId = res.data;
-                    API.post(`/api/Freelance/`)
-                        .then(res => {
-                            
-                        })
-                        .catch(err => {
-                            console.log(err);
-                        });
+                    console.log(res.data);
                 })
                 .catch(err => {
                     console.log(err);
@@ -108,14 +94,14 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getComponent1Data', 'getComponent2Data', 'getComponent3Data', 'getComponent4Data', 'getComponent5Data', 'getComponent6Data', 'getComponent7Data', 'getComponent8Data']),
-        getComponentsData() {
-            this.getFrameByNo(this.getComponent8Data.selectedTemplate);
-            console.log(this.getComponent5Data);
+        ...mapGetters(['getCompanyComponent1Data', 'getCompanyComponent2Data', 'getCompanyComponent3Data', 'getCompanyComponent4Data', 'getCompanyComponent5Data']),
+        getCompanyComponentsData() {
+            this.getFrameByNo(this.getCompanyComponent5Data.selectedTemplate);
+            console.log(this.getCompanyComponent5Data);
         }
     },
     mounted() {
-        this.getComponentsData;
+        this.getCompanyComponentsData;
     }
 }
 </script>

@@ -10,6 +10,7 @@ namespace MyCareerServer.FreelanceModels
         public string? Begin { get; set; }
         public string? End { get; set; }
         public string? Description { get; set; }
+        public bool? IsWorking { get; set; }
         [ForeignKey("Resume")]
         public int? ResumeId { get; set; }
         public Resume? Resume { get; set; }
