@@ -23,7 +23,7 @@ namespace MyCareerServer.Freelance_Controller
         [HttpGet("{resumeId}")]
         public async Task<IActionResult> GetLanguages(int resumeId)
         {
-            var languages = _mapper.Map<LanguageDto>(await _languageRepository.GetLanguages(resumeId));
+            var languages = _mapper.Map<List<LanguageDto>>(await _languageRepository.GetLanguages(resumeId));
 
             return Ok(languages);
         }
@@ -38,7 +38,7 @@ namespace MyCareerServer.Freelance_Controller
             return Ok("Successful");
         }
 
-        [HttpPut]
+        [HttpPatch]
         public IActionResult UpdateLanguage([FromBody] LanguageDto languageDto)
         {
             var language = _mapper.Map<Language>(languageDto);
@@ -48,12 +48,10 @@ namespace MyCareerServer.Freelance_Controller
             return Ok("Successful");
         }
 
-        [HttpDelete]
-        public IActionResult DeleteLanguage([FromBody] LanguageDto languageDto)
+        [HttpDelete("{id}")]
+        public IActionResult DeleteLanguage(int id)
         {
-            var language = _mapper.Map<Language>(languageDto);
-
-            _languageRepository.Delete(language);
+            _languageRepository.Delete(id);
 
             return Ok("Successful");
         }

@@ -20,7 +20,7 @@
                     <p style="background-color: white; color: #776CE2; font-size: 15px; font-weight: 800;">LANGUAGES</p>
                     <hr>
                     <div v-for="(item, index) in languages" :key="index">
-                        <p style="font-size: 10px; font-weight: 400;">{{ item.language }} - {{ item.level }}</p>
+                        <p style="font-size: 10px; font-weight: 400;">{{ item.lang }} - {{ item.level }}</p>
                     </div>
                     <p style="font-size: 10px; font-weight: 400;">French - level</p>
                     <p style="font-size: 10px; font-weight: 400;">Korean - level</p>
@@ -37,9 +37,13 @@
                 <div id="contacts">
                     <p style="background-color: white; color: #776CE2; font-size: 15px; font-weight: 800;">CONTACTS</p>
                     <hr>
-                    <p style="font-size: 10px; font-weight: 400;"><img src="../../assets/icons/templates/frame 3/whatsapp" alt="">{{ contacts }}</p>
-                    <p style="font-size: 10px; font-weight: 400;"><img src="../../assets/icons/templates/frame 3/facebook" alt="">Murphy_design_2001</p>
-                    <p style="font-size: 10px; font-weight: 400;"><img src="../../assets/icons/templates/frame 3/instagram" alt="">Murphy_design_2001</p>
+                    <div v-if="website"><p style="font-size: 10px; font-weight: 400;"><img src="../../assets/icons/contacts/website.png" alt="">{{ website }}</p></div>
+                    <div v-if="whatsapp"><p style="font-size: 10px; font-weight: 400;"><img src="../../assets/icons/contacts/whatsapp.png" alt="">{{ whatsapp }}</p></div>
+                    <div v-if="facebook"><p style="font-size: 10px; font-weight: 400;"><img src="../../assets/icons/contacts/facebook.png" alt="">{{ facebook }}</p></div>
+                    <div v-if="instagram"><p style="font-size: 10px; font-weight: 400;"><img src="../../assets/icons/contacts/instagram.png" alt="">{{ instagram }}</p></div>
+                    <div v-if="telegram"><p style="font-size: 10px; font-weight: 400;"><img src="../../assets/icons/contacts/telegram.png" alt="">{{ telegram }}</p></div>
+                    <div v-if="github"><p style="font-size: 10px; font-weight: 400;"><img src="../../assets/icons/contacts/github.png" alt="">{{ github }}</p></div>
+                    <div v-if="twitter"><p style="font-size: 10px; font-weight: 400;"><img src="../../assets/icons/contacts/twitter.png" alt="">{{ twitter }}</p></div>
                 </div>
             </div>
             <div style="width: 59%;">
@@ -101,7 +105,7 @@
 
 <script>
 export default {
-    name: 'CompanyFrame4',
+    name: 'Frame4',
     components: {},
     data() {
         return {
@@ -109,7 +113,7 @@ export default {
         }
     },
     props: {
-        photo: String,
+        photo: FileReader,
         firstName: String,
         lastName: String,
         email: String,
@@ -125,7 +129,13 @@ export default {
         languages: Array,
         experience: Array,
         education: Array,
-        contacts: String
+        website: String,
+        whatsapp: String,
+        facebook: String,
+        instagram: String,
+        telegram: String,
+        github: String,
+        twitter: String
     },
 }
 </script>

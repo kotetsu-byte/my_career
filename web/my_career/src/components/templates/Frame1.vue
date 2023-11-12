@@ -32,7 +32,7 @@
                     <div id="languages">
                         <p style="font-size: 22px; font-weight: 700;">Languages</p>
                         <div v-for="(item, index) in languages" :key="index">
-                            <p style="font-size: 12px; font-weight: 400;">{{ item.language }} - {{ item.level }}</p>
+                            <p style="font-size: 12px; font-weight: 400;">{{ item.lang }} - {{ item.level }}</p>
                         </div>
                         <p style="font-size: 12px; font-weight: 400;">French - level</p>
                         <p style="font-size: 12px; font-weight: 400;">Korean - level</p>
@@ -49,9 +49,13 @@
                     </div>
                     <div id="contacts">
                         <p style="font-size: 22px; font-weight: 700;">Contacts</p>
-                        <p><img src="../../assets/icons/templates/frame 1/whatsapp" alt=""><span style="font-size: 12px; font-weight: 400;">{{ contacts }}</span></p>
-                        <p><img src="../../assets/icons/templates/frame 1/facebook" alt=""><span style="font-size: 12px; font-weight: 400;">Murphy_design_2001</span></p>
-                        <p><img src="../../assets/icons/templates/frame 1/instagram" alt=""><span style="font-size: 12px; font-weight: 400;">Murphy_design_2001</span></p>
+                        <div v-if="website"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/website.png" alt="">{{ webiste }}</p></div>
+                        <div v-if="whatsapp"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets//icons/contacts/whatsapp.png" alt="">{{ whatsapp }}</p></div>
+                        <div v-if="facebook"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/facebook.png" alt="">{{ facebook }}</p></div>
+                        <div v-if="instagram"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/instagram.png" alt="">{{ instagram }}</p></div>
+                        <div v-if="telegram"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/telegram.png" alt="">{{ telegram }}</p></div>
+                        <div v-if="github"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/github.png" alt="">{{ github }}</p></div>
+                        <div v-if="twitter"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/twitter.png" alt="">{{ twitter }}</p></div>
                     </div>
                 </div>
                 <hr id="vertical-hr">
@@ -99,7 +103,7 @@
 
 <script>
 export default {
-    name: 'CompanyFrame1',
+    name: 'Frame1',
     components: {},
     data() {
         return {
@@ -123,7 +127,13 @@ export default {
         languages: Array,
         experience: Array,
         education: Array,
-        contacts: String
+        website: String,
+        whatsapp: String,
+        facebook: String,
+        instagram: String,
+        telegram: String,
+        github: String,
+        twitter: String
     },
     methods: {
         setVerticalHrWith() {

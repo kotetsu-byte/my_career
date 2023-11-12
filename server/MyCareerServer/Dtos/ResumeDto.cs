@@ -4,6 +4,7 @@ namespace MyCareerServer.Dtos
 {
     public class ResumeDto
     {
+        public int? Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set;}
         public string? Email { get; set; }
@@ -25,5 +26,6 @@ namespace MyCareerServer.Dtos
         public string? Telegram { get; set; }
         public string? Github { get; set; }
         public string? Twitter { get; set; }
+        public int? UserId { get; set; }
     }
 }

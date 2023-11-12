@@ -4,6 +4,19 @@ import VuexPersistence from 'vuex-persist';
 const store = new Vuex.Store({
     state() {
         return {
+            currentUser: {
+                id: 0
+            },
+            openResume: {
+                id: 0,
+                type: ''
+            },
+            isUpdate: false,
+            updateResumeId: 0,
+            updateEducationId: [],
+            updateExpeirenceId: [],
+            updateLanguageId: [],
+            updateCompanyResumeId: 0,
             freelance: {
                 sectionNo: 1,
                 components: [
@@ -78,6 +91,38 @@ const store = new Vuex.Store({
         }
     },
     getters: {
+        // user
+        getCurrentUser: state => {
+            return state.currentUser.id;
+        },
+        // open resume 
+        getOpenResume: state => {
+            return state.openResume;
+        },
+        // update
+        getIsUpdate: state => {
+            return state.isUpdate;
+        },
+        // update resume id
+        getUpdateResumeId: state => {
+            return state.updateResumeId;
+        },
+        // update education id
+        getUpdateEducationId: state => {
+            return state.updateEducationId;
+        },
+        // update experience id 
+        getUpdateExperienceId: state => {
+            return state.updateExpeirenceId;
+        },
+        // update language id
+        getUpdateLanguageId: state => {
+            return state.updateLanguageId;
+        },
+        // update company resume id
+        getUpdateCompanyResumeId: state => {
+            return state.updateCompanyResumeId;
+        },
         // freelance
         getSectionNo: state => {
             return state.freelance.sectionNo;
@@ -127,6 +172,48 @@ const store = new Vuex.Store({
         }
     },
     mutations: {
+        // user
+        setCurrentUser(state, payload) {
+            state.currentUser.id = payload;
+        },
+        // open resume
+        setOpenResume(state, payload) {
+            state.openResume = payload;
+        },
+        // update 
+        setIsUpdate(state, payload) {
+            state.isUpdate = payload;
+        },
+        // update resume id
+        setUpdateResumeId(state, payload) {
+            state.updateResumeId = payload;
+            console.log(state.updateResumeId);
+        },
+        // update education id
+        setUpdateEducationId(state, payload) {
+            payload.forEach(elem => {
+                state.updateEducationId.push(elem);
+            });
+            console.log(state.updateEducationId);
+        },
+        // update experience id
+        setUpdateExperienceId(state, payload) {
+            payload.forEach(elem => {
+                state.updateExpeirenceId.push(elem);
+            })
+            console.log(state.updateExpeirenceId);
+        },
+        // update language id 
+        setUpdateLanguageId(state, payload) {
+            payload.forEach(elem => {
+                state.updateLanguageId.push(elem);
+            })
+            console.log(state.updateLanguageId);
+        },
+        // update company resume id
+        setUpdateCompanyResumeId(state, payload) {
+            state.updateCompanyResumeId = payload;
+        },
         // freelance
         setSectionNo(state, payload) {
             state.freelance.sectionNo = payload;
@@ -162,8 +249,11 @@ const store = new Vuex.Store({
         removeComponent5DataById(state, payload) {
             state.freelance.experiences.splice(payload, 1);
         },
+        removeAllComponent5Data(state) {
+            state.freelance.experiences.length = 0;
+        },
         setComponent6Data(state, payload) {
-            state.freelance.educations.push(payload);
+                state.freelance.educations.push(payload);
         },
         editComponent6DataById(state, payload) {
             state.freelance.educations[payload.id].schoolName = payload.obj.schoolName; 
@@ -176,6 +266,9 @@ const store = new Vuex.Store({
         },
         removeComponent6DataById(state, payload) {
             state.freelance.educations.splice(payload, 1);
+        },
+        removeAllComponent6Data(state) {
+            state.freelance.educations.length = 0;
         },
         setComponent7Data(state, payload) {
             state.freelance.components[3] = payload;
@@ -204,6 +297,37 @@ const store = new Vuex.Store({
         }
     },
     actions: {
+        // user
+        setCurrentUser({commit}, payload) {
+            commit('setCurrentUser', payload);
+        },
+        // open resume
+        setOpenResume({commit}, payload) {
+            commit('setOpenResume', payload);
+        },
+        // update 
+        setIsUpdate({commit}, payload) {
+            commit('setIsUpdate', payload);
+        },
+        // update resume id
+        setUpdateResumeId({commit}, payload) {
+            commit('setUpdateResumeId', payload);
+        },
+        // update education id
+        setUpdateEducationId({commit}, payload) {
+            commit('setUpdateEducationId', payload);
+        },
+        // update experience id
+        setUpdateExperienceId({commit}, payload) {
+            commit('setUpdateExperienceId', payload);
+        },
+        // update language id
+        setUpdateLanguageId({commit}, payload) {
+            commit('setUpdateLanguageId', payload);
+        },
+        setUpdateCompanyResumeId({commit}, payload) {
+            commit('setUpdateCompanyResumeId', payload);
+        },
         // freelance
         setSectionNo({commit}, payload) {
             commit('setSectionNo', payload);
@@ -229,6 +353,9 @@ const store = new Vuex.Store({
         removeComponent5DataById({commit}, payload) {
             commit('removeComponent5DataById', payload);
         },
+        removeAllComponent5Data({commit}, payload) {
+            commit('removeAllComponent5Data', payload);
+        },
         setComponent6Data({commit}, payload) {
             commit('setComponent6Data', payload);
         },
@@ -237,6 +364,9 @@ const store = new Vuex.Store({
         },
         removeComponent6DataById({commit}, payload) {
             commit('removeComponent6DataById', payload);
+        },
+        removeAllComponent6Data({commit}, payload) {
+            commit('removeAllComponent6Data', payload);
         },
         setComponent7Data({commit}, payload) {
             commit('setComponent7Data', payload);

@@ -33,8 +33,9 @@ namespace MyCareerServer.Freelance_Repositories
             return Save();
         }
 
-        public bool Delete(Language language)
+        public bool Delete(int id)
         {
+            var language = _dbContext.Languages.Where(l => l.Id == id).FirstOrDefault();
             _dbContext.Languages.Remove(language);
 
             return Save();

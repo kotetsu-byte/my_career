@@ -21,7 +21,13 @@
                 :level="template.level"
                 :experience="template.experience"
                 :education="template.education"
-                :contacts="template.contacts"
+                :website="template.website"
+                :whatsapp="template.whatsapp"
+                :facebook="template.facebook"
+                :instagram="template.instagram"
+                :telegram="template.telegram"
+                :github="template.github"
+                :twitter="template.twitter"
             />
         </div>
         <div class="frame" @click="select(2)">
@@ -43,7 +49,13 @@
                 :level="template.level"
                 :experience="template.experience"
                 :education="template.education"
-                :contacts="template.contacts"
+                :website="template.website"
+                :whatsapp="template.whatsapp"
+                :facebook="template.facebook"
+                :instagram="template.instagram"
+                :telegram="template.telegram"
+                :github="template.github"
+                :twitter="template.twitter"
             />
         </div>
         <div class="frame" @click="select(3)">
@@ -65,7 +77,13 @@
                 :level="template.level"
                 :experience="template.experience"
                 :education="template.education"
-                :contacts="template.contacts"
+                :website="template.website"
+                :whatsapp="template.whatsapp"
+                :facebook="template.facebook"
+                :instagram="template.instagram"
+                :telegram="template.telegram"
+                :github="template.github"
+                :twitter="template.twitter"
             />
         </div>
         <div class="frame" @click="select(4)">
@@ -87,7 +105,13 @@
                 :level="template.level"
                 :experience="template.experience"
                 :education="template.education"
-                :contacts="template.contacts"
+                :website="template.website"
+                :whatsapp="template.whatsapp"
+                :facebook="template.facebook"
+                :instagram="template.instagram"
+                :telegram="template.telegram"
+                :github="template.github"
+                :twitter="template.twitter"
             />
         </div>
         <div class="frame" @click="select(5)">
@@ -109,7 +133,13 @@
                 :level="template.level"
                 :experience="template.experience"
                 :education="template.education"
-                :contacts="template.contacts"
+                :website="template.website"
+                :whatsapp="template.whatsapp"
+                :facebook="template.facebook"
+                :instagram="template.instagram"
+                :telegram="template.telegram"
+                :github="template.github"
+                :twitter="template.twitter"
             />
         </div>
         <div class="frame" @click="select(6)">
@@ -131,7 +161,13 @@
                 :level="template.level"
                 :experience="template.experience"
                 :education="template.education"
-                :contacts="template.contacts"
+                :website="template.website"
+                :whatsapp="template.whatsapp"
+                :facebook="template.facebook"
+                :instagram="template.instagram"
+                :telegram="template.telegram"
+                :github="template.github"
+                :twitter="template.twitter"
             />
         </div>
     </div>
@@ -185,7 +221,13 @@ export default {
                     to: '2014',
                     currently: false
                 },
-                contacts: 'Murphy_design_2001'
+                website: '',
+                whatsapp: '',
+                facebook: '',
+                instagram: '',
+                telegram: '',
+                github: '',
+                twitter: ''
             }
         }
     },

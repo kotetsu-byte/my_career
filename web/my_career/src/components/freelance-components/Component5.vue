@@ -77,8 +77,8 @@ export default {
                         let obj = {
                             companyName: this.template.companyName,
                             position: this.template.position,
-                            begin: this.template.begin,
-                            end: this.template.end,
+                            begin: this.template.begin.toString(),
+                            end: this.template.end.toString(),
                             description: this.template.description,
                             isWorking: this.template.isWorking,
                         }
@@ -91,8 +91,8 @@ export default {
                         let obj = {
                             companyName: this.template.companyName,
                             position: this.template.position,
-                            begin: this.template.begin,
-                            end: this.template.end,
+                            begin: this.template.begin.toString(),
+                            end: this.template.end.toString(),
                             description: this.template.description,
                             isWorking: this.template.isWorking,
                         }

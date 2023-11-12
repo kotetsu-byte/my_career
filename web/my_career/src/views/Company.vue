@@ -1,6 +1,6 @@
 <template>
     <div id="cont">
-        <button onclick="location.href = '/login'">Back to log in</button>
+        <button onclick="location.href = '/home'">Back to log in</button>
         <div class="container">
             <component :is="componentName" :saveToStore="savingComponentsData" @nextPrevPage="nextOrPrev" @hideNavigation="hideNav" @showNavigation="showNav"></component>
             <div style="text-align: right;">

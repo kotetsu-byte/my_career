@@ -5,12 +5,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyCareerServer.User_Model
 {
-    public class User : IdentityUser
+    public class User
     {
-        [Required]
-        public override string? Email { get; set; }
-        [Required]
-        [DataType(DataType.Password)]
+        public int? Id { get; set; }
+        public string? Email { get; set; }
         public string? Password { get; set; }
         public IEnumerable<Resume>? Resumes { get; set; }
         public IEnumerable<CompanyResume>? CompanyResumes { get; set; }

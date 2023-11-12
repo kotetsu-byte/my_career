@@ -4,10 +4,11 @@ namespace MyCareerServer.Freelance_Interfaces
 {
     public interface IResumeRepository
     {
-        Task<IEnumerable<Resume>> GetResumesByEmailAsync(string email);
+        Task<IEnumerable<Resume>> GetResumes(int userId);
+        Task<Resume> GetResumeById(int id);
         bool Create(Resume resume);
         bool Update(Resume resume);
-        bool Delete(Resume resume);
+        bool Delete(int id);
         bool Save();
     }
 }

@@ -24,7 +24,7 @@ namespace MyCareerServer.Freelance_Controller
         [HttpGet("{resumeId}")]
         public async Task<IActionResult> GetExperiences(int resumeId)
         {
-            var experiences = _mapper.Map<ExperienceDto>(await _experienceRepository.GetExperiences(resumeId));
+            var experiences = _mapper.Map<List<ExperienceDto>>(await _experienceRepository.GetExperiences(resumeId));
 
             return Ok(experiences);
         }
@@ -39,7 +39,7 @@ namespace MyCareerServer.Freelance_Controller
             return Ok("Successful");
         }
 
-        [HttpPut]
+        [HttpPatch]
         public IActionResult UpdateExperience([FromBody] ExperienceDto experienceDto)
         {
             var experience = _mapper.Map<Experience>(experienceDto);
@@ -49,12 +49,10 @@ namespace MyCareerServer.Freelance_Controller
             return Ok("Successful");
         }
 
-        [HttpDelete]
-        public IActionResult DeleteExperience([FromBody] ExperienceDto experienceDto)
+        [HttpDelete("{id}")]
+        public IActionResult DeleteExperience(int id)
         {
-            var experience = _mapper.Map<Experience>(experienceDto);
-
-            _experienceRepository.Delete(experience);
+            _experienceRepository.Delete(id);
 
             return Ok("Successful");
         }

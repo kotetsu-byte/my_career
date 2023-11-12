@@ -18,7 +18,7 @@
             </div>
         </div>
         <div id="right">
-            <button>&lt; Back</button><br>
+            <button onclick="location.href = '/home'">&lt; Back</button><br>
             <img src="../assets/img/computer.png" width="550" alt="">
         </div>
     </div>
@@ -73,7 +73,6 @@ export default {
 
 #choice > div {
     padding: 10px;
-    
     background: white;
     border-radius: 15px;
 }

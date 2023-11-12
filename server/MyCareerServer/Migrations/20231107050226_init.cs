@@ -13,6 +13,56 @@ namespace MyCareerServer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CompanyResumes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Photo = table.Column<string>(type: "text", nullable: true),
+                    CompanyName = table.Column<string>(type: "text", nullable: true),
+                    CompanyPhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    Address = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    FirstName = table.Column<string>(type: "text", nullable: true),
+                    LastName = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    Website = table.Column<string>(type: "text", nullable: true),
+                    Whatsapp = table.Column<string>(type: "text", nullable: true),
+                    Facebook = table.Column<string>(type: "text", nullable: true),
+                    Instagram = table.Column<string>(type: "text", nullable: true),
+                    Telegram = table.Column<string>(type: "text", nullable: true),
+                    Github = table.Column<string>(type: "text", nullable: true),
+                    Twitter = table.Column<string>(type: "text", nullable: true),
+                    TemplateNo = table.Column<int>(type: "integer", nullable: true),
+                    UserId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompanyResumes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CompanyResumes_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Resumes",
                 columns: table => new
                 {
@@ -38,11 +88,18 @@ namespace MyCareerServer.Migrations
                     Instagram = table.Column<string>(type: "text", nullable: true),
                     Telegram = table.Column<string>(type: "text", nullable: true),
                     Github = table.Column<string>(type: "text", nullable: true),
-                    Twitter = table.Column<string>(type: "text", nullable: true)
+                    Twitter = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Resumes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Resumes_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,6 +175,11 @@ namespace MyCareerServer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_CompanyResumes_UserId",
+                table: "CompanyResumes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Educations_ResumeId",
                 table: "Educations",
                 column: "ResumeId");
@@ -131,11 +193,19 @@ namespace MyCareerServer.Migrations
                 name: "IX_Languages_ResumeId",
                 table: "Languages",
                 column: "ResumeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Resumes_UserId",
+                table: "Resumes",
+                column: "UserId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CompanyResumes");
+
             migrationBuilder.DropTable(
                 name: "Educations");
 
@@ -147,6 +217,9 @@ namespace MyCareerServer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Resumes");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

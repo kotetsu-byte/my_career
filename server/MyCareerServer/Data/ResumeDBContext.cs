@@ -6,11 +6,11 @@ using MyCareerServer.User_Model;
 
 namespace MyCareerServer.Data
 {
-    public class ResumeDBContext : IdentityDbContext<User>
+    public class ResumeDBContext : DbContext
     {
         public ResumeDBContext(DbContextOptions<ResumeDBContext> options) : base(options) { }
 
-        public override DbSet<User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Resume> Resumes { get; set; }
         public DbSet<Education> Educations { get; set; }
         public DbSet<Experience> Experiences { get; set; }

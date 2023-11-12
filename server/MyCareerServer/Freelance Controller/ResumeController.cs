@@ -20,39 +20,43 @@ namespace MyCareerServer.Freelance_Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{email}")]
-        public async Task<IActionResult> GetResumesByEmail(string email)
+        [HttpGet("all/{userId}")]
+        public async Task<IActionResult> GetResumesByEmail(int userId)
         {
-            var resumesDto = _mapper.Map<ResumeDto>(await _resumeRepository.GetResumesByEmailAsync(email));
-            
-            return Ok(resumesDto);
+            var resumes = await _resumeRepository.GetResumes(userId);
+
+            return Ok(resumes);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetResumeById(int id)
+        {
+            var resumeDto = _mapper.Map<ResumeDto>(await _resumeRepository.GetResumeById(id));
+
+            return Ok(resumeDto);
         }
 
         [HttpPost]
         public IActionResult CreateResume([FromBody] ResumeDto resumeDto)
         {
             var resume = _mapper.Map<Resume>(resumeDto);
-
             _resumeRepository.Create(resume);
             return Ok(resume.Id);
         }
 
-        [HttpPut]
+        [HttpPost("Update")]
         public IActionResult UpdateResume([FromBody] ResumeDto resumeDto)
         {
             var resume = _mapper.Map<Resume>(resumeDto);
-            
             _resumeRepository.Update(resume);
 
             return Ok("Succeeded");
         }
 
-        [HttpDelete]
-        public IActionResult DeleteResume([FromBody] ResumeDto resumeDto)
+        [HttpDelete("{id}")]
+        public IActionResult DeleteResume(int id)
         {
-            var resume = _mapper.Map<Resume>(resumeDto);
-            
-            _resumeRepository.Delete(resume);
+            _resumeRepository.Delete(id);
 
             return Ok("Succeeded");
         }

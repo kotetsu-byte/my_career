@@ -33,8 +33,9 @@ namespace MyCareerServer.Freelance_Repositories
             return Save();
         }
 
-        public bool Delete(Education education)
+        public bool Delete(int id)
         {
+            var education = _dbContext.Educations.Where(e => e.Id == id).FirstOrDefault();
             _dbContext.Educations.Remove(education);
 
             return Save();

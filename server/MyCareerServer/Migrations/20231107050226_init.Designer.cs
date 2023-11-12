@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyCareerServer.Migrations
 {
     [DbContext(typeof(ResumeDBContext))]
-    [Migration("20231103061036_init")]
+    [Migration("20231107050226_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -24,6 +24,75 @@ namespace MyCareerServer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("MyCareerServer.CompanyModels.CompanyResume", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CompanyPhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Facebook")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Github")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Instagram")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Photo")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Telegram")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("TemplateNo")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Twitter")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Website")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Whatsapp")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CompanyResumes");
+                });
 
             modelBuilder.Entity("MyCareerServer.FreelanceModels.Education", b =>
                 {
@@ -189,6 +258,9 @@ namespace MyCareerServer.Migrations
                     b.Property<string>("Twitter")
                         .HasColumnType("text");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Website")
                         .HasColumnType("text");
 
@@ -197,7 +269,40 @@ namespace MyCareerServer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Resumes");
+                });
+
+            modelBuilder.Entity("MyCareerServer.User_Model.User", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("MyCareerServer.CompanyModels.CompanyResume", b =>
+                {
+                    b.HasOne("MyCareerServer.User_Model.User", "User")
+                        .WithMany("CompanyResumes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyCareerServer.FreelanceModels.Education", b =>
@@ -232,11 +337,28 @@ namespace MyCareerServer.Migrations
 
             modelBuilder.Entity("MyCareerServer.FreelanceModels.Resume", b =>
                 {
+                    b.HasOne("MyCareerServer.User_Model.User", "User")
+                        .WithMany("Resumes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MyCareerServer.FreelanceModels.Resume", b =>
+                {
                     b.Navigation("Educations");
 
                     b.Navigation("Experinces");
 
                     b.Navigation("Languages");
+                });
+
+            modelBuilder.Entity("MyCareerServer.User_Model.User", b =>
+                {
+                    b.Navigation("CompanyResumes");
+
+                    b.Navigation("Resumes");
                 });
 #pragma warning restore 612, 618
         }

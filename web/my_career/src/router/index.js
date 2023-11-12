@@ -11,26 +11,44 @@ import Frame3 from '../components/templates/Frame3.vue';
 import Frame4 from '../components/templates/Frame4.vue';
 import Frame5 from '../components/templates/Frame5.vue';
 import Frame6 from '../components/templates/Frame6.vue';
-import CompanyFrame1 from '../components/company-templates/Frame1.vue';
-import CompanyFrame2 from '../components/company-templates/Frame2.vue';
-import CompanyFrame3 from '../components/company-templates/Frame3.vue';
-import CompanyFrame4 from '../components/company-templates/Frame4.vue';
-import CompanyFrame5 from '../components/company-templates/Frame5.vue';
-import CompanyFrame6 from '../components/company-templates/Frame6.vue';
+import CompanyFrame1 from '../components/company-templates/CompanyFrame1.vue';
+import CompanyFrame2 from '../components/company-templates/CompanyFrame2.vue';
+import CompanyFrame3 from '../components/company-templates/CompanyFrame3.vue';
+import CompanyFrame4 from '../components/company-templates/CompanyFrame4.vue';
+import CompanyFrame5 from '../components/company-templates/CompanyFrame5.vue';
+import CompanyFrame6 from '../components/company-templates/CompanyFrame6.vue';
 import CompanyReady from '../views/CompanyReady.vue';
+import HomePage from '../views/HomePage.vue';
+import MyResumes from '../views/MyResumes.vue';
+import OpenResume from '../views/OpenResume.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/register',
       name: 'Register',
       component: Register
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: Login
+      path: '/home',
+      name: 'Home Page',
+      component: HomePage
+    },
+    {
+      path: '/my-resumes',
+      name: 'My Resumes',
+      component: MyResumes
+    },
+    {
+      path: '/open-resume',
+      name: 'Open Resume',
+      component: OpenResume
     },
     {
       path: '/resume-type',

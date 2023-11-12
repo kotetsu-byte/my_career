@@ -21,9 +21,13 @@
                 <div style="width: 39%;" id="for-hr">
                     <div id="contacts">
                         <p style="font-size: 22px; font-weight: 700;">Contacts</p>
-                        <p><img src="../../assets/icons/templates/frame 1/whatsapp" alt=""><span style="font-size: 12px; font-weight: 400;">{{ contacts }}</span></p>
-                        <p><img src="../../assets/icons/templates/frame 1/facebook" alt=""><span style="font-size: 12px; font-weight: 400;">Murphy_design_2001</span></p>
-                        <p><img src="../../assets/icons/templates/frame 1/instagram" alt=""><span style="font-size: 12px; font-weight: 400;">Murphy_design_2001</span></p>
+                        <div v-if="website"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/website.png" alt="">{{ website }}</p></div>
+                        <div v-if="whatsapp"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/whatsapp.png" alt="">{{ whatsapp }}</p></div>
+                        <div v-if="facebook"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/facebook.png" alt="">{{ facebook }}</p></div>
+                        <div v-if="instagram"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/instagram.png" alt="">{{ instagram }}</p></div>
+                        <div v-if="telegram"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/telegram.png" alt="">{{ telegram }}</p></div>
+                        <div v-if="github"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/github.png" alt="">{{ github }}</p></div>
+                        <div v-if="twitter"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/twitter.png" alt="">{{ twitter }}</p></div>
                     </div>
                 </div>
                 <hr id="vertical-hr">
@@ -46,7 +50,7 @@
 
 <script>
 export default {
-    name: 'Frame1',
+    name: 'CompanyFrame1',
     components: {},
     data() {
         return {
@@ -58,7 +62,13 @@ export default {
         companyName: String,
         companyPhoneNumber: String,
         address: String,
-        contacts: String,
+        website: String,
+        whatsapp: String,
+        facebook: String,
+        instagram: String,
+        telegram: String,
+        github: String,
+        twitter: String,
         description: String,
         firstName: String,
         lastName: String,

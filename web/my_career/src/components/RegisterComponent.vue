@@ -1,13 +1,14 @@
 <template>
     <div id="container-1">
         <p style="font-size: 30px; font-weight: 700; margin: 5px 0;">Sign up</p>
-        <p style="font-size: 18px; font-weight: 500; margin: 10px 0;">Do you have an account? <a href="">Log in Now</a></p>
-        <input type="email" placeholder="Email" style="width: 90%; padding: 15px 20px; border: 1px solid #CDCDCD; margin-bottom: 5px; border-radius: 8px; font-size: 20px; font-weight: 500;"><br>
-        <input type="password" placeholder="Password" style="width: 90%; padding: 15px 20px; border: 1px solid #CDCDCD; margin-bottom: 5px; border-radius: 8px; font-size: 20px; font-weight: 500;"><br>
-        <input type="password" placeholder="Confirm password" style="width: 90%; padding: 15px 20px; border: 1px solid #CDCDCD; margin-bottom: 5px; border-radius: 8px; font-size: 20px; font-weight: 500;"><br>
+        <p style="font-size: 18px; font-weight: 500; margin: 10px 0;">Do you have an account? <RouterLink to="/">Log in Now</RouterLink></p>
+        <input v-model="email" type="email" placeholder="Email" style="width: 90%; padding: 15px 20px; border: 1px solid #CDCDCD; margin-bottom: 5px; border-radius: 8px; font-size: 20px; font-weight: 500;"><br>
+        <input v-model="password" type="password" placeholder="Password" style="width: 90%; padding: 15px 20px; border: 1px solid #CDCDCD; margin-bottom: 5px; border-radius: 8px; font-size: 20px; font-weight: 500;"><br>
+        <input v-model="confirmPassword" type="password" placeholder="Confirm password" style="width: 90%; padding: 15px 20px; border: 1px solid #CDCDCD; margin-bottom: 5px; border-radius: 8px; font-size: 20px; font-weight: 500;"><br>
         <div style="text-align: right;">
-            <button @click="displayEmail()" style="padding: 10px 20px; color: white; border: none; border-radius: 8px; background-color: #1D71B8; margin: 10px 0; font-size: 20px; font-weight: 500;">Continue</button>
+            <button @click="register()" style="padding: 10px 20px; color: white; border: none; border-radius: 8px; background-color: #1D71B8; margin: 10px 0; font-size: 20px; font-weight: 500;">Continue</button>
         </div>
+        {{ notification }}
         <hr style="margin: 10px 0;">
         <p style="margin: 5px; text-align: center; font-size: 18px; font-weight: 500; color: #808080;">Or continue with</p>
         <div style="text-align: center;">
@@ -31,15 +32,44 @@
 </template>
 
 <script>
+import API from '../api';
+
 export default {
     name: 'RegisterComponent',
     components: {},
     data() {
         return {
-
+            email: '',
+            password: '',
+            confirmPassword: '',
+            notification: ''
         }
     },
     methods: {
+        register() {
+            if(this.password != this.confirmPassword)
+            {
+                this.notification = "Passwords do not match!";
+                return;
+            }
+            var obj = {
+                email: this.email,
+                password: this.password
+            }
+            API.post('/api/User/register', obj)
+                .then(res => {
+                    console.log(res.data);
+                    if(res.data == true) {
+                        this.displayEmail();
+                    } else {
+                        this.notification = 'User already exists!';
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+
+        },
         displayEmail() {
             let container1 = document.getElementById("container-1");
             let container2 = document.getElementById("container-2");

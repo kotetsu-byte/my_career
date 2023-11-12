@@ -21,7 +21,13 @@
                     :languages="getComponent4Data"
                     :experience="getComponent5Data"
                     :education="getComponent6Data"
-                    :contacts="getComponent7Data.contacts"
+                    :website="getComponent7Data.website"
+                    :whatsapp="getComponent7Data.whatsapp"
+                    :facebook="getComponent7Data.facebook"
+                    :instagram="getComponent7Data.instagram"
+                    :telegram="getComponent7Data.telegram"
+                    :github="getComponent7Data.github"
+                    :twitter="getComponent7Data.twitter"
                 ></component>
             </div>
         </div>
@@ -47,6 +53,7 @@ export default {
     data() {
         return {
             frameName: '',
+            userId: 0
         }
     },
     methods: {
@@ -96,54 +103,124 @@ export default {
                 instagram: this.getComponent7Data.instagram,
                 telegram: this.getComponent7Data.telegram,
                 github: this.getComponent7Data.github,
-                twitter: this.getComponent7Data.twitter
+                twitter: this.getComponent7Data.twitter,
+                userId: this.userId
             }
             let educationObj = this.getComponent6Data;
             let experienceObj = this.getComponent5Data;
             let languageObj = this.getComponent4Data;
-            API.post('/api/Resume', resumeObj)
-                .then(res => {
-                    let resumeId = res.data;
-                    educationObj.forEach(education => {
-                        education.resumeId = resumeId;
-                        API.post(`/api/Education/`, education)
+            switch(this.getIsUpdate) {
+                case false:
+                API.post(`/api/Resume/`, resumeObj)
+                    .then(res => {
+                        let resumeId = res.data;
+                        educationObj.forEach(education => {
+                            education.resumeId = resumeId;
+                            API.post(`/api/Education/`, education)
+                            .then(res => {
+                                console.log(res.data)
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            });
+                        });
+                        experienceObj.forEach(experience => {
+                            experience.resumeId = resumeId;
+                            API.post(`/api/Experience/`, experience)
+                                .then(res => {
+                                    console.log(res.data);
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                })    
+                        })
+                        languageObj.forEach(language => {
+                            language.resumeId = resumeId;
+                            API.post(`/api/Language/`, language)
+                                .then(res => {
+                                    console.log(res.data);
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                })
+                        })
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+                    break;
+                case true:
+                    resumeObj.id = this.getUpdateResumeId;
+                    console.log(this.getUpdateResumeId)
+                    API.post(`/api/Resume/Update`, resumeObj)
                         .then(res => {
-                            console.log(res.data)
+                            let resumeId = res.data;
+                            console.log(res.data);
+                            for(let i = 0; i < this.getUpdateEducationId.length; i++)
+                            {
+                                educationObj[i].resumeId = resumeId;
+                                educationObj[i].id = this.getUpdateEducationId[i];
+                                API.post(`/api/Education`, educationObj[i])
+                                .then(res => {
+                                    console.log(res.data)
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                });
+                            }
+                            for(let i = 0; i < this.getUpdateExperienceId.length; i++)
+                            {
+                                experienceObj[i].resumeId = resumeId;
+                                experienceObj[i].id = this.getUpdateExperienceId[i];
+                                API.post(`/api/Experience`, experienceObj[i])
+                                .then(res => {
+                                    console.log(res.data)
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                });
+                            }
+                            for(let i = 0; i < this.getUpdateLanguageId.length; i++)
+                            {
+                                languageObj[i].resumeId = resumeId;
+                                languageObj[i].id = this.getUpdateLanguageId[i];
+                                API.post(`/api/Language`, languageObj[i])
+                                .then(res => {
+                                    console.log(res.data)
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                });
+                            }
                         })
                         .catch(err => {
                             console.log(err);
                         });
-                    });
-                    experienceObj.forEach(experience => {
-                        experience.resumeId = resumeId;
-                        API.post(`/api/Experience/`, experience)
-                            .then(res => {
-                                console.log(res.data);
-                            })
-                            .catch(err => {
-                                console.log(err);
-                            })    
-                    })
-                    languageObj.forEach(language => {
-                        language.resumeId = resumeId;
-                        API.post(`/api/Language/`, language)
-                            .then(res => {
-                                console.log(res.data);
-                            })
-                            .catch(err => {
-                                console.log(err);
-                            })
-                    })
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+                    break;
+            }
         }
     },
     computed: {
-        ...mapGetters(['getComponent1Data', 'getComponent2Data', 'getComponent3Data', 'getComponent4Data', 'getComponent5Data', 'getComponent6Data', 'getComponent7Data', 'getComponent8Data']),
+        ...mapGetters([
+            'getIsUpdate', 
+            'getUpdateResumeId',
+            'getUpdateEducationId',
+            'getUpdateExperienceId',
+            'getUpdateLanguageId', 
+            'getCurrentUser', 
+            'getComponent1Data', 
+            'getComponent2Data', 
+            'getComponent3Data', 
+            'getComponent4Data', 
+            'getComponent5Data', 
+            'getComponent6Data', 
+            'getComponent7Data', 
+            'getComponent8Data'
+        ]),
         getComponentsData() {
             this.getFrameByNo(this.getComponent8Data.selectedTemplate);
+            this.userId = this.getCurrentUser;
+            console.log(this.userId);
             console.log(this.getComponent5Data);
         }
     },

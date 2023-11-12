@@ -41,9 +41,10 @@ export default {
     methods: {
         ...mapActions(['setComponent7Data']),
         choose(app) {
+            let obj;
             switch(app) {
                 case 'whatsapp':
-                    let obj = {
+                    obj = {
                         id: 1,
                         name: 'whatsapp',
                         icon: '../../src/assets/icons/contacts/whatsapp.png',

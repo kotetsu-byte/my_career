@@ -23,7 +23,7 @@ namespace MyCareerServer.Freelance_Controller
         [HttpGet("{resumeId}")]
         public async Task<IActionResult> GetEducation(int resumeId)
         {
-            var educations = _mapper.Map<EducationDto>(await _educationRepository.GetEducations(resumeId));
+            var educations = _mapper.Map<List<EducationDto>>(await _educationRepository.GetEducations(resumeId));
 
             return Ok(educations);
         }
@@ -38,7 +38,7 @@ namespace MyCareerServer.Freelance_Controller
             return Ok("Successful");
         }
 
-        [HttpPut]
+        [HttpPatch]
         public IActionResult UpdateEducation([FromBody] EducationDto educationDto)
         {
             var education = _mapper.Map<Education>(educationDto);
@@ -48,12 +48,10 @@ namespace MyCareerServer.Freelance_Controller
             return Ok("Successful");
         }
 
-        [HttpDelete]
-        public IActionResult DeleteEducation([FromBody] EducationDto educationDto)
+        [HttpDelete("{id}")]
+        public IActionResult DeleteEducation(int id)
         {
-            var education = _mapper.Map<Education>(educationDto);
-
-            _educationRepository.Delete(education);
+            _educationRepository.Delete(id);
 
             return Ok("Successful");
         }

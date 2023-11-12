@@ -10,7 +10,6 @@ namespace MyCareerServer.CompanyModels
         public string? CompanyName { get; set; }
         public string? CompanyPhoneNumber { get; set; }
         public string? Address { get; set; }
-        public string? Contacts { get; set; }
         public string? Description { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
@@ -23,6 +22,7 @@ namespace MyCareerServer.CompanyModels
         public string? Telegram { get; set; }
         public string? Github { get; set; }
         public string? Twitter { get; set; }
+        public int? TemplateNo { get; set; }
         [ForeignKey("User")]
         public int? UserId { get; set; }
         public User? User { get; set; }

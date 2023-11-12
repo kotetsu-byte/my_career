@@ -35,11 +35,6 @@ export default {
             lastName: '',
             email: '',
             phoneNumber: '',
-            photo: '',
-            companyName: '',
-            companyPhoneNumber: '',
-            address: '',
-            description: ''
         }
     },
     props: {

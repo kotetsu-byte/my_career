@@ -33,8 +33,9 @@ namespace MyCareerServer.Freelance_Repositories
             return Save();
         }
 
-        public bool Delete(Experience experience)
+        public bool Delete(int id)
         {
+            var experience = _dbContext.Experiences.Where(e => e.Id == id).FirstOrDefault();
             _dbContext.Experiences.Remove(experience);
 
             return Save();

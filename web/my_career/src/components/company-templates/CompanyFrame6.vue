@@ -32,9 +32,13 @@
             <div>
                 <div id="contacts">
                     <p style="background-color: #C7DAE0; font-size: 15px; font-weight: 500;">CONTACTS</p>
-                    <p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/templates/frame 6/whatsapp.png" alt="">{{ contacts }}</p>
-                    <p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/templates/frame 6/facebook.png" alt="">Murphy_design_2001</p>
-                    <p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/templates/frame 6/instagram.png" alt="">Murphy_design_2001</p>
+                    <div v-if="website"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/website.png" alt="">{{ website }}</p></div>
+                    <div v-if="whatsapp"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/whatsapp.png" alt="">{{ whatsapp }}</p></div>
+                    <div v-if="facebook"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/facebook.png" alt="">{{ facebook }}</p></div>
+                    <div v-if="instagram"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/instagram.png" alt="">{{ instagram }}</p></div>
+                    <div v-if="telegram"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/telegram.png" alt="">{{ telegram }}</p></div>
+                    <div v-if="github"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/github.png" alt="">{{ github }}</p></div>
+                    <div v-if="twitter"><p style="font-size: 12px; font-weight: 400;"><img src="../../assets/icons/contacts/twitter.png" alt="">{{ twitter }}</p></div>
                 </div>
             </div>
         </div>
@@ -43,7 +47,7 @@
 
 <script>
 export default {
-    name: 'Frame6',
+    name: 'CompanyFrame6',
     components: {},
     data() {
         return {
@@ -55,7 +59,13 @@ export default {
         companyName: String,
         companyPhoneNumber: String,
         address: String,
-        contacts: String,
+        website: String,
+        whatsapp: String,
+        facebook: String,
+        instagram: String,
+        telegram: String,
+        github: String,
+        twitter: String,
         description: String,
         firstName: String,
         lastName: String,

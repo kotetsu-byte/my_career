@@ -3,12 +3,18 @@
     <p style="font-size: 18px; font-weight: 500; color: #808080; margin: 10px 0;">Your resume is ready! You need to choose one of this templates and all your info will be filled in it already.</p>
     <div class="templates" style="display: flex; flex-direction: row; overflow-x: scroll;">
         <div class="frame" @click="select(1)" style="padding: 0;">
-            <Frame1
+            <CompanyFrame1
                 :photo="template.photo"
                 :companyName="template.companyName"
                 :companyPhoneNumber="template.companyPhoneNumber"
                 :address="template.address"
-                :contacts="template.contacts"
+                :website="template.website"
+                :whatsapp="template.whatsapp"
+                :facebook="template.facebook"
+                :instagram="template.instagram"
+                :telegram="template.telegram"
+                :github="template.github"
+                :twitter="template.twitter"
                 :description="template.description"
                 :firstName="template.firstName"
                 :lastName="template.lastName"
@@ -17,12 +23,18 @@
             />
         </div>
         <div class="frame" @click="select(2)">
-            <Frame2
+            <CompanyFrame2
                 :photo="template.photo"
                 :companyName="template.companyName"
                 :companyPhoneNumber="template.companyPhoneNumber"
                 :address="template.address"
-                :contacts="template.contacts"
+                :website="template.website"
+                :whatsapp="template.whatsapp"
+                :facebook="template.facebook"
+                :instagram="template.instagram"
+                :telegram="template.telegram"
+                :github="template.github"
+                :twitter="template.twitter"
                 :description="template.description"
                 :firstName="template.firstName"
                 :lastName="template.lastName"
@@ -31,12 +43,18 @@
             />
         </div>
         <div class="frame" @click="select(3)">
-            <Frame3
+            <CompanyFrame3
                 :photo="template.photo"
                 :companyName="template.companyName"
                 :companyPhoneNumber="template.companyPhoneNumber"
                 :address="template.address"
-                :contacts="template.contacts"
+                :website="template.website"
+                :whatsapp="template.whatsapp"
+                :facebook="template.facebook"
+                :instagram="template.instagram"
+                :telegram="template.telegram"
+                :github="template.github"
+                :twitter="template.twitter"
                 :description="template.description"
                 :firstName="template.firstName"
                 :lastName="template.lastName"
@@ -45,12 +63,18 @@
             />
         </div>
         <div class="frame" @click="select(4)">
-            <Frame4 
+            <CompanyFrame4 
                 :photo="template.photo"
                 :companyName="template.companyName"
                 :companyPhoneNumber="template.companyPhoneNumber"
                 :address="template.address"
-                :contacts="template.contacts"
+                :website="template.website"
+                :whatsapp="template.whatsapp"
+                :facebook="template.facebook"
+                :instagram="template.instagram"
+                :telegram="template.telegram"
+                :github="template.github"
+                :twitter="template.twitter"
                 :description="template.description"
                 :firstName="template.firstName"
                 :lastName="template.lastName"
@@ -59,12 +83,18 @@
             />
         </div>
         <div class="frame" @click="select(5)">
-            <Frame5 
+            <CompanyFrame5 
                 :photo="template.photo"
                 :companyName="template.companyName"
                 :companyPhoneNumber="template.companyPhoneNumber"
                 :address="template.address"
-                :contacts="template.contacts"
+                :website="template.website"
+                :whatsapp="template.whatsapp"
+                :facebook="template.facebook"
+                :instagram="template.instagram"
+                :telegram="template.telegram"
+                :github="template.github"
+                :twitter="template.twitter"
                 :description="template.description"
                 :firstName="template.firstName"
                 :lastName="template.lastName"
@@ -73,12 +103,18 @@
             />
         </div>
         <div class="frame" @click="select(6)">
-            <Frame6 
+            <CompanyFrame6 
                 :photo="template.photo"
                 :companyName="template.companyName"
                 :companyPhoneNumber="template.companyPhoneNumber"
                 :address="template.address"
-                :contacts="template.contacts"
+                :website="template.website"
+                :whatsapp="template.whatsapp"
+                :facebook="template.facebook"
+                :instagram="template.instagram"
+                :telegram="template.telegram"
+                :github="template.github"
+                :twitter="template.twitter"
                 :description="template.description"
                 :firstName="template.firstName"
                 :lastName="template.lastName"
@@ -90,17 +126,17 @@
 </template>
 
 <script>
-import Frame1 from '../company-templates/Frame1.vue';
-import Frame2 from '../company-templates/Frame2.vue';
-import Frame3 from '../company-templates/Frame3.vue';
-import Frame4 from '../company-templates/Frame4.vue';
-import Frame5 from '../company-templates/Frame5.vue';
-import Frame6 from '../company-templates/Frame6.vue';
+import CompanyFrame1 from '../company-templates/CompanyFrame1.vue';
+import CompanyFrame2 from '../company-templates/CompanyFrame2.vue';
+import CompanyFrame3 from '../company-templates/CompanyFrame3.vue';
+import CompanyFrame4 from '../company-templates/CompanyFrame4.vue';
+import CompanyFrame5 from '../company-templates/CompanyFrame5.vue';
+import CompanyFrame6 from '../company-templates/CompanyFrame6.vue';
 import {mapGetters, mapActions} from 'vuex';
 
 export default {
     name: 'Component5',
-    components: {Frame1, Frame2, Frame3, Frame4, Frame5, Frame6},
+    components: {CompanyFrame1, CompanyFrame2, CompanyFrame3, CompanyFrame4, CompanyFrame5, CompanyFrame6},
     data() {
         return {
             selectedTemplate: 0,
@@ -114,7 +150,13 @@ export default {
                 companyPhoneNumber: '+998 71 000 00 00',
                 address: 'Somewhere',
                 description: 'Something',
-                contacts: ''
+                website: '',
+                whatsapp: '',
+                facebook: '',
+                instagram: '',
+                telegram: '',
+                github: '',
+                twitter: ''
             }            
         }
     },

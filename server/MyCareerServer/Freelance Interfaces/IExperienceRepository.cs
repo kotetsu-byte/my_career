@@ -7,7 +7,7 @@ namespace MyCareerServer.Freelance_Interfaces
         Task<IEnumerable<Experience>> GetExperiences(int resumeId);
         bool Create(Experience experience);
         bool Update(Experience experience);
-        bool Delete(Experience experience);
+        bool Delete(int id);
         bool Save();
     }
 }

@@ -14,9 +14,14 @@ namespace MyCareerServer.Company_Repositories
             _dbContext = dBContext;
         }
 
-        public async Task<IEnumerable<CompanyResume>> GetCompanyResumesByEmail(string email)
+        public async Task<IEnumerable<CompanyResume>> GetCompanyResumes(int userId)
         {
-            return await _dbContext.CompanyResumes.Where(c => c.User.Email == email).ToListAsync();
+            return await _dbContext.CompanyResumes.Where(c => c.User.Id == userId).ToListAsync();
+        }
+
+        public async Task<CompanyResume> GetCompanyResumeById(int id)
+        {
+            return await _dbContext.CompanyResumes.Where(cr => cr.Id == id).FirstOrDefaultAsync();
         }
 
         public bool Create(CompanyResume companyResume)
@@ -33,8 +38,10 @@ namespace MyCareerServer.Company_Repositories
             return Save();
         }
 
-        public bool Delete(CompanyResume companyResume)
+        public bool Delete(int id)
         {
+            var companyResume = _dbContext.CompanyResumes.Where(cr => cr.Id == id).FirstOrDefault();
+            
             _dbContext.CompanyResumes.Remove(companyResume);
 
             return Save();

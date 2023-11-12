@@ -7,7 +7,7 @@ namespace MyCareerServer.Freelance_Interfaces
         Task<IEnumerable<Language>> GetLanguages(int resumeId);
         bool Create(Language language);
         bool Update(Language language);
-        bool Delete(Language language);
+        bool Delete(int id);
         bool Save();
     }
 }
