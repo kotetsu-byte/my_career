@@ -55,15 +55,26 @@ export default {
                 description: '',
                 isWorking: false,
             },
+            updateTemplate: {
+                id: 0,
+                companyName: '',
+                position: '',
+                begin: '',
+                end: '',
+                description: '',
+                isWorking: false,
+                resumeId: 0
+            },
             savingMode: 0,
-            experienceId: 0
+            experienceId: 0,
+            updateExperienceId: 0
         }
     },
     props: {
         saveToStore: Boolean
     },
     methods: {
-        ...mapActions(['setComponent5Data', 'editComponent5DataById', 'removeComponent5DataById']),
+        ...mapActions(['setComponent5Data', 'editComponent5DataById', 'removeComponent5DataById', 'setUpdateExperience', 'editUpdateExperience']),
         createNew() {
             this.savingMode = 0;
             this.$emit('hideNavigation');
@@ -74,29 +85,58 @@ export default {
             switch(mode) {
                 case 0:
                     {
-                        let obj = {
-                            companyName: this.template.companyName,
-                            position: this.template.position,
-                            begin: this.template.begin.toString(),
-                            end: this.template.end.toString(),
-                            description: this.template.description,
-                            isWorking: this.template.isWorking,
+                        if(this.getIsUpdate == false) {
+                            let obj = {
+                                companyName: this.template.companyName,
+                                position: this.template.position,
+                                begin: this.template.begin.toString(),
+                                end: this.template.end.toString(),
+                                description: this.template.description,
+                                isWorking: this.template.isWorking,
+                            }
+                            this.setComponent5Data(obj);
+                        } else {
+                            let obj = {
+                                id: this.updateTemplate.id,
+                                companyName: this.updateTemplate.companyName,
+                                position: this.updateTemplate.position,
+                                begin: this.updateTemplate.begin,
+                                end: this.updateTemplate.end,
+                                description: this.updateTemplate.description,
+                                isWorking: this.updateTemplate.isWorking,
+                                resumeId: this.updateTemplate.resumeId
+                            }
+                            this.setUpdateExperience(obj);
                         }
-                        this.setComponent5Data(obj);
                         break;
                     }
                 case 1:
                     {
-                        let id = this.experienceId;
-                        let obj = {
-                            companyName: this.template.companyName,
-                            position: this.template.position,
-                            begin: this.template.begin.toString(),
-                            end: this.template.end.toString(),
-                            description: this.template.description,
-                            isWorking: this.template.isWorking,
+                        if(this.getIsUpdate == false) {
+                            let id = this.experienceId;
+                            let obj = {
+                                companyName: this.template.companyName,
+                                position: this.template.position,
+                                begin: this.template.begin.toString(),
+                                end: this.template.end.toString(),
+                                description: this.template.description,
+                                isWorking: this.template.isWorking,
+                            }
+                            this.editComponent5DataById({id: id, obj: obj});
+                        } else {
+                            let id = this.updateExperienceId;
+                            let obj = {
+                                id: this.updateTemplate.id,
+                                companyName: this.updateTemplate.companyName,
+                                position: this.updateTemplate.position,
+                                begin: this.updateTemplate.begin,
+                                end: this.updateTemplate.end,
+                                description: this.updateTemplate.description,
+                                isWorking: this.updateTemplate.isWorking,
+                                resumeId: this.updateTemplate.resumeId
+                            }
+                            this.editUpdateExperience({id: id, obj: obj});
                         }
-                        this.editComponent5DataById({id: id, obj: obj});
                         break;
                     }
             }
@@ -121,14 +161,27 @@ export default {
             this.$emit('hideNavigation');
             document.querySelector('#display').style.display = 'none';
             document.querySelector('#new').style.display = 'block';
-            let entity = this.experiences[id];
-            this.template.companyName = entity.companyName;
-            this.template.position = entity.position;
-            this.template.begin = entity.begin;
-            this.template.end = entity.end;
-            this.template.description = entity.description;
-            this.template.isWorking = entity.isWorking;
-            this.experienceId = id;
+            if(this.getIsUpdate == false) {
+                let entity = this.experiences[id];
+                this.template.companyName = entity.companyName;
+                this.template.position = entity.position;
+                this.template.begin = entity.begin;
+                this.template.end = entity.end;
+                this.template.description = entity.description;
+                this.template.isWorking = entity.isWorking;
+                this.experienceId = id;
+            } else {
+                let entity = this.experiences[id];
+                this.updateTemplate.id = entity.id;
+                this.updateTemplate.companyName = entity.companyName;
+                this.updateTemplate.position = entity.position;
+                this.updateTemplate.begin = entity.begin;
+                this.updateTemplate.end = entity.end;
+                this.updateTemplate.description = entity.description;
+                this.updateTemplate.isWorking = entity.isWorking;
+                this.updateTemplate.resumeId = entity.resumeId;
+                this.updateExperienceId = id;
+            }
         },
         del(id) {
             this.removeComponent5DataById(id);
@@ -143,12 +196,18 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getComponent5Data']),
+        ...mapGetters(['getIsUpdate', 'getComponent5Data', 'getUpdateExperience']),
         getComponentData() {
             this.experiences = [];
-            this.getComponent5Data.forEach(elem => {
-                this.experiences.push(elem);
-            });
+            if(this.getIsUpdate == false) {
+                this.getComponent5Data.forEach(elem => {
+                    this.experiences.push(elem);
+                });
+            } else {
+                this.getUpdateExperience.forEach(elem => {
+                    this.experiences.push(elem);
+                });
+            }
             console.log(this.experiences);
         },
     },

@@ -1,7 +1,7 @@
 <template>
     <div class="super-container">
         <div id="content">
-            <div onclick="location.href = '/resume-type'" style="background-color: white;">
+            <div @click="createNewResume()" style="background-color: white;">
                 <div class="flex-div" style="align-items: center; justify-content: start;">
                     <img src="../assets/icons/select/freelancer.png" alt="">
                     <span>New Resume</span>
@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex';
+
 export default {
     name: 'HomePage',
     components: {},
@@ -31,7 +33,90 @@ export default {
 
     },
     methods: {
-
+        ...mapActions([
+            'setIsUpdate',
+            'setSectionNo',
+            'setComponent1Data',
+            'setComponent2Data',
+            'setComponent3Data',
+            'setComponent4Data',
+            'removeAllComponent5Data',
+            'removeAllComponent6Data',
+            'setComponent7Data',
+            'setComponent8Data',
+            'setCompanySectionNo',
+            'setComapnyComponent1Data',
+            'setComapnyComponent2Data',
+            'setComapnyComponent3Data',
+            'setComapnyComponent4Data',
+            'setComapnyComponent5Data'
+        ]),
+        createNewResume() {
+            this.setComponent1Data({
+                photo: '',
+                firstName: '',
+                lastName: '',
+                email: '',
+                phoneNumber: ''
+            });
+            this.setComponent2Data({
+                country: '',
+                region: '',
+                street: ''
+            });
+            this.setComponent3Data({
+                position: '',
+                dateOfBirth: '',
+                skills: '',
+                hobbies: '',
+                selfDescription: ''});
+            this.setComponent4Data([]);
+            this.removeAllComponent5Data();
+            this.removeAllComponent6Data();
+            this.setComponent7Data({
+                website: '',
+                whatsapp: '',
+                facebook: '',
+                instagram: '',
+                telegram: '',
+                github: '',
+                twitter: ''
+            });
+            this.setComponent8Data({
+                selectedTemplate: 0
+            });
+            this.setComapnyComponent1Data({
+                firstName: '',
+                lastName: '',
+                email: '',
+                phoneNumber: ''
+            });
+            this.setComapnyComponent2Data({
+                photo: '',
+                companyName: '',
+                companyPhoneNumber: ''
+            });
+            this.setComapnyComponent3Data({
+                address: '',
+                description: ''
+            });
+            this.setComapnyComponent4Data({
+                website: '',
+                whatsapp: '',
+                facebook: '',
+                instagram: '',
+                telegram: '',
+                github: '',
+                twitter: ''
+            });
+            this.setComapnyComponent5Data({
+                selectedTemplate: 0
+            });
+            this.$router.push('/resume-type');
+            this.setSectionNo(1);
+            this.setCompanySectionNo(1);
+            this.setIsUpdate(false);
+        }
     },
     watch: {
 

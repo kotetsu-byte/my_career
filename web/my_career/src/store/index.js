@@ -12,11 +12,11 @@ const store = new Vuex.Store({
                 type: ''
             },
             isUpdate: false,
-            updateResumeId: 0,
-            updateEducationId: [],
-            updateExpeirenceId: [],
-            updateLanguageId: [],
-            updateCompanyResumeId: 0,
+            updateResume: {},
+            updateEducation: [],
+            updateExpeirence: [],
+            updateLanguage: [],
+            updateCompanyResume: {},
             freelance: {
                 sectionNo: 1,
                 components: [
@@ -104,24 +104,24 @@ const store = new Vuex.Store({
             return state.isUpdate;
         },
         // update resume id
-        getUpdateResumeId: state => {
-            return state.updateResumeId;
+        getUpdateResume: state => {
+            return state.updateResume;
         },
         // update education id
-        getUpdateEducationId: state => {
-            return state.updateEducationId;
+        getUpdateEducation: state => {
+            return state.updateEducation;
         },
         // update experience id 
-        getUpdateExperienceId: state => {
-            return state.updateExpeirenceId;
+        getUpdateExperience: state => {
+            return state.updateExpeirence;
         },
         // update language id
-        getUpdateLanguageId: state => {
-            return state.updateLanguageId;
+        getUpdateLanguage: state => {
+            return state.updateLanguage;
         },
         // update company resume id
-        getUpdateCompanyResumeId: state => {
-            return state.updateCompanyResumeId;
+        getUpdateCompanyResume: state => {
+            return state.updateCompanyResume;
         },
         // freelance
         getSectionNo: state => {
@@ -184,35 +184,60 @@ const store = new Vuex.Store({
         setIsUpdate(state, payload) {
             state.isUpdate = payload;
         },
-        // update resume id
-        setUpdateResumeId(state, payload) {
-            state.updateResumeId = payload;
-            console.log(state.updateResumeId);
+        // update resume 
+        setUpdateResume(state, payload) {
+            state.updateResume = payload;
+            console.log(state.updateResume);
         },
-        // update education id
-        setUpdateEducationId(state, payload) {
+        // update education 
+        setUpdateEducation(state, payload) {
             payload.forEach(elem => {
-                state.updateEducationId.push(elem);
+                state.updateEducation.push(elem);
             });
-            console.log(state.updateEducationId);
+            console.log(state.updateEducation);
         },
-        // update experience id
-        setUpdateExperienceId(state, payload) {
+        editUpdateEducation(state, payload) {
+            
+        },
+        removeUpdateEducationById(state, payload) {
+
+        },
+        removeAllUpdateEducation(state) {
+
+        },
+        // update experience 
+        setUpdateExperience(state, payload) {
             payload.forEach(elem => {
-                state.updateExpeirenceId.push(elem);
+                state.updateExpeirence.push(elem);
             })
-            console.log(state.updateExpeirenceId);
+            console.log(state.updateExpeirence);
         },
-        // update language id 
-        setUpdateLanguageId(state, payload) {
+        editUpdateExperience(state, payload) {
+            state.updateExpeirence[payload.id].id = payload.obj.id;
+            state.updateExpeirence[payload.id].companyName = payload.obj.companyName;
+            state.updateExpeirence[payload.id].position = payload.obj.position;
+            state.updateExpeirence[payload.id].begin = payload.obj.begin;
+            state.updateExpeirence[payload.id].end = payload.obj.end;
+            state.updateExpeirence[payload.id].description = payload.obj.description;
+            state.updateExpeirence[payload.id].isWorking = payload.obj.isWorking;
+            state.updateExpeirence[payload.id].resumeId = payload.obj.resumeId;
+        },
+        removeUpdateExperienceById(state, payload) {
+            state.updateExpeirence.splice(payload, 1);
+        },
+        removeAllUpdateExperience(state) {
+            state.updateExpeirence = [];
+        },
+        // update language  
+        setUpdateLanguage(state, payload) {
             payload.forEach(elem => {
-                state.updateLanguageId.push(elem);
+                state.updateLanguage.push(elem);
             })
-            console.log(state.updateLanguageId);
+            console.log(state.updateLanguage);
         },
-        // update company resume id
-        setUpdateCompanyResumeId(state, payload) {
-            state.updateCompanyResumeId = payload;
+        // update company resume 
+        setUpdateCompanyResume(state, payload) {
+            state.updateCompanyResume = payload;
         },
         // freelance
         setSectionNo(state, payload) {
@@ -250,7 +275,7 @@ const store = new Vuex.Store({
             state.freelance.experiences.splice(payload, 1);
         },
         removeAllComponent5Data(state) {
-            state.freelance.experiences.length = 0;
+            state.freelance.experiences = [];
         },
         setComponent6Data(state, payload) {
                 state.freelance.educations.push(payload);
@@ -268,7 +293,7 @@ const store = new Vuex.Store({
             state.freelance.educations.splice(payload, 1);
         },
         removeAllComponent6Data(state) {
-            state.freelance.educations.length = 0;
+            state.freelance.educations = [];
         },
         setComponent7Data(state, payload) {
             state.freelance.components[3] = payload;
@@ -310,23 +335,23 @@ const store = new Vuex.Store({
             commit('setIsUpdate', payload);
         },
         // update resume id
-        setUpdateResumeId({commit}, payload) {
-            commit('setUpdateResumeId', payload);
+        setUpdateResume({commit}, payload) {
+            commit('setUpdateResume', payload);
         },
         // update education id
-        setUpdateEducationId({commit}, payload) {
-            commit('setUpdateEducationId', payload);
+        setUpdateEducation({commit}, payload) {
+            commit('setUpdateEducation', payload);
         },
         // update experience id
-        setUpdateExperienceId({commit}, payload) {
-            commit('setUpdateExperienceId', payload);
+        setUpdateExperience({commit}, payload) {
+            commit('setUpdateExperience', payload);
         },
         // update language id
-        setUpdateLanguageId({commit}, payload) {
-            commit('setUpdateLanguageId', payload);
+        setUpdateLanguage({commit}, payload) {
+            commit('setUpdateLanguage', payload);
         },
-        setUpdateCompanyResumeId({commit}, payload) {
-            commit('setUpdateCompanyResumeId', payload);
+        setUpdateCompanyResume({commit}, payload) {
+            commit('setUpdateCompanyResume', payload);
         },
         // freelance
         setSectionNo({commit}, payload) {

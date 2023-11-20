@@ -95,11 +95,11 @@ export default {
     methods: {
         ...mapActions([
             'setIsUpdate', 
-            'setUpdateResumeId',
-            'setUpdateEducationId',
-            'setUpdateExperienceId',
-            'setUpdateLanguageId',
-            'setUpdateCompanyResumeId',
+            'setUpdateResume',
+            'setUpdateEducation',
+            'setUpdateExperience',
+            'setUpdateLanguage',
+            'setUpdateCompanyResume',
             'setSectionNo', 
             'setComponent1Data', 
             'setComponent2Data', 
@@ -233,11 +233,10 @@ export default {
             this.setIsUpdate(true);
             switch(this.resumeType) {
                 case 'freelance':
-                    this.setUpdateResumeId(this.resumeData.id);
-                    console.log(this.resumeData.id);
-                    this.setUpdateEducationId(this.educationData.map(elem => elem.id));
-                    this.setUpdateExperienceId(this.experienceData.map(elem => elem.id));
-                    this.setUpdateLanguageId(this.languageData.map(elem => elem.id));
+                    this.setUpdateResume(this.resumeData);
+                    this.setUpdateEducation(this.educationData);
+                    this.setUpdateExperience(this.experienceData);
+                    this.setUpdateLanguage(this.languageData);
                     let comp1Obj = {
                         photo: this.resumeData.imageURL,
                         firstName: this.resumeData.firstName,
@@ -262,9 +261,13 @@ export default {
                     this.setComponent3Data(comp3Obj);
                     this.setComponent4Data(this.languageData);
                     this.removeAllComponent5Data();
-                    this.setComponent5Data(this.experienceData);
+                    this.experienceData.forEach(elem => {
+                        this.setComponent5Data(elem);
+                    })
                     this.removeAllComponent6Data();
-                    this.setComponent6Data(this.educationData);
+                    this.educationData.forEach(elem => {
+                        this.setComponent6Data(elem);
+                    })
                     let comp7Obj = {
                         website: this.resumeData.website,
                         whatsapp: this.resumeData.whatsapp,
@@ -283,7 +286,7 @@ export default {
                     this.$router.push('/freelance')
                     break;
                 case 'company:':
-                    this.setUpdateId = this.companyResumeData.id;
+                    this.setUpdateCompanyResume(this.companyResumeData);
                     let company1Obj = {
                         firstName: this.companyResumeData.firstName,
                         lastName: this.companyResumeData.lastName,

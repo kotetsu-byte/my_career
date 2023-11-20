@@ -150,17 +150,15 @@ export default {
                     });
                     break;
                 case true:
-                    resumeObj.id = this.getUpdateResumeId;
-                    console.log(this.getUpdateResumeId)
+                    resumeObj.id = this.getUpdateResume.id;
+                    console.log(resumeObj);
                     API.post(`/api/Resume/Update`, resumeObj)
                         .then(res => {
-                            let resumeId = res.data;
                             console.log(res.data);
-                            for(let i = 0; i < this.getUpdateEducationId.length; i++)
+                            for(let i = 0; i < this.getUpdateEducation.length; i++)
                             {
-                                educationObj[i].resumeId = resumeId;
-                                educationObj[i].id = this.getUpdateEducationId[i];
-                                API.post(`/api/Education`, educationObj[i])
+                                educationObj[i].id = this.getUpdateEducation[i].id;
+                                API.post(`/api/Education/Update`, educationObj[i])
                                 .then(res => {
                                     console.log(res.data)
                                 })
@@ -168,11 +166,10 @@ export default {
                                     console.log(err);
                                 });
                             }
-                            for(let i = 0; i < this.getUpdateExperienceId.length; i++)
+                            for(let i = 0; i < this.getUpdateExperience.length; i++)
                             {
-                                experienceObj[i].resumeId = resumeId;
-                                experienceObj[i].id = this.getUpdateExperienceId[i];
-                                API.post(`/api/Experience`, experienceObj[i])
+                                experienceObj[i].id = this.getUpdateExperience[i].id;
+                                API.post(`/api/Experience/Update`, experienceObj[i])
                                 .then(res => {
                                     console.log(res.data)
                                 })
@@ -180,11 +177,10 @@ export default {
                                     console.log(err);
                                 });
                             }
-                            for(let i = 0; i < this.getUpdateLanguageId.length; i++)
+                            for(let i = 0; i < this.getUpdateLanguage.length; i++)
                             {
-                                languageObj[i].resumeId = resumeId;
-                                languageObj[i].id = this.getUpdateLanguageId[i];
-                                API.post(`/api/Language`, languageObj[i])
+                                languageObj[i].id = this.getUpdateLanguage[i].id;
+                                API.post(`/api/Language/Update`, languageObj[i])
                                 .then(res => {
                                     console.log(res.data)
                                 })
@@ -203,10 +199,10 @@ export default {
     computed: {
         ...mapGetters([
             'getIsUpdate', 
-            'getUpdateResumeId',
-            'getUpdateEducationId',
-            'getUpdateExperienceId',
-            'getUpdateLanguageId', 
+            'getUpdateResume',
+            'getUpdateEducation',
+            'getUpdateExperience',
+            'getUpdateLanguage', 
             'getCurrentUser', 
             'getComponent1Data', 
             'getComponent2Data', 

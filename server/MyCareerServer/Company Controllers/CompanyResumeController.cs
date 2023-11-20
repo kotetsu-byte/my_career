@@ -46,7 +46,7 @@ namespace MyCareerServer.Company_Controllers
             return Ok("Successful");
         }
 
-        [HttpPatch]
+        [HttpPost("Update")]
         public IActionResult UpdateCompanyResume([FromBody] CompanyResumeDto companyResumeDto)
         {
             var resume = _mapper.Map<CompanyResume>(companyResumeDto);

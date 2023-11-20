@@ -94,17 +94,39 @@ export default {
                 twitter: this.getCompanyComponent4Data.twitter,
                 templateNo: this.getCompanyComponent5Data.selectedTemplate
             }
-            API.post(`/api/CompanyResume/${this.userEmail}`, obj)
-                .then(res => {
-                    console.log(res.data);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            switch(this.getIsUpdate) {
+                case false:
+                    API.post(`/api/CompanyResume/${this.userEmail}`, obj)
+                        .then(res => {
+                            console.log(res.data);
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        });
+                case true:
+                    obj.id = this.getUpdateCompanyResumeId;
+                    API.post(`/api/Resume/Update`, obj)
+                        .then(res => {
+                            console.log(res.data)
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+            }
+            
         }
     },
     computed: {
-        ...mapGetters(['getCurrentUser', 'getCompanyComponent1Data', 'getCompanyComponent2Data', 'getCompanyComponent3Data', 'getCompanyComponent4Data', 'getCompanyComponent5Data']),
+        ...mapGetters([
+            'getIsUpdate',
+            'getCurrentUser',
+            'getUpdateCompanyResumeId', 
+            'getCompanyComponent1Data', 
+            'getCompanyComponent2Data', 
+            'getCompanyComponent3Data', 
+            'getCompanyComponent4Data', 
+            'getCompanyComponent5Data'
+        ]),
         getCompanyComponentsData() {
             this.getFrameByNo(this.getCompanyComponent5Data.selectedTemplate);
             this.userEmail = this.getCurrentUser;
