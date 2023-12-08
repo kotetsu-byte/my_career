@@ -16,7 +16,7 @@ namespace MyCareerServer.Freelance_Repositories
 
         public async Task<IEnumerable<Education>> GetEducations(int id)
         {
-            return await _dbContext.Educations.Where(e => e.Id == id).ToListAsync();
+            return await _dbContext.Educations.Where(e => e.ResumeId == id).ToListAsync();
         }
 
         public bool Create(Education education)
@@ -28,7 +28,7 @@ namespace MyCareerServer.Freelance_Repositories
 
         public bool Update(Education education)
         {
-            _dbContext.Educations.Add(education);
+            _dbContext.Educations.Update(education);
 
             return Save();
         }

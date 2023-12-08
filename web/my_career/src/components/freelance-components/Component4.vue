@@ -2,26 +2,53 @@
     <p class="f-30-w-700">Write language you speak</p>
     <p class="f-18-w-500-c">The more languages ​​you know,<br> the more foreign employers will contact you.</p>
     <label for=""><span class="f-18-w-500">Language*</span></label>
-    <div class="language" v-if="languages.length == 1 ? true : false">
-        <div class="flex-div">
-            <div class="mr-10">
-                <input class="input w-80" type="text" v-model="languages[0].lang" placeholder="Language">
+    <div v-if="getIsUpdate === false">
+        <div class="language" v-if="languages.length == 1 ? true : false">
+            <div class="flex-div">
+                <div class="mr-10">
+                    <input class="input w-80" type="text" v-model="languages[0].lang" placeholder="Language">
+                </div>
+                <div>
+                    <input class="input w-80" type="text" v-model="languages[0].level" placeholder="Level">
+                </div>
             </div>
-            <div>
-                <input class="input w-80" type="text" v-model="languages[0].level" placeholder="Level">
+        </div>
+        <div class="languages" v-if="languages.length > 1 ? true : false">
+            <div class="flex-div" v-for="(item, index) in languages" :key="index">
+                <div style="margin-right: 10px 0;">
+                    <input class="input w-80" type="text" v-model="item.lang" placeholder="Language">
+                </div>
+                <div>
+                    <input class="input w-80" type="text" v-model="item.level" placeholder="Level">
+                </div>
+                <div>
+                    <button @click="removeLanguage(index)">X</button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="languages" v-if="languages.length > 1 ? true : false">
-        <div class="flex-div" v-for="(item, index) in languages" :key="index">
-            <div style="margin-right: 10px 0;">
-                <input class="input w-80" type="text" v-model="item.lang" placeholder="Language">
+    <div v-else>
+        <div class="language" v-if="updateLanguages.length == 1 ? true : false">
+            <div class="flex-div">
+                <div class="mr-10">
+                    <input class="input w-80" type="text" v-model="updateLanguages[0].lang" placeholder="Language">
+                </div>
+                <div>
+                    <input class="input w-80" type="text" v-model="updateLanguages[0].level" placeholder="Level">
+                </div>
             </div>
-            <div>
-                <input class="input w-80" type="text" v-model="item.level" placeholder="Level">
-            </div>
-            <div>
-                <button @click="removeLanguage(index)">X</button>
+        </div>
+        <div class="languages" v-if="updateLanguages.length > 1 ? true : false">
+            <div class="flex-div" v-for="(item, index) in updateLanguages" :key="index">
+                <div style="margin-right: 10px 0;">
+                    <input class="input w-80" type="text" v-model="item.lang" placeholder="Language">
+                </div>
+                <div>
+                    <input class="input w-80" type="text" v-model="item.level" placeholder="Level">
+                </div>
+                <div>
+                    <button @click="removeLanguage(index)">X</button>
+                </div>
             </div>
         </div>
     </div>
@@ -30,6 +57,7 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex';
+import API from '../../api';
 
 export default {
     name: 'Component4',
@@ -42,6 +70,14 @@ export default {
                     level: ''
                 }
             ],
+            updateLanguages: [
+                {
+                    id: 0,
+                    lang: '',
+                    level: '',
+                    resumeId: 0
+                }
+            ]
         }
     },
     props: {
@@ -55,13 +91,28 @@ export default {
         },
         addNewLanguage() {
             let obj = {
-                lang: '',
-                level: ''
+                    lang: '',
+                    level: ''
             }
-            this.languages.push(obj);
+            if(this.getIsUpdate === false) {    
+                this.languages.push(obj);
+            } else {
+                this.updateLanguages.push(obj);
+            }
         },
         removeLanguage(index) {
-            this.languages.splice(index, 1);
+            if(this.getIsUpdate === false) {
+                this.languages.splice(index, 1);
+            } else {
+                let itemId = this.updateLanguages[index].id;
+                this.updateLanguages.splice(index, 1);
+                API.delete(`/api/Language/${itemId}`)
+                    .then(res => {
+                        console.log(res.data);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+            }
         }
     },
     watch: {
@@ -72,13 +123,23 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getComponent4Data']),
+        ...mapGetters([
+            'getComponent4Data',
+            'getIsUpdate',
+            'getUpdateLanguage'
+        ]),
         getComponentData() {
             if(this.languages) {
                 this.languages = [];
-                this.getComponent4Data.forEach(elem => {
-                    this.languages.push(elem);
-                });
+                if(this.getIsUpdate === false) {
+                    this.getComponent4Data.forEach(elem => {
+                        this.languages.push(elem);
+                    });
+                } else {
+                    this.getUpdateLanguage.forEach(elem => {
+                        this.updateLanguages.push(elem);
+                    });
+                }
             }
         }
     },

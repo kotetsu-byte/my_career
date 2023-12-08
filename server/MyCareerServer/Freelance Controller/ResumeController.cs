@@ -44,13 +44,12 @@ namespace MyCareerServer.Freelance_Controllers
             return Ok(resume.Id);
         }
 
-        [HttpPost("Update")]
+        [HttpPatch]
         public IActionResult UpdateResume([FromBody] ResumeDto resumeDto)
         {
             var resume = _mapper.Map<Resume>(resumeDto);
             _resumeRepository.Update(resume);
-
-            return Ok("Succeeded");
+            return Ok(resume.Id);
         }
 
         [HttpDelete("{id}")]

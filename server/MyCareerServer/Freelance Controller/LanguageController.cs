@@ -38,7 +38,7 @@ namespace MyCareerServer.Freelance_Controller
             return Ok("Successful");
         }
 
-        [HttpPost("Update")]
+        [HttpPatch]
         public IActionResult UpdateLanguage([FromBody] LanguageDto languageDto)
         {
             var language = _mapper.Map<Language>(languageDto);

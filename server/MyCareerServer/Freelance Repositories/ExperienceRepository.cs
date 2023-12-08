@@ -16,7 +16,7 @@ namespace MyCareerServer.Freelance_Repositories
 
         public async Task<IEnumerable<Experience>> GetExperiences(int id)
         {
-            return await _dbContext.Experiences.Where(e => e.Id == id).ToListAsync();
+            return await _dbContext.Experiences.Where(e => e.ResumeId == id).ToListAsync();
         }
 
         public bool Create(Experience experience)

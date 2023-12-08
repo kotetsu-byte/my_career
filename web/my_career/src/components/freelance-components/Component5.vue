@@ -15,20 +15,38 @@
         <button @click="createNew()" style="padding: 15px 20px; border: 1px solid #1D71B8; border-radius: 8px; color: #1D71B8; width: 100%; margin: 10px 0; background-color: inherit;">+ Add new</button><br>
     </div>
     <div v-if="true" id="new" style="display: none;">
-        <input v-model="template.companyName" type="text" placeholder="Company name" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
-        <input v-model="template.position" type="text" placeholder="Job" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
-        <input v-model="template.isWorking" type="checkbox" style="border: 1px solid #1D71B8; border-radius: 6px;"><span style="font-size: 18px; font-weight: 500;"> I am currently working in this role</span><br>
-        <div class="flex-div">
-            <div style="margin-right: 10px;">
-                <label for="">Date from</label><br>
-                <input v-model="template.begin" type="date" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
+        <div v-if="getIsUpdate === false">
+            <input v-model="template.companyName" type="text" placeholder="Company name" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
+            <input v-model="template.position" type="text" placeholder="Job" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
+            <input v-model="template.isWorking" type="checkbox" style="border: 1px solid #1D71B8; border-radius: 6px;"><span style="font-size: 18px; font-weight: 500;"> I am currently working in this role</span><br>
+            <div class="flex-div">
+                <div style="margin-right: 10px;">
+                    <label for="">Date from</label><br>
+                    <input v-model="template.begin" type="date" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
+                </div>
+                <div>
+                    <label for="To">To</label><br>
+                    <input v-model="template.end" type="date" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
+                </div>
             </div>
-            <div>
-                <label for="To">To</label><br>
-                <input v-model="template.end" type="date" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
-            </div>
+            <textarea v-model="template.description" placeholder="Description" cols="30" rows="10" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%; resize: none; margin: 10px 0;"></textarea><br>
         </div>
-        <textarea v-model="template.description" placeholder="Description" cols="30" rows="10" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%; resize: none; margin: 10px 0;"></textarea><br>
+        <div v-else>
+            <input v-model="updateTemplate.companyName" type="text" placeholder="Company name" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
+            <input v-model="updateTemplate.position" type="text" placeholder="Job" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
+            <input v-model="updateTemplate.isWorking" type="checkbox" style="border: 1px solid #1D71B8; border-radius: 6px;"><span style="font-size: 18px; font-weight: 500;"> I am currently working in this role</span><br>
+            <div class="flex-div">
+                <div style="margin-right: 10px;">
+                    <label for="">Date from</label><br>
+                    <input v-model="updateTemplate.begin" type="date" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
+                </div>
+                <div>
+                    <label for="To">To</label><br>
+                    <input v-model="updateTemplate.end" type="date" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
+                </div>
+            </div>
+            <textarea v-model="updateTemplate.description" placeholder="Description" cols="30" rows="10" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%; resize: none; margin: 10px 0;"></textarea><br>
+        </div>
         <div style="text-align: right;">
             <button @click="cancel()" style="margin-top: 10px; background-color: white; border: 1px solid #1D71B8; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px;">Cancel</button>
             <button @click="save(savingMode)" style="margin-top: 10px; background-color: white; border: 1px solid #1D71B8; padding: 10px 20px; border-radius: 8px; cursor: pointer;">Save</button>
@@ -38,6 +56,7 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex';
+import API from '../../api';
 
 export default {
     name: 'Component5',
@@ -74,7 +93,14 @@ export default {
         saveToStore: Boolean
     },
     methods: {
-        ...mapActions(['setComponent5Data', 'editComponent5DataById', 'removeComponent5DataById', 'setUpdateExperience', 'editUpdateExperience']),
+        ...mapActions([
+            'setComponent5Data', 
+            'editComponent5DataById', 
+            'removeComponent5DataById', 
+            'setUpdateExperience', 
+            'editUpdateExperience', 
+            'removeUpdateExperienceById'
+        ]),
         createNew() {
             this.savingMode = 0;
             this.$emit('hideNavigation');
@@ -149,6 +175,14 @@ export default {
             this.template.end = '';
             this.template.description = '';
             this.template.isWorking = '';
+            this.updateTemplate.id = 0;
+            this.updateTemplate.companyName = '';
+            this.updateTemplate.position = '';
+            this.updateTemplate.begin = '';
+            this.updateTemplate.end = '';
+            this.updateTemplate.description = '';
+            this.updateTemplate.isWorking = false;
+            this.updateTemplate.resumeId = 0;
             this.getComponentData;
         },
         cancel() {
@@ -184,9 +218,21 @@ export default {
             }
         },
         del(id) {
-            this.removeComponent5DataById(id);
+            if(this.getIsUpdate == false)
+            {
+                this.removeComponent5DataById(id);
+            } else {
+                let itemId = this.experiences[id].id;
+                this.removeUpdateExperienceById(id);
+                API.delete(`/api/Experience/${itemId}`)
+                    .then(res => {
+                        console.log(res.data);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+            }
             window.location.reload();
-        }
+        },
     },
     watch: {
         saveToStore: function(newVal, oldVal) {
@@ -196,7 +242,11 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getIsUpdate', 'getComponent5Data', 'getUpdateExperience']),
+        ...mapGetters([
+            'getIsUpdate', 
+            'getComponent5Data', 
+            'getUpdateExperience'
+        ]),
         getComponentData() {
             this.experiences = [];
             if(this.getIsUpdate == false) {
@@ -208,7 +258,6 @@ export default {
                     this.experiences.push(elem);
                 });
             }
-            console.log(this.experiences);
         },
     },
     mounted() {

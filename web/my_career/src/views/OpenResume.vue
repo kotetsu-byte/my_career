@@ -83,9 +83,9 @@ export default {
             frameName: '',
             resumeType: '',
             resumeData: null,
-            educationData: null,
-            experienceData: null,
-            languageData: null,
+            educationData: [],
+            experienceData: [],
+            languageData: [],
             companyResumeData: null
         }
     },
@@ -101,6 +101,8 @@ export default {
             'setUpdateLanguage',
             'setUpdateCompanyResume',
             'setSectionNo', 
+            'removeAllUpdateEducation',
+            'removeAllUpdateExperience',
             'setComponent1Data', 
             'setComponent2Data', 
             'setComponent3Data', 
@@ -191,7 +193,9 @@ export default {
             console.log(this.resumeData);
         },
         structEducation(obj) {
-            this.educationData = obj;
+            obj.forEach(elem => {
+                this.educationData.push(elem);
+            })
             console.log(this.educationData);
         },
         structExperience(obj) {
@@ -375,4 +379,4 @@ export default {
     background: url(../assets/img/logo.png) no-repeat;
     height: 100vh;
 }
-</style>
+</style>    

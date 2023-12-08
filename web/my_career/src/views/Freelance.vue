@@ -26,7 +26,16 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'Freelance',
-    components: {Component1, Component2, Component3, Component4, Component5, Component6, Component7, Component8},
+    components: {
+        Component1, 
+        Component2, 
+        Component3, 
+        Component4, 
+        Component5, 
+        Component6, 
+        Component7, 
+        Component8
+    },
     data() {
         return {
             sectionNo: 0,

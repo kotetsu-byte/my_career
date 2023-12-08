@@ -191,25 +191,29 @@ const store = new Vuex.Store({
         },
         // update education 
         setUpdateEducation(state, payload) {
-            payload.forEach(elem => {
-                state.updateEducation.push(elem);
-            });
+            state.updateEducation.push(payload)
             console.log(state.updateEducation);
         },
         editUpdateEducation(state, payload) {
-            
+            state.updateEducation[payload.id].id = payload.obj.id;
+            state.updateEducation[payload.id].schoolName = payload.obj.schoolName;
+            state.updateEducation[payload.id].degree = payload.obj.degree;
+            state.updateEducation[payload.id].typeOfStudy = payload.obj.typeOfStudy;
+            state.updateEducation[payload.id].location = payload.obj.location;
+            state.updateEducation[payload.id].begin = payload.obj.begin;
+            state.updateEducation[payload.id].end = payload.obj.end;
+            state.updateEducation[payload.id].isCurrently = payload.obj.isCurrently;
+            state.updateEducation[payload.id].resumeId = payload.obj.resumeId;
         },
         removeUpdateEducationById(state, payload) {
-
+            state.updateEducation.splice(payload, 1);
         },
         removeAllUpdateEducation(state) {
-
+            state.updateEducation = [];
         },
         // update experience 
         setUpdateExperience(state, payload) {
-            payload.forEach(elem => {
-                state.updateExpeirence.push(elem);
-            })
+            state.updateExpeirence.push(payload);
             console.log(state.updateExpeirence);
         },
         editUpdateExperience(state, payload) {
@@ -230,6 +234,7 @@ const store = new Vuex.Store({
         },
         // update language  
         setUpdateLanguage(state, payload) {
+            state.updateLanguage = [];
             payload.forEach(elem => {
                 state.updateLanguage.push(elem);
             })
@@ -334,22 +339,41 @@ const store = new Vuex.Store({
         setIsUpdate({commit}, payload) {
             commit('setIsUpdate', payload);
         },
-        // update resume id
+        // update resume 
         setUpdateResume({commit}, payload) {
             commit('setUpdateResume', payload);
         },
-        // update education id
+        // update education 
         setUpdateEducation({commit}, payload) {
             commit('setUpdateEducation', payload);
         },
-        // update experience id
+        editUpdateEducation({commit}, payload) {
+            commit('editUpdateEducation', payload);
+        },
+        removeUpdateEducationById({commit}, payload) {
+            commit('removeUpdateEducationById', payload);
+        },
+        removeAllUpdateEducation({commit}, payload) {
+            commit('removeAllUpdateEducation', payload);
+        },
+        // update experience 
         setUpdateExperience({commit}, payload) {
             commit('setUpdateExperience', payload);
         },
-        // update language id
+        editUpdateExperience({commit}, payload) {
+            commit('editUpdateExperience', payload);
+        },
+        removeUpdateExperienceById({commit}, payload) {
+            commit('removeUpdateExperienceById', payload);
+        },
+        removeAllUpdateExperience({commit}, payload) {
+            commit('removeAllUpdateExperience', payload);
+        },
+        // update language 
         setUpdateLanguage({commit}, payload) {
             commit('setUpdateLanguage', payload);
         },
+        // update company resume
         setUpdateCompanyResume({commit}, payload) {
             commit('setUpdateCompanyResume', payload);
         },

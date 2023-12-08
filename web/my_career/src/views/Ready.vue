@@ -5,29 +5,29 @@
             <div style="background-color: white; background-image: none;">
                 <component 
                     :is="frameName"
-                    :photo="getComponent1Data.photo"
-                    :firstName="getComponent1Data.firstName"
-                    :lastName="getComponent1Data.lastName"
-                    :email="getComponent1Data.email"
-                    :phoneNumber="getComponent1Data.phoneNumber"
-                    :country="getComponent2Data.country"
-                    :region="getComponent2Data.region"
-                    :street="getComponent2Data.street"
-                    :position="getComponent3Data.position"
-                    :dateOfBirth="getComponent3Data.dateOfBirth"
-                    :skills="getComponent3Data.skills"
-                    :hobbies="getComponent3Data.hobbies"
-                    :selfDescription="getComponent3Data.selfDescription"
-                    :languages="getComponent4Data"
-                    :experience="getComponent5Data"
-                    :education="getComponent6Data"
-                    :website="getComponent7Data.website"
-                    :whatsapp="getComponent7Data.whatsapp"
-                    :facebook="getComponent7Data.facebook"
-                    :instagram="getComponent7Data.instagram"
-                    :telegram="getComponent7Data.telegram"
-                    :github="getComponent7Data.github"
-                    :twitter="getComponent7Data.twitter"
+                    :photo="template.photo"
+                    :firstName="template.firstName"
+                    :lastName="template.lastName"
+                    :email="template.email"
+                    :phoneNumber="template.phoneNumber"
+                    :country="template.country"
+                    :region="template.region"
+                    :street="template.street"
+                    :position="template.position"
+                    :dateOfBirth="template.dateOfBirth"
+                    :skills="template.skills"
+                    :hobbies="template.hobbies"
+                    :selfDescription="template.selfDescription"
+                    :languages="template.languages"
+                    :experience="template.experience"
+                    :education="template.education"
+                    :website="template.website"
+                    :whatsapp="template.whatsapp"
+                    :facebook="template.facebook"
+                    :instagram="template.instagram"
+                    :telegram="template.telegram"
+                    :github="template.github"
+                    :twitter="template.twitter"
                 ></component>
             </div>
         </div>
@@ -53,10 +53,98 @@ export default {
     data() {
         return {
             frameName: '',
-            userId: 0
+            userId: 0,
+            template: {
+                photo: '',
+                firstName: '',
+                lastName: '',
+                email: '',
+                phoneNumber: '',
+                country: '',
+                region: '',
+                street: '',
+                position: '',
+                dateOfBirth: '',
+                skills: '',
+                hobbies: '',
+                selfDescription: '',
+                languages: [],
+                experience: [],
+                education: [],
+                website: '',
+                whatsapp: '',
+                facebook: '',
+                instagram: '',
+                telegram: '',
+                github: '',
+                twitter: ''
+            }
         }
     },
     methods: {
+        displayData() {
+            if(this.getIsUpdate === false) {
+                this.template.photo = this.getComponent1Data.photo;
+                this.template.firstName = this.getComponent1Data.firstName;
+                this.template.lastName = this.getComponent1Data.lastName;
+                this.template.email = this.getComponent1Data.email;
+                this.template.phoneNumber = this.getComponent1Data.phoneNumber;
+                this.template.country = this.getComponent2Data.country;
+                this.template.region = this.getComponent2Data.region;
+                this.template.street = this.getComponent2Data.street;
+                this.template.position = this.getComponent3Data.position;
+                this.template.dateOfBirth = this.getComponent3Data.dateOfBirth;
+                this.template.skills = this.getComponent3Data.skills;
+                this.template.hobbies = this.getComponent3Data.hobbies;
+                this.template.selfDescription = this.getComponent3Data.selfDescription;
+                this.getComponent4Data.forEach(elem => {
+                    this.template.languages.push(elem);
+                });
+                this.getComponent5Data.forEach(elem => {
+                    this.template.experience.push(elem);
+                });
+                this.getComponent6Data.forEach(elem => {
+                    this.template.education.push(elem);
+                })
+                this.template.website = this.getComponent7Data.website;
+                this.template.whatsapp = this.getComponent7Data.whatsapp;
+                this.template.facebook = this.getComponent7Data.facebook;
+                this.template.instagram = this.getComponent7Data.instagram;
+                this.template.telegram = this.getComponent7Data.telegram;
+                this.template.github = this.getComponent7Data.github;
+                this.template.twitter = this.getComponent7Data.twitter;
+            } else {
+                this.template.photo = this.getUpdateResume.photo;
+                this.template.firstName = this.getUpdateResume.firstName;
+                this.template.lastName = this.getUpdateResume.lastName;
+                this.template.email = this.getUpdateResume.email;
+                this.template.phoneNumber = this.getUpdateResume.phoneNumber;
+                this.template.country = this.getUpdateResume.country;
+                this.template.region = this.getUpdateResume.region;
+                this.template.street = this.getUpdateResume.street;
+                this.template.position = this.getUpdateResume.position;
+                this.template.dateOfBirth = this.getUpdateResume.dateOfBirth;
+                this.template.skills = this.getUpdateResume.skills;
+                this.template.hobbies = this.getUpdateResume.hobbies;
+                this.template.selfDescription = this.getUpdateResume.selfDescription;
+                this.getUpdateLanguage.forEach(elem => {
+                    this.template.languages.push(elem);
+                });
+                this.getUpdateExperience.forEach(elem => {
+                    this.template.experience.push(elem);
+                });
+                this.getUpdateEducation.forEach(elem => {
+                    this.template.education.push(elem);
+                })
+                this.template.website = this.getComponent7Data.website;
+                this.template.whatsapp = this.getComponent7Data.whatsapp;
+                this.template.facebook = this.getComponent7Data.facebook;
+                this.template.instagram = this.getComponent7Data.instagram;
+                this.template.telegram = this.getComponent7Data.telegram;
+                this.template.github = this.getComponent7Data.github;
+                this.template.twitter = this.getComponent7Data.twitter;
+            }
+        },
         getFrameByNo(number) {
             console.log(number);
             switch(number) {
@@ -152,42 +240,69 @@ export default {
                 case true:
                     resumeObj.id = this.getUpdateResume.id;
                     console.log(resumeObj);
-                    API.post(`/api/Resume/Update`, resumeObj)
+                    API.patch(`/api/Resume`, resumeObj)
                         .then(res => {
                             console.log(res.data);
-                            for(let i = 0; i < this.getUpdateEducation.length; i++)
-                            {
-                                educationObj[i].id = this.getUpdateEducation[i].id;
-                                API.post(`/api/Education/Update`, educationObj[i])
-                                .then(res => {
-                                    console.log(res.data)
-                                })
-                                .catch(err => {
-                                    console.log(err);
-                                });
-                            }
-                            for(let i = 0; i < this.getUpdateExperience.length; i++)
-                            {
-                                experienceObj[i].id = this.getUpdateExperience[i].id;
-                                API.post(`/api/Experience/Update`, experienceObj[i])
-                                .then(res => {
-                                    console.log(res.data)
-                                })
-                                .catch(err => {
-                                    console.log(err);
-                                });
-                            }
-                            for(let i = 0; i < this.getUpdateLanguage.length; i++)
-                            {
-                                languageObj[i].id = this.getUpdateLanguage[i].id;
-                                API.post(`/api/Language/Update`, languageObj[i])
-                                .then(res => {
-                                    console.log(res.data)
-                                })
-                                .catch(err => {
-                                    console.log(err);
-                                });
-                            }
+                            let resumeId = res.data;
+                            this.getUpdateEducation.forEach(elem => {
+                                if((elem.id == 0) || elem.id) {
+                                    API.patch(`/api/Education`, elem)
+                                        .then(res => {
+                                            console.log(res.data)
+                                        })
+                                        .catch(err => {
+                                            console.log(err);
+                                        });    
+                                } else {
+                                    elem.resumeId = res.data 
+                                    API.post('/api/Education', elem)
+                                        .then(res => {
+                                            console.log(res.data);
+                                        }).catch(err => {
+                                            console.log(err);
+                                        })
+                                }
+                            })
+                            this.getUpdateExperience.forEach(elem => {
+                                if(elem.id != undefined) {
+                                    API.patch(`/api/Experience`, elem)
+                                        .then(res => {
+                                            console.log(res.data)
+                                        })
+                                        .catch(err => {
+                                            console.log(err);
+                                        });
+                                } else {
+                                    elem.resumeId = resumeId;
+                                    API.post(`/api/Experience`, elem)
+                                        .then(res => {
+                                            console.log(res.data)
+                                        })
+                                        .catch(err => {
+                                            console.log(err);
+                                        });
+                                }
+                            })
+                            this.getUpdateLanguage.forEach(elem => {
+                                if(elem.id != undefined) {
+                                    API.patch(`/api/Language`, elem)
+                                        .then(res => {
+                                            console.log(res.data)
+                                        })
+                                        .catch(err => {
+                                            console.log(err);
+                                        });
+                                } else {
+                                    elem.resumeId = resumeId;
+                                    API.post(`/api/Language`, elem)
+                                        .then(res => {
+                                            console.log(res.data)
+                                        })
+                                        .catch(err => {
+                                            console.log(err);
+                                        });
+                                }
+                            })
                         })
                         .catch(err => {
                             console.log(err);
@@ -211,11 +326,12 @@ export default {
             'getComponent5Data', 
             'getComponent6Data', 
             'getComponent7Data', 
-            'getComponent8Data'
+            'getComponent8Data',
         ]),
         getComponentsData() {
             this.getFrameByNo(this.getComponent8Data.selectedTemplate);
             this.userId = this.getCurrentUser;
+            this.displayData();
             console.log(this.userId);
             console.log(this.getComponent5Data);
         }

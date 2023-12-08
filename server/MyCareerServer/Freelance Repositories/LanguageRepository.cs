@@ -16,7 +16,7 @@ namespace MyCareerServer.Freelance_Repositories
 
         public async Task<IEnumerable<Language>> GetLanguages(int id)
         {
-            return await _dbContext.Languages.Where(l => l.Id == id).ToListAsync();
+            return await _dbContext.Languages.Where(l => l.ResumeId == id).ToListAsync();
         }
 
         public bool Create(Language language)

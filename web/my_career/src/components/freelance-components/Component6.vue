@@ -19,31 +19,50 @@
         <button @click="createNew()" style="padding: 15px 20px; border: 1px solid #1D71B8; border-radius: 8px; color: #1D71B8; width: 100%; margin: 10px 0; background-color: inherit;">+ Add new</button><br>
     </div>
     <div id="new" style="display: none;">
-        <input type="text" v-model="template.schoolName" placeholder="School name" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
-        <input type="text" v-model="template.degree" placeholder="Degree" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
-        <input type="text" v-model="template.typeOfStudy" placeholder="Type of study" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
-        <input type="text" v-model="template.location" placeholder="Location of school" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
-        <div class="flex-div">
-            <div>
-                <label for="">Date from</label><br>
-                <input type="date" v-model="template.begin" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%; margin-right: 10px;">
+        <div v-if="getIsUpdate === false">
+            <input type="text" v-model="template.schoolName" placeholder="School name" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
+            <input type="text" v-model="template.degree" placeholder="Degree" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
+            <input type="text" v-model="template.typeOfStudy" placeholder="Type of study" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
+            <input type="text" v-model="template.location" placeholder="Location of school" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
+            <div class="flex-div">
+                <div>
+                    <label for="">Date from</label><br>
+                    <input type="date" v-model="template.begin" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%; margin-right: 10px;">
+                </div>
+                <div>
+                    <label for="">To</label><br>
+                    <input type="date" v-model="template.end" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
+                </div>
             </div>
-            <div>
-                <label for="">To</label><br>
-                <input type="date" v-model="template.end" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
-            </div>
+            <input type="checkbox" v-model="template.isCurrently"> I currently attend here<br>
         </div>
-        <input type="checkbox" v-model="template.isCurrently"> I currently attend here<br>
+        <div v-else>
+            <input type="text" v-model="updateTemplate.schoolName" placeholder="School name" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
+            <input type="text" v-model="updateTemplate.degree" placeholder="Degree" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
+            <input type="text" v-model="updateTemplate.typeOfStudy" placeholder="Type of study" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
+            <input type="text" v-model="updateTemplate.location" placeholder="Location of school" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 90%;"><br>
+            <div class="flex-div">
+                <div>
+                    <label for="">Date from</label><br>
+                    <input type="date" v-model="updateTemplate.begin" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%; margin-right: 10px;">
+                </div>
+                <div>
+                    <label for="">To</label><br>
+                    <input type="date" v-model="updateTemplate.end" style="padding: 15px 20px; border: 1px solid #CDCDCD; border-radius: 8px; font-size: 20px; font-weight: 500; width: 80%;">
+                </div>
+            </div>
+            <input type="checkbox" v-model="updateTemplate.isCurrently"> I currently attend here<br>
+        </div>
         <div style="text-align: right;">
             <button @click="cancel()" style="margin-top: 10px; background-color: white; border: 1px solid #1D71B8; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px;">Cancel</button>
             <button @click="save(savingMode)" style="margin-top: 10px; background-color: white; border: 1px solid #1D71B8; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px;">Save</button>
         </div>
     </div>
-    
 </template>
 
 <script>
 import {mapActions, mapGetters} from 'vuex';
+import API from '../../api';
 
 export default {
     name: 'Component6',
@@ -62,15 +81,34 @@ export default {
                 end: '',
                 isCurrently: false
             },
+            updateTemplate: {
+                id: 0,
+                schoolName: '',
+                degree: '',
+                typeOfStudy: '',
+                location: '',
+                begin: '',
+                end: '',
+                isCurrently: false,
+                resumeId: 0
+            },
             savingMode: 0,
-            educationId: 0
+            educationId: 0,
+            updateEducationId: 0
         }
     },
     props: {
         saveToStore: Boolean
     },
     methods: {
-        ...mapActions(['setComponent6Data', 'editComponent6DataById', 'removeComponent6DataById']),
+        ...mapActions([
+            'setComponent6Data', 
+            'editComponent6DataById', 
+            'removeComponent6DataById',
+            'setUpdateEducation',
+            'editUpdateEducation',
+            'removeUpdateEducationById'
+        ]),
         createNew() {
             this.savingMode = 0;
             this.$emit('hideNavigation');
@@ -80,29 +118,60 @@ export default {
         save(mode) {
             switch(mode) {
                 case 0:
-                    let obj = {
-                        schoolName: this.template.schoolName,
-                        degree: this.template.degree,
-                        typeOfStudy: this.template.typeOfStudy,
-                        location: this.template.location,
-                        beign: this.template.begin,
-                        end: this.template.end,
-                        isCurrently: this.template.isCurrently
+                    if(this.getIsUpdate == false) {
+                        let obj = {
+                            schoolName: this.template.schoolName,
+                            degree: this.template.degree,
+                            typeOfStudy: this.template.typeOfStudy,
+                            location: this.template.location,
+                            beign: this.template.begin,
+                            end: this.template.end,
+                            isCurrently: this.template.isCurrently
+                        }
+                        this.setComponent6Data(obj);
+                    } else {
+                        let obj = {
+                            id: this.updateTemplate.id,
+                            schoolName: this.updateTemplate.schoolName,
+                            degree: this.updateTemplate.degree,
+                            typeOfStudy: this.updateTemplate.typeOfStudy,
+                            location: this.updateTemplate.location,
+                            begin: this.updateTemplate.begin,
+                            end: this.updateTemplate.end,
+                            isCurrently: this.updateTemplate.isCurrently,
+                            resumeId: this.updateTemplate.resumeId
+                        }
+                        this.setUpdateEducation(obj);
                     }
-                    this.setComponent6Data(obj);
                     break;
                 case 1:
-                    let id = this.educationId;
-                    obj = {
-                        schoolName: this.template.schoolName,
-                        degree: this.template.degree,
-                        typeOfStudy: this.template.typeOfStudy,
-                        location: this.template.location,
-                        beign: this.template.begin,
-                        end: this.template.end,
-                        isCurrently: this.template.isCurrently
+                    if(this.getIsUpdate == false) {
+                        let id = this.educationId;
+                        let obj = {
+                            schoolName: this.template.schoolName,
+                            degree: this.template.degree,
+                            typeOfStudy: this.template.typeOfStudy,
+                            location: this.template.location,
+                            beign: this.template.begin,
+                            end: this.template.end,
+                            isCurrently: this.template.isCurrently
+                        }
+                        this.editComponent6DataById({id: id, obj: obj});
+                    } else {
+                        let id = this.updateEducationId;
+                        let obj = {
+                            id: this.updateTemplate.id,
+                            schoolName: this.updateTemplate.schoolName,
+                            degree: this.updateTemplate.degree,
+                            typeOfStudy: this.updateTemplate.typeOfStudy,
+                            location: this.updateTemplate.location,
+                            begin: this.updateTemplate.begin,
+                            end: this.updateTemplate.end,
+                            isCurrently: this.updateTemplate.isCurrently,
+                            resumeId: this.updateTemplate.resumeId
+                        }
+                        this.editUpdateEducation({id: id, obj: obj});
                     }
-                    this.editComponent6DataById({id: id, obj: obj});
                     break;
             }
             this.$emit('showNavigation');
@@ -115,6 +184,15 @@ export default {
             this.template.begin = '';
             this.template.end = '';
             this.template.isCurrently = '';
+            this.updateTemplate.id = 0;
+            this.updateTemplate.schoolName = '';
+            this.updateTemplate.degree = '';
+            this.updateTemplate.typeOfStudy = '';
+            this.updateTemplate.location = '';
+            this.updateTemplate.begin = '';
+            this.updateTemplate.end = '';
+            this.updateTemplate.isCurrently = '';
+            this.updateTemplate.resumeId = '';
             this.getComponentData;
         },
         cancel() {
@@ -127,18 +205,43 @@ export default {
             this.$emit('hideNavigation');
             document.querySelector('#display').style.display = 'none';
             document.querySelector('#new').style.display = 'block';
-            let entity = this.educations[id];
-            this.template.schoolName = entity.schoolName;
-            this.template.degree = entity.degree;
-            this.template.typeOfStudy = entity.typeOfStudy;
-            this.template.location = entity.location;
-            this.template.begin = entity.begin;
-            this.template.end = entity.end;
-            this.template.isCurrently = entity.isCurrently;
-            this.educationId = id;
+            if(this.getIsUpdate === false) {
+                let entity = this.educations[id];
+                this.template.schoolName = entity.schoolName;
+                this.template.degree = entity.degree;
+                this.template.typeOfStudy = entity.typeOfStudy;
+                this.template.location = entity.location;
+                this.template.begin = entity.begin;
+                this.template.end = entity.end;
+                this.template.isCurrently = entity.isCurrently;
+                this.educationId = id;
+            } else {
+                let entity = this.educations[id];
+                this.updateTemplate.id = entity.id;
+                this.updateTemplate.schoolName = entity.schoolName;
+                this.updateTemplate.degree = entity.degree;
+                this.updateTemplate.typeOfStudy = entity.typeOfStudy;
+                this.updateTemplate.location = entity.location;
+                this.updateTemplate.begin = entity.begin;
+                this.updateTemplate.end = entity.end;
+                this.updateTemplate.isCurrently = entity.isCurrently;
+                this.updateTemplate.resumeId = entity.resumeId;
+                this.updateEducationId = id;
+            }
         },
         del(id) {
-            this.removeComponent6DataById(id);
+            if(this.getIsUpdate === false) {
+                this.removeComponent6DataById(id);
+            } else {
+                let itemId = this.educations[id].id;
+                this.removeUpdateEducationById(id);
+                API.delete(`/api/Education/${itemId}`)
+                    .then(res => {
+                        console.log(res.data);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+            }
             window.location.reload();
         }
     },
@@ -150,12 +253,22 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getComponent6Data']),
+        ...mapGetters([
+            'getComponent6Data', 
+            'getIsUpdate', 
+            'getUpdateEducation'
+        ]),
         getComponentData() {
             this.educations = [];
-            this.getComponent6Data.forEach(elem => {
-                this.educations.push(elem);
-            });
+            if(this.getIsUpdate == false) {
+                this.getComponent6Data.forEach(elem => {
+                    this.educations.push(elem);
+                });
+            } else {
+                this.getUpdateEducation.forEach(elem => {
+                    this.educations.push(elem);
+                });
+            }
             console.log(this.educations);
         }
     },

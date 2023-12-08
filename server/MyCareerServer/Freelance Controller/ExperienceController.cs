@@ -39,7 +39,7 @@ namespace MyCareerServer.Freelance_Controller
             return Ok("Successful");
         }
 
-        [HttpPost("Update")]
+        [HttpPatch]
         public IActionResult UpdateExperience([FromBody] ExperienceDto experienceDto)
         {
             var experience = _mapper.Map<Experience>(experienceDto);
