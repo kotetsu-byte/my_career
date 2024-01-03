@@ -17,7 +17,7 @@
                     :dateOfBirth="template.dateOfBirth"
                     :skills="template.skills"
                     :hobbies="template.hobbies"
-                    :selfDescription="template.selfDescription"
+                    :aboutSelf="template.aboutSelf"
                     :languages="template.languages"
                     :experience="template.experience"
                     :education="template.education"
@@ -67,7 +67,7 @@ export default {
                 dateOfBirth: '',
                 skills: '',
                 hobbies: '',
-                selfDescription: '',
+                aboutSelf: '',
                 languages: [],
                 experience: [],
                 education: [],
@@ -77,7 +77,8 @@ export default {
                 instagram: '',
                 telegram: '',
                 github: '',
-                twitter: ''
+                twitter: '',
+                selectedTemplate: 0
             }
         }
     },
@@ -96,7 +97,7 @@ export default {
                 this.template.dateOfBirth = this.getComponent3Data.dateOfBirth;
                 this.template.skills = this.getComponent3Data.skills;
                 this.template.hobbies = this.getComponent3Data.hobbies;
-                this.template.selfDescription = this.getComponent3Data.selfDescription;
+                this.template.aboutSelf = this.getComponent3Data.aboutSelf;
                 this.getComponent4Data.forEach(elem => {
                     this.template.languages.push(elem);
                 });
@@ -126,7 +127,7 @@ export default {
                 this.template.dateOfBirth = this.getUpdateResume.dateOfBirth;
                 this.template.skills = this.getUpdateResume.skills;
                 this.template.hobbies = this.getUpdateResume.hobbies;
-                this.template.selfDescription = this.getUpdateResume.selfDescription;
+                this.template.aboutSelf = this.getUpdateResume.aboutSelf;
                 this.getUpdateLanguage.forEach(elem => {
                     this.template.languages.push(elem);
                 });
@@ -136,13 +137,13 @@ export default {
                 this.getUpdateEducation.forEach(elem => {
                     this.template.education.push(elem);
                 })
-                this.template.website = this.getComponent7Data.website;
-                this.template.whatsapp = this.getComponent7Data.whatsapp;
-                this.template.facebook = this.getComponent7Data.facebook;
-                this.template.instagram = this.getComponent7Data.instagram;
-                this.template.telegram = this.getComponent7Data.telegram;
-                this.template.github = this.getComponent7Data.github;
-                this.template.twitter = this.getComponent7Data.twitter;
+                this.template.website = this.getUpdateResume.website;
+                this.template.whatsapp = this.getUpdateResume.whatsapp;
+                this.template.facebook = this.getUpdateResume.facebook;
+                this.template.instagram = this.getUpdateResume.instagram;
+                this.template.telegram = this.getUpdateResume.telegram;
+                this.template.github = this.getUpdateResume.github;
+                this.template.twitter = this.getUpdateResume.twitter;
             }
         },
         getFrameByNo(number) {
@@ -169,83 +170,111 @@ export default {
             }
         },
         sendDataToBackend() {
-            let resumeObj = 
-            {
-                firstName: this.getComponent1Data.firstName,
-                lastName: this.getComponent1Data.lastName,
-                email: this.getComponent1Data.email,
-                phoneNumber: this.getComponent1Data.phoneNumber,
-                imageURL: this.getComponent1Data.photo,
-                country: this.getComponent2Data.country,
-                region: this.getComponent2Data.region,
-                street: this.getComponent2Data.street,
-                position: this.getComponent3Data.position,
-                dateOfBirth: this.getComponent3Data.dateOfBirth,
-                skills: this.getComponent3Data.skills,
-                hobbies: this.getComponent3Data.hobbies,
-                aboutSelf: this.getComponent3Data.selfDescription,
-                templateNo: this.getComponent8Data.selectedTemplate,
-                website: this.getComponent7Data.website,
-                whatsapp: this.getComponent7Data.whatsapp,
-                facebook: this.getComponent7Data.facebook,
-                instagram: this.getComponent7Data.instagram,
-                telegram: this.getComponent7Data.telegram,
-                github: this.getComponent7Data.github,
-                twitter: this.getComponent7Data.twitter,
-                userId: this.userId
-            }
-            let educationObj = this.getComponent6Data;
-            let experienceObj = this.getComponent5Data;
-            let languageObj = this.getComponent4Data;
             switch(this.getIsUpdate) {
                 case false:
-                API.post(`/api/Resume/`, resumeObj)
-                    .then(res => {
-                        let resumeId = res.data;
-                        educationObj.forEach(education => {
-                            education.resumeId = resumeId;
-                            API.post(`/api/Education/`, education)
-                            .then(res => {
-                                console.log(res.data)
-                            })
-                            .catch(err => {
-                                console.log(err);
+                    var resumeObj = 
+                    {
+                        firstName: this.getComponent1Data.firstName,
+                        lastName: this.getComponent1Data.lastName,
+                        email: this.getComponent1Data.email,
+                        phoneNumber: this.getComponent1Data.phoneNumber,
+                        photo: this.getComponent1Data.photo,
+                        country: this.getComponent2Data.country,
+                        region: this.getComponent2Data.region,
+                        street: this.getComponent2Data.street,
+                        position: this.getComponent3Data.position,
+                        dateOfBirth: this.getComponent3Data.dateOfBirth,
+                        skills: this.getComponent3Data.skills,
+                        hobbies: this.getComponent3Data.hobbies,
+                        aboutSelf: this.getComponent3Data.aboutSelf,
+                        templateNo: this.getComponent8Data.selectedTemplate,
+                        website: this.getComponent7Data.website,
+                        whatsapp: this.getComponent7Data.whatsapp,
+                        facebook: this.getComponent7Data.facebook,
+                        instagram: this.getComponent7Data.instagram,
+                        telegram: this.getComponent7Data.telegram,
+                        github: this.getComponent7Data.github,
+                        twitter: this.getComponent7Data.twitter,
+                        userId: this.userId
+                    }
+                    var educationObj = this.getComponent6Data;
+                    var experienceObj = this.getComponent5Data;
+                    var languageObj = this.getComponent4Data;
+                    API.post(`/api/Resume/`, resumeObj)
+                        .then(res => {
+                            let resumeId = res.data;
+                            educationObj.forEach(education => {
+                                education.resumeId = resumeId;
+                                API.post(`/api/Education/`, education)
+                                .then(res => {
+                                    console.log(res.data)
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                });
                             });
+                            experienceObj.forEach(experience => {
+                                experience.resumeId = resumeId;
+                                API.post(`/api/Experience/`, experience)
+                                    .then(res => {
+                                        console.log(res.data);
+                                    })
+                                    .catch(err => {
+                                        console.log(err);
+                                    })    
+                            })
+                            languageObj.forEach(language => {
+                                language.resumeId = resumeId;
+                                API.post(`/api/Language/`, language)
+                                    .then(res => {
+                                        console.log(res.data);
+                                    })
+                                    .catch(err => {
+                                        console.log(err);
+                                    })
+                            })
+                        })
+                        .catch(err => {
+                            console.log(err);
                         });
-                        experienceObj.forEach(experience => {
-                            experience.resumeId = resumeId;
-                            API.post(`/api/Experience/`, experience)
-                                .then(res => {
-                                    console.log(res.data);
-                                })
-                                .catch(err => {
-                                    console.log(err);
-                                })    
-                        })
-                        languageObj.forEach(language => {
-                            language.resumeId = resumeId;
-                            API.post(`/api/Language/`, language)
-                                .then(res => {
-                                    console.log(res.data);
-                                })
-                                .catch(err => {
-                                    console.log(err);
-                                })
-                        })
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    });
                     break;
                 case true:
-                    resumeObj.id = this.getUpdateResume.id;
+                    var resumeObj = 
+                    {
+                        id: this.getUpdateResume.id,
+                        firstName: this.getUpdateResume.firstName,
+                        lastName: this.getUpdateResume.lastName,
+                        email: this.getUpdateResume.email,
+                        phoneNumber: this.getUpdateResume.phoneNumber,
+                        photo: this.getUpdateResume.photo,
+                        country: this.getUpdateResume.country,
+                        region: this.getUpdateResume.region,
+                        street: this.getUpdateResume.street,
+                        position: this.getUpdateResume.position,
+                        dateOfBirth: this.getUpdateResume.dateOfBirth,
+                        skills: this.getUpdateResume.skills,
+                        hobbies: this.getUpdateResume.hobbies,
+                        aboutSelf: this.getUpdateResume.aboutSelf,
+                        templateNo: this.getUpdateResume.selectedTemplate,
+                        website: this.getUpdateResume.website,
+                        whatsapp: this.getUpdateResume.whatsapp,
+                        facebook: this.getUpdateResume.facebook,
+                        instagram: this.getUpdateResume.instagram,
+                        telegram: this.getUpdateResume.telegram,
+                        github: this.getUpdateResume.github,
+                        twitter: this.getUpdateResume.twitter,
+                        userId: this.userId
+                    }
+                    var educationObj = this.getUpdateEducation;
+                    var experienceObj = this.getUpdateExperience;
+                    var languageObj = this.getUpdateLanguage;
                     console.log(resumeObj);
                     API.patch(`/api/Resume`, resumeObj)
                         .then(res => {
                             console.log(res.data);
                             let resumeId = res.data;
                             this.getUpdateEducation.forEach(elem => {
-                                if((elem.id == 0) || elem.id) {
+                                if((elem.id != 0) && elem.id) {
                                     API.patch(`/api/Education`, elem)
                                         .then(res => {
                                             console.log(res.data)
@@ -264,7 +293,7 @@ export default {
                                 }
                             })
                             this.getUpdateExperience.forEach(elem => {
-                                if(elem.id != undefined) {
+                                if((elem.id != 0) && elem.id) {
                                     API.patch(`/api/Experience`, elem)
                                         .then(res => {
                                             console.log(res.data)
@@ -284,7 +313,7 @@ export default {
                                 }
                             })
                             this.getUpdateLanguage.forEach(elem => {
-                                if(elem.id != undefined) {
+                                if((elem.id != 0) && elem.id) {
                                     API.patch(`/api/Language`, elem)
                                         .then(res => {
                                             console.log(res.data)
@@ -329,7 +358,13 @@ export default {
             'getComponent8Data',
         ]),
         getComponentsData() {
-            this.getFrameByNo(this.getComponent8Data.selectedTemplate);
+            if(this.getIsUpdate === false) {
+                this.getFrameByNo(this.getComponent8Data.selectedTemplate);
+                this.template.selectedTemplate = this.getComponent8Data.selectedTemplate;
+            } else {
+                this.getFrameByNo(this.getUpdateResume.selectedTemplate);
+                this.template.selectedTemplate = this.getUpdateResume.selectedTemplate;
+            }
             this.userId = this.getCurrentUser;
             this.displayData();
             console.log(this.userId);

@@ -41,7 +41,7 @@ export default {
         saveToStore: Boolean
     },
     methods: {
-        ...mapActions(['setComapnyComponent1Data']),
+        ...mapActions(['setComapnyComponent1Data', 'setUpdateCompanyResume']),
         sendComponentDataToStore() {
             let obj = {
                 firstName: this.firstName,
@@ -49,7 +49,11 @@ export default {
                 email: this.email,
                 phoneNumber: this.phoneNumber
             };
-            this.setComapnyComponent1Data(obj);
+            if(this.getIsUpdate === false) {
+                this.setComapnyComponent1Data(obj);
+            } else {
+                this.setUpdateCompanyResume(obj);
+            }
             this.$emit('nextPrevPage', null);
         }
     },
@@ -61,12 +65,19 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getCompanyComponent1Data']),
+        ...mapGetters(['getCompanyComponent1Data', 'getIsUpdate', 'getUpdateCompanyResume']),
         getComponentData() {
-            this.firstName = this.getCompanyComponent1Data.firstName;
-            this.lastName = this.getCompanyComponent1Data.lastName;
-            this.email = this.getCompanyComponent1Data.email;
-            this.phoneNumber = this.getCompanyComponent1Data.phoneNumber;
+            if(this.getIsUpdate === false) {
+                this.firstName = this.getCompanyComponent1Data.firstName;
+                this.lastName = this.getCompanyComponent1Data.lastName;
+                this.email = this.getCompanyComponent1Data.email;
+                this.phoneNumber = this.getCompanyComponent1Data.phoneNumber;
+            } else {
+                this.firstName = this.getUpdateCompanyResume.firstName;
+                this.lastName = this.getUpdateCompanyResume.lastName;
+                this.email = this.getUpdateCompanyResume.email;
+                this.phoneNumber = this.getUpdateCompanyResume.phoneNumber;
+            }
         }
     },
     mounted() {

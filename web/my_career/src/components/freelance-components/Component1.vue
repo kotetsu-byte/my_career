@@ -49,7 +49,7 @@ export default {
         saveToStore: Boolean
     },
     methods: {
-        ...mapActions(['setComponent1Data']),
+        ...mapActions(['setComponent1Data', 'setUpdateResume']),
         addPhoto(event) {
             let reader = new FileReader();
             reader.readAsDataURL(event.target.files[0]);
@@ -57,9 +57,6 @@ export default {
                 this.photo = reader.result;
                 console.log(reader.result);
             }
-        },
-        saveImg() {
-
         },
         sendComponentDataToStore() {
             let obj = {
@@ -69,7 +66,11 @@ export default {
                 email: this.email,
                 phoneNumber: this.phoneNumber
             };
-            this.setComponent1Data(obj);
+            if(this.getIsUpdate === false) {
+                this.setComponent1Data(obj);
+            } else {
+                this.setUpdateResume(obj);
+            }
             this.$emit('nextPrevPage', null);
         }
     },
@@ -81,13 +82,24 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getComponent1Data']),
+        ...mapGetters(['getComponent1Data', 'getUpdateResume', 'getIsUpdate']),
         getComponentData() {
-            this.photo = this.getComponent1Data.photo;
-            this.firstName = this.getComponent1Data.firstName;
-            this.lastName = this.getComponent1Data.lastName;
-            this.email = this.getComponent1Data.email;
-            this.phoneNumber = this.getComponent1Data.phoneNumber;
+            if(this.getIsUpdate === false) {
+                if(this.getComponent1Data.photo !== '') {
+                    this.photo = this.getComponent1Data.photo;
+                }
+                this.firstName = this.getComponent1Data.firstName;
+                this.lastName = this.getComponent1Data.lastName;
+                this.email = this.getComponent1Data.email;
+                this.phoneNumber = this.getComponent1Data.phoneNumber;
+            } else {
+                this.photo = this.getUpdateResume.imageUrl;
+                this.firstName = this.getUpdateResume.firstName;
+                this.lastName = this.getUpdateResume.lastName;
+                this.email = this.getUpdateResume.email;
+                this.phoneNumber = this.getUpdateResume.phoneNumber;
+                console.log(this.getUpdateResume);
+            }
         }
     },
     mounted() {

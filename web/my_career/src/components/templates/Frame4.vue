@@ -53,7 +53,7 @@
                 </div>
                 <div id="about">
                     <p style="font-size: 15px; font-weight: 500; color: #776CE2;">ABOUT ME</p>
-                    <p style="font-size: 10px; font-weight: 400;">{{ selfDescription }}</p>
+                    <p style="font-size: 10px; font-weight: 400;">{{ aboutSelf }}</p>
                 </div>
                 <div id="education">
                     <p style="font-size: 15px; font-weight: 800; color: white; background-color: #776CE2;">EDUCATION</p>
@@ -125,7 +125,7 @@ export default {
         dateOfBirth: Date,
         skills: String,
         hobbies: String,
-        selfDescription: String,
+        aboutSelf: String,
         languages: Array,
         experience: Array,
         education: Array,

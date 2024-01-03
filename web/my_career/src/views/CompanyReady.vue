@@ -46,10 +46,65 @@ export default {
     data() {
         return {
             frameName: '',
-            userEmail: ''
+            userId: '',
+            template: {
+                photo: "",
+                companyName: "",
+                companyPhoneNumber: "",
+                address: "",
+                website: "",
+                whatsapp: "",
+                facebook: "",
+                instagram: "",
+                telegram: "",
+                github: "",
+                twitter: "",
+                description: "",
+                firstName: "",
+                lastName: "",
+                email: "",
+                phoneNumber: ""
+            }
         }
     },
     methods: {
+        displayData() {
+            if(this.getIsUpdate === false) {
+                this.template.photo = this.getCompanyComponent2Data.photo;
+                this.template.companyName = this.getCompanyComponent2Data.companyName;
+                this.template.companyPhoneNumber = this.getCompanyComponent2Data.companyPhoneNumber;
+                this.template.address = this.getCompanyComponent3Data.description;
+                this.template.website = this.getCompanyComponent4Data.website;
+                this.template.whatsapp = this.getCompanyComponent4Data.whatsapp;
+                this.template.facebook = this.getCompanyComponent4Data.facebook;
+                this.template.instagram = this.getCompanyComponent4Data.instagram;
+                this.template.telegram = this.getCompanyComponent4Data.telegram;
+                this.template.github = this.getCompanyComponent4Data.github;
+                this.template.twitter = this.getCompanyComponent4Data.twitter;
+                this.template.description = this.getCompanyComponent3Data.description;
+                this.template.firstName = this.getCompanyComponent1Data.firstName;
+                this.template.lastName = this.getCompanyComponent1Data.lastName;
+                this.template.email = this.getCompanyComponent1Data.email;
+                this.template.phoneNumber = this.getCompanyComponent1Data.phoneNumber;
+            } else {
+                this.template.photo = this.getUpdateCompanyResume.photo;
+                this.template.companyName = this.getUpdateCompanyResume.companyName;
+                this.template.companyPhoneNumber = this.getUpdateCompanyResume.companyPhoneNumber;
+                this.template.address = this.getUpdateCompanyResume.description;
+                this.template.website = this.getUpdateCompanyResume.website;
+                this.template.whatsapp = this.getUpdateCompanyResume.whatsapp;
+                this.template.facebook = this.getUpdateCompanyResume.facebook;
+                this.template.instagram = this.getUpdateCompanyResume.instagram;
+                this.template.telegram = this.getUpdateCompanyResume.telegram;
+                this.template.github = this.getUpdateCompanyResume.github;
+                this.template.twitter = this.getUpdateCompanyResume.twitter;
+                this.template.description = this.getUpdateCompanyResume.description;
+                this.template.firstName = this.getUpdateCompanyResume.firstName;
+                this.template.lastName = this.getUpdateCompanyResume.lastName;
+                this.template.email = this.getUpdateCompanyResume.email;
+                this.template.phoneNumber = this.getUpdateCompanyResume.phoneNumber;
+            }
+        },
         getFrameByNo(number) {
             console.log(number);
             switch(number) {
@@ -120,7 +175,7 @@ export default {
         ...mapGetters([
             'getIsUpdate',
             'getCurrentUser',
-            'getUpdateCompanyResumeId', 
+            'getUpdateCompanyResume', 
             'getCompanyComponent1Data', 
             'getCompanyComponent2Data', 
             'getCompanyComponent3Data', 
@@ -129,7 +184,8 @@ export default {
         ]),
         getCompanyComponentsData() {
             this.getFrameByNo(this.getCompanyComponent5Data.selectedTemplate);
-            this.userEmail = this.getCurrentUser;
+            this.userId = this.getCurrentUser.id;
+            this.displayData();
             console.log(this.getCompanyComponent5Data);
         }
     },

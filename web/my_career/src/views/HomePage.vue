@@ -3,14 +3,14 @@
         <div id="content">
             <div @click="createNewResume()" style="background-color: white;">
                 <div class="flex-div" style="align-items: center; justify-content: start;">
-                    <img src="../assets/icons/select/freelancer.png" alt="">
+                    <img src="../assets/icons/select/freelancer.png" style="margin-right: 10px;" alt="">
                     <span>New Resume</span>
                 </div>
             </div>
             <br><br>
             <div onclick="location.href = '/my-resumes'" style="background-color: white;">
                 <div class="flex-div" style="align-items: center; justify-content: start;">
-                    <img src="../assets/icons/select/company.png" alt="">
+                    <img src="../assets/icons/select/company.png" style="margin-right: 10px;" alt="">
                     <span>My Resumes</span>
                 </div>
             </div>

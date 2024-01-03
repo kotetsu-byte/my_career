@@ -4,14 +4,14 @@
             <div id="choice">
                 <div onclick="location.href = '/freelance'">
                     <div class="flex-div" style="align-items: center; justify-content: start;">
-                        <img src="../assets/icons/select/freelancer.png" alt="">
+                        <img src="../assets/icons/select/freelancer.png" style="margin-right: 10px;" alt="">
                         <span>Freelancer</span>
                     </div>
                 </div>
                 <br><br>
                 <div onclick="location.href = '/company'">
                     <div class="flex-div" style="align-items: center; justify-content: start;">
-                        <img src="../assets/icons/select/company.png" alt="">
+                        <img src="../assets/icons/select/company.png" style="margin-right: 10px;" alt="">
                         <span>Company</span>
                     </div>
                 </div>
@@ -75,5 +75,6 @@ export default {
     padding: 10px;
     background: white;
     border-radius: 15px;
+    border: 1px solid black;
 }
 </style>

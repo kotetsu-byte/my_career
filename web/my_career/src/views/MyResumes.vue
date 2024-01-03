@@ -1,6 +1,9 @@
 <template>
     <div class="super-container">
         <div id="container">
+            <div v-if="resumes.length === 0" style="padding: 20px; background-color: white; border: 1px solid black; border-radius: 15px;">
+                <p>No Data</p>
+            </div>
             <div class="resume" v-for="(item, index) in resumes" :key="index">
                 <div v-if="!item.companyName" @click="openResume(item.id, 'freelance')">
                     <div class="flex-div">
@@ -13,6 +16,9 @@
                     </div>
                 </div>
                 <div v-else @click="openResume(item.id, 'company')">
+                    <div v-if="!item.id">
+                        <p>No company resume</p>
+                    </div>
                     <p>{{ item.companyName }}</p>
                     <p>{{ item.companyPhoneNumber }}</p>
                     <p>{{ item.address }}</p>
@@ -32,9 +38,7 @@ export default {
     data() {
         return {
             userId: 0,
-            resumes: [
-
-            ],
+            resumes: [],
         }
     },
     props: {
@@ -78,11 +82,13 @@ export default {
                 .catch(err => {
                     console.log(err);
                 });
-            // API.get(`/api/CompanyResume/${this.userEmail}`)
-            //     .then(res => {
-            //         console.log(res.data);
-            //         this.resumes.push(this.resumes);
-            //     })
+            API.get(`/api/CompanyResume/all/${this.userId}`)
+                .then(res => {
+                    console.log(res.data);
+                    res.data.forEach(elem => {
+                        this.resumes.push(elem);
+                    })
+                })
         }
     },
     mounted() {

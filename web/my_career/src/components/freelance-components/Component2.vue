@@ -30,14 +30,18 @@ export default {
         saveToStore: Boolean
     },
     methods: {
-        ...mapActions(['setComponent2Data']),
+        ...mapActions(['setComponent2Data', 'setUpdateResume']),
         sendComponentDataToStore() {
             let obj = {
                 country: this.country,
                 region: this.region,
                 street: this.street
             };
-            this.setComponent2Data(obj);
+            if(this.getIsUpdate === false) {
+                this.setComponent2Data(obj);
+            } else {
+                this.setUpdateResume(obj);
+            }
             this.$emit('nextPrevPage', null);
         }
     },
@@ -49,11 +53,17 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getComponent2Data']),
+        ...mapGetters(['getComponent2Data', 'getIsUpdate', 'getUpdateResume']),
         getComponentData() {
-            this.country = this.getComponent2Data.country;
-            this.region = this.getComponent2Data.region;
-            this.street = this.getComponent2Data.street;
+            if(this.getIsUpdate === false) {
+                this.country = this.getComponent2Data.country;
+                this.region = this.getComponent2Data.region;
+                this.street = this.getComponent2Data.street;
+            } else {
+                this.country = this.getUpdateResume.country;
+                this.region = this.getUpdateResume.region;
+                this.street = this.getUpdateResume.street;
+            }
         }
     },
     mounted() {

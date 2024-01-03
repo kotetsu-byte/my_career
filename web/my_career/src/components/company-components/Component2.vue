@@ -32,14 +32,18 @@ export default {
         saveToStore: Boolean
     },
     methods: {
-        ...mapActions(['setComapnyComponent2Data']),
+        ...mapActions(['setComapnyComponent2Data', 'setUpdateCompanyResume']),
         sendComponentDataToStore() {
             let obj = {
                 photo: this.photo,
                 companyName: this.companyName,
                 companyPhoneNumber: this.companyPhoneNumber
             };
-            this.setComapnyComponent2Data(obj);
+            if(this.getIsUpdate === false) {
+                this.setComapnyComponent2Data(obj);                
+            } else {
+                this.setUpdateCompanyResume(obj);
+            }
             this.$emit('nextPrevPage', null);
         }
     },
@@ -51,11 +55,17 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getCompanyComponent2Data']),
+        ...mapGetters(['getCompanyComponent2Data', 'getIsUpdate', 'getUpdateCompanyResume']),
         getComponentData() {
-            this.photo = this.getCompanyComponent2Data.photo;
-            this.companyName = this.getCompanyComponent2Data.companyName;
-            this.companyPhoneNumber = this.getCompanyComponent2Data.companyPhoneNumber;
+            if(this.getIsUpdate === false) {
+                this.photo = this.getCompanyComponent2Data.photo;
+                this.companyName = this.getCompanyComponent2Data.companyName;
+                this.companyPhoneNumber = this.getCompanyComponent2Data.companyPhoneNumber;
+            } else {
+                this.photo = this.getUpdateCompanyResume.photo;
+                this.companyName = this.getUpdateCompanyResume.companyName;
+                this.companyPhoneNumber = this.getUpdateCompanyResume.companyPhoneNumber;
+            }
         }
     },
     mounted() {

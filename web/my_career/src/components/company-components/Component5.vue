@@ -164,7 +164,7 @@ export default {
         saveToStore: Boolean
     },
     methods: {
-        ...mapActions(['setCompanyComponent5Data']),
+        ...mapActions(['setCompanyComponent5Data', 'setUpdateCompanyResume']),
         select(num) {
             this.selectedTemplate = num;
             document.querySelectorAll('.frame').forEach(elem => {
@@ -176,7 +176,11 @@ export default {
             let obj = {
                 selectedTemplate: this.selectedTemplate
             };
-            this.setCompanyComponent5Data(obj);
+            if(this.getIsUpdate === false) {
+                this.setCompanyComponent5Data(obj);
+            } else {
+                this.setUpdateCompanyResume(obj);
+            }
             this.$emit('nextPrevPage', null);
         }
     },
@@ -188,11 +192,17 @@ export default {
         },
     },
     computed: {
-        ...mapGetters(['getCompanyComponent5Data']),
+        ...mapGetters(['getCompanyComponent5Data', 'getIsUpdate', 'getUpdateCompanyResume']),
         getCompanyData() {
-            if(this.getCompanyComponent5Data)
+            let templateNo;
+            if(this.getIsUpdate === false) {
+                templateNo = this.getCompanyComponent5Data.selectedTemplate;
+            } else {
+                templateNo = this.getUpdateCompanyResume.selectedTemplate;
+            }
+            if(templateNo)
             {
-                this.selectedTemplate = this.getCompanyComponent5Data.selectedTemplate;
+                this.selectedTemplate = templateNo;
                 console.log(this.selectedTemplate);
                 if(parseInt(this.selectedTemplate) > 0) {
                     this.select(this.selectedTemplate);

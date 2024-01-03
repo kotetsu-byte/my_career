@@ -22,7 +22,7 @@
             <div>
                 <div id="about">
                     <p style="background-color: #C7DAE0; font-size: 15px; font-weight: 500;">ABOUT ME</p>
-                    <p style="font-size: 12px; font-weight: 400;">{{ selfDescription }}</p>
+                    <p style="font-size: 12px; font-weight: 400;">{{ aboutSelf }}</p>
                 </div>
                 <div id="language">
                     <p style="background-color: #C7DAE0; font-size: 15px; font-weight: 500;">LANGUAGE</p>
@@ -102,7 +102,7 @@ export default {
         dateOfBirth: Date,
         skills: String,
         hobbies: String,
-        selfDescription: String,
+        aboutSelf: String,
         languages: Array,
         experience: Array,
         education: Array,

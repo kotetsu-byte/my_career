@@ -23,13 +23,17 @@ export default {
         saveToStore: Boolean
     },
     methods: {
-        ...mapActions(['setCompanyComponent3Data']),
+        ...mapActions(['setCompanyComponent3Data', 'setUpdateCompanyResume']),
         sendComponentDataToStore() {
             let obj = {
                 address: this.address,
                 description: this.description
             };
-            this.setCompanyComponent3Data(obj);
+            if(this.getIsUpdate === false) {
+                this.setCompanyComponent3Data(obj);
+            } else {
+                this.setUpdateCompanyResume(obj);
+            }
             this.$emit('nextPrevPage', null);
         }
     },
@@ -41,10 +45,15 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getCompanyComponent3Data']),
+        ...mapGetters(['getCompanyComponent3Data', 'getIsUpdate', 'getUpdateCompanyResume']),
         getComponentData() {
-            this.address = this.getCompanyComponent3Data.address;
-            this.description = this.getCompanyComponent3Data.description;
+            if(this.getIsUpdate === false) {
+                this.address = this.getCompanyComponent3Data.address;
+                this.description = this.getCompanyComponent3Data.description;
+            } else {
+                this.address = this.getUpdateCompanyResume.address;
+                this.description = this.getUpdateCompanyResume.description;
+            }
         }
     },
     mounted() {

@@ -20,7 +20,7 @@ namespace MyCareerServer.Company_Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("all/{userId}")]
         public async Task<IActionResult> GetCompanyResumes(int userId)
         {
             var resumes = await _companyResumeRepository.GetCompanyResumes(userId);

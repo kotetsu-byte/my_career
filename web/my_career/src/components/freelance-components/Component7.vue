@@ -39,7 +39,7 @@ export default {
         saveToStore: Boolean
     },
     methods: {
-        ...mapActions(['setComponent7Data']),
+        ...mapActions(['setComponent7Data', 'setUpdateResume']),
         choose(app) {
             let obj;
             switch(app) {
@@ -169,7 +169,11 @@ export default {
                 twitter: twitterLink
             };
             console.log(obj);
-            this.setComponent7Data(obj);
+            if(this.getIsUpdate === false) {
+                this.setComponent7Data(obj);
+            } else {
+                this.setUpdateResume(obj);
+            }
             this.$emit('nextPrevPage', null);
         }
     },
@@ -181,15 +185,32 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getComponent7Data']),
+        ...mapGetters(['getComponent7Data', 'getIsUpdate', 'getUpdateResume']),
         getComponentData() {
-            let website = this.getComponent7Data.website;
-            let whatsappLink = this.getComponent7Data.whatsapp;
-            let facebookLink = this.getComponent7Data.facebook;
-            let instagramLink = this.getComponent7Data.instagram;
-            let telegramLink = this.getComponent7Data.telegram;
-            let githubLink = this.getComponent7Data.github;
-            let twitterLink = this.getComponent7Data.twitter;
+            let website;
+            let whatsappLink;
+            let facebookLink;
+            let instagramLink;
+            let telegramLink;
+            let githubLink;
+            let twitterLink;
+            if(this.getIsUpdate === false) {
+                website = this.getComponent7Data.website;
+                whatsappLink = this.getComponent7Data.whatsapp;
+                facebookLink = this.getComponent7Data.facebook;
+                instagramLink = this.getComponent7Data.instagram;
+                telegramLink = this.getComponent7Data.telegram;
+                githubLink = this.getComponent7Data.github;
+                twitterLink = this.getComponent7Data.twitter;
+            } else {
+                website = this.getUpdateResume.website;
+                whatsappLink = this.getUpdateResume.whatsapp;
+                facebookLink = this.getUpdateResume.facebook;
+                instagramLink = this.getUpdateResume.instagram;
+                telegramLink = this.getUpdateResume.telegram;
+                githubLink = this.getUpdateResume.github;
+                twitterLink = this.getUpdateResume.twitter;
+            }
             if(website) {
                 this.website = website;
             }

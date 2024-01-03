@@ -186,7 +186,72 @@ const store = new Vuex.Store({
         },
         // update resume 
         setUpdateResume(state, payload) {
-            state.updateResume = payload;
+            if(payload.id !== undefined) {
+                state.updateResume.id = payload.id;
+            }
+            if(payload.photo !== undefined) {
+                state.updateResume.photo = payload.photo;
+            }
+            if(payload.firstName !== undefined) {
+                state.updateResume.firstName = payload.firstName;
+            }
+            if(payload.lastName !== undefined) {
+                state.updateResume.lastName = payload.lastName;
+            }
+            if(payload.email !== undefined) {
+                state.updateResume.email = payload.email;
+            }
+            if(payload.phoneNumber !== undefined) {
+                state.updateResume.phoneNumber = payload.phoneNumber;
+            }
+            if(payload.country !== undefined) {
+                state.updateResume.country = payload.country;
+            }
+            if(payload.region !== undefined) {
+                state.updateResume.region = payload.region;
+            }
+            if(payload.street !== undefined) {
+                state.updateResume.street = payload.street;
+            }
+            if(payload.position !== undefined) {
+                state.updateResume.position = payload.position;
+            }
+            if(payload.dateOfBirth !== undefined) {
+                state.updateResume.dateOfBirth = payload.dateOfBirth;
+            }
+            if(payload.skills !== undefined) {
+                state.updateResume.skills = payload.skills;
+            }
+            if(payload.hobbies !== undefined) {
+                state.updateResume.hobbies = payload.hobbies;                
+            }
+            if(payload.selfDescription !== undefined) {
+                state.updateResume.selfDescription = payload.selfDescription;
+            }
+            if(payload.website !== undefined) {
+                state.updateResume.website = payload.website;
+            }
+            if(payload.whatsapp !== undefined) {
+                state.updateResume.whatsapp = payload.whatsapp;
+            }
+            if(payload.facebook !== undefined) {
+                state.updateResume.facebook = payload.facebook;
+            }
+            if(payload.instagram !== undefined) {
+                state.updateResume.instagram = payload.instagram;
+            }
+            if(payload.telegram !== undefined) {
+                state.updateResume.telegram = payload.telegram;
+            }
+            if(payload.github !== undefined) {
+                state.updateResume.github = payload.github;
+            }
+            if(payload.twitter !== undefined) {
+                state.updateResume.twitter = payload.twitter;
+            }
+            if(payload.selectedTemplate !== undefined) {
+                state.updateResume.selectedTemplate = payload.selectedTemplate;
+            }
             console.log(state.updateResume);
         },
         // update education 
@@ -209,7 +274,7 @@ const store = new Vuex.Store({
             state.updateEducation.splice(payload, 1);
         },
         removeAllUpdateEducation(state) {
-            state.updateEducation = [];
+            state.updateEducation.length = 0;
         },
         // update experience 
         setUpdateExperience(state, payload) {
@@ -230,11 +295,11 @@ const store = new Vuex.Store({
             state.updateExpeirence.splice(payload, 1);
         },
         removeAllUpdateExperience(state) {
-            state.updateExpeirence = [];
+            state.updateExpeirence.length = 0;
         },
         // update language  
         setUpdateLanguage(state, payload) {
-            state.updateLanguage = [];
+            state.updateLanguage.length = 0;
             payload.forEach(elem => {
                 state.updateLanguage.push(elem);
             })
@@ -242,7 +307,57 @@ const store = new Vuex.Store({
         },
         // update company resume 
         setUpdateCompanyResume(state, payload) {
-            state.updateCompanyResume = payload;
+            if(payload.photo !== undefined) {
+                state.updateCompanyResume.photo = payload.photo;
+            }
+            if(payload.companyName !== undefined) {
+                state.updateCompanyResume.companyName = payload.companyName;
+            }
+            if(payload.companyPhoneNumber !== undefined) {
+                state.updateCompanyResume.companyPhoneNumber = payload.companyPhoneNumber;
+            }
+            if(payload.address !== undefined) {
+                state.updateCompanyResume.address = payload.address;
+            }
+            if(payload.website !== undefined) {
+                state.updateCompanyResume.website = payload.website;
+            }
+            if(payload.whatsapp !== undefined) {
+                state.updateCompanyResume.whatsapp = payload.whatsapp;
+            }
+            if(payload.facebook !== undefined) {
+                state.updateCompanyResume.facebook = payload.facebook;
+            }
+            if(payload.instagram !== undefined) {
+                state.updateCompanyResume.instagram = payload.instagram;
+            }
+            if(payload.telegram !== undefined) {
+                state.updateCompanyResume.telegram = payload.telegram;
+            }
+            if(payload.github !== undefined) {
+                state.updateCompanyResume.github = payload.github;
+            }
+            if(payload.twitter !== undefined) {
+                state.updateCompanyResume.twitter = payload.twitter;
+            }
+            if(payload.description !== undefined) {
+                state.updateCompanyResume.description = payload.description;
+            }
+            if(payload.firstName !== undefined) {
+                state.updateCompanyResume.firstName = payload.firstName;
+            }
+            if(payload.lastName !== undefined) {
+                state.updateCompanyResume.lastName = payload.lastName;
+            }
+            if(payload.email !== undefined) {
+                state.updateCompanyResume.email = payload.email;
+            }
+            if(payload.phoneNumber !== undefined) {
+                state.updateCompanyResume.phoneNumber = payload.phoneNumber;
+            }
+            if(payload.selectedTemplate !== undefined) {
+                state.updateCompanyResume.selectedTemplate = payload.selectedTemplate;
+            }
         },
         // freelance
         setSectionNo(state, payload) {
@@ -258,7 +373,7 @@ const store = new Vuex.Store({
             state.freelance.components[2] = payload
         },
         setComponent4Data(state, payload) {
-            state.freelance.languages = [];
+            state.freelance.languages.length = 0;
             payload.forEach(elem => {
                 state.freelance.languages.push(elem);
             });
@@ -280,7 +395,7 @@ const store = new Vuex.Store({
             state.freelance.experiences.splice(payload, 1);
         },
         removeAllComponent5Data(state) {
-            state.freelance.experiences = [];
+            state.freelance.experiences.length = 0;
         },
         setComponent6Data(state, payload) {
                 state.freelance.educations.push(payload);
@@ -298,7 +413,7 @@ const store = new Vuex.Store({
             state.freelance.educations.splice(payload, 1);
         },
         removeAllComponent6Data(state) {
-            state.freelance.educations = [];
+            state.freelance.educations.length = 0;
         },
         setComponent7Data(state, payload) {
             state.freelance.components[3] = payload;

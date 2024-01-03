@@ -180,16 +180,33 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getCompanyComponent4Data']),
+        ...mapGetters(['getCompanyComponent4Data', 'getIsUpdate', 'getUpdateCompanyResume']),
         getComponentData() {
             console.log(this.getCompanyComponent4Data);
-            let website = this.getCompanyComponent4Data.website || '';
-            let whatsappLink = this.getCompanyComponent4Data.whatsapp || '';
-            let facebookLink = this.getCompanyComponent4Data.facebook;
-            let instagramLink = this.getCompanyComponent4Data.instagram;
-            let telegramLink = this.getCompanyComponent4Data.telegram;
-            let githubLink = this.getCompanyComponent4Data.github;
-            let twitterLink = this.getCompanyComponent4Data.twitter;
+            let website;
+            let whatsappLink;
+            let facebookLink;
+            let instagramLink;
+            let telegramLink;
+            let githubLink;
+            let twitterLink;
+            if(this.getIsUpdate === false) {
+                website = this.getCompanyComponent4Data.website;
+                whatsappLink = this.getCompanyComponent4Data.whatsapp;
+                facebookLink = this.getCompanyComponent4Data.facebook;
+                instagramLink = this.getCompanyComponent4Data.instagram;
+                telegramLink = this.getCompanyComponent4Data.telegram;
+                githubLink = this.getCompanyComponent4Data.github;
+                twitterLink = this.getCompanyComponent4Data.twitter;
+            } else {
+                website = this.getUpdateCompanyResume.website;
+                whatsappLink = this.getUpdateCompanyResume.whatsapp;
+                facebookLink = this.getUpdateCompanyResume.facebook;
+                instagramLink = this.getUpdateCompanyResume.instagram;
+                telegramLink = this.getUpdateCompanyResume.telegram;
+                githubLink = this.getUpdateCompanyResume.github;
+                twitterLink = this.getUpdateCompanyResume.twitter;
+            }
             if(website) {
                 this.website = website;
             }

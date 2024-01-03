@@ -33,25 +33,17 @@
                     <div id="skills">
                         <p style="font-size: 20px; font-weight: 700;">Skills</p>
                         <p style="font-size: 10px; font-weight: 400;">{{ skills }}</p>
-                        <p style="font-size: 10px; font-weight: 400;">Figma</p>
-                        <p style="font-size: 10px; font-weight: 400;">Adobe XD</p>
                     </div>
                     <div id="languages">
                         <p style="font-size: 20px; font-weight: 700;">Languages</p>
                         <div v-for="(item, index) in languages" :key="index">
                             <p style="font-size: 10px; font-weight: 400;">{{ item.lang }} - {{ item.level }}</p>
                         </div>
-                        <p style="font-size: 10px; font-weight: 400;">French - level</p>
-                        <p style="font-size: 10px; font-weight: 400;">Korean - level</p>
-                        <p style="font-size: 10px; font-weight: 400;">Uzbek - level</p>
                     </div>
                     <div id="hobbies">
                         <p style="font-size: 20px; font-weight: 700;">Hobbies</p>
                         <ul style="padding-left: 20px;">
                             <li style="font-size: 11px; font-weight: 500;">{{ hobbies }}</li>
-                            <li style="font-size: 11px; font-weight: 500;">Football</li>
-                            <li style="font-size: 11px; font-weight: 500;">Music</li>
-                            <li style="font-size: 11px; font-weight: 500;">Chess</li>
                         </ul>
                     </div>
                     <div id="contacts">
@@ -68,7 +60,7 @@
                 <div style="width: 59%;">
                     <div id="about">
                         <p style="font-size: 20px; font-weight: 700;">About me</p>
-                        <p style="font-size: 10px; font-weight: 400;">{{ selfDescription }}</p>
+                        <p style="font-size: 10px; font-weight: 400;">{{ aboutSelf }}</p>
                     </div>
                     <div id="education">
                         <p style="font-size: 20px; font-weight: 700;">Education</p>
@@ -128,7 +120,7 @@ export default {
         dateOfBirth: Date,
         skills: String,
         hobbies: String,
-        selfDescription: String,
+        aboutSelf: String,
         languages: Array,
         experience: Array,
         education: Array,

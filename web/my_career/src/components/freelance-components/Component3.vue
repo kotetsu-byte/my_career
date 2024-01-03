@@ -14,7 +14,7 @@
     <input class="input w-90" type="text" v-model="skills"><br>
     <label for=""><span class="f-18-w-500">Hobbies</span></label><br>
     <input class="input w-90" type="text" v-model="hobbies"><br>
-    <textarea class="textarea" v-model="selfDescription" cols="30" rows="10" placeholder="Describe yourself to buyers"></textarea>
+    <textarea class="textarea" v-model="aboutSelf" cols="30" rows="10" placeholder="Describe yourself to buyers"></textarea>
 </template>
 
 <script>
@@ -29,23 +29,27 @@ export default {
             dateOfBirth: '',
             skills: '',
             hobbies: '',
-            selfDescription: ''
+            aboutSelf: ''
         }
     },
     props: {
         saveToStore: Boolean
     },
     methods: {
-        ...mapActions(['setComponent3Data']),
+        ...mapActions(['setComponent3Data', 'setUpdateResume']),
         sendComponentDataToStore() {
             let obj = {
                 position: this.position,
                 dateOfBirth: this.dateOfBirth,
                 skills: this.skills,
                 hobbies: this.hobbies,
-                selfDescription: this.selfDescription
+                aboutSelf: this.aboutSelf
             };
-            this.setComponent3Data(obj);
+            if(this.getIsUpdate === false) {
+                this.setComponent3Data(obj);
+            } else {
+                this.setUpdateResume(obj);
+            }
             this.$emit('nextPrevPage', null);
         }
     },
@@ -57,13 +61,21 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getComponent3Data']),
+        ...mapGetters(['getComponent3Data', 'getIsUpdate', 'getUpdateResume']),
         getComponentData() {
-            this.position = this.getComponent3Data.position;
-            this.dateOfBirth = this.getComponent3Data.dateOfBirth;
-            this.skills = this.getComponent3Data.skills;
-            this.hobbies = this.getComponent3Data.hobbies;
-            this.selfDescription = this.getComponent3Data.selfDescription;
+            if(this.getIsUpdate === false) {
+                this.position = this.getComponent3Data.position;
+                this.dateOfBirth = this.getComponent3Data.dateOfBirth;
+                this.skills = this.getComponent3Data.skills;
+                this.hobbies = this.getComponent3Data.hobbies;
+                this.aboutSelf = this.getComponent3Data.aboutSelf;
+            } else {
+                this.position = this.getUpdateResume.position;
+                this.dateOfBirth = this.getUpdateResume.dateOfBirth;
+                this.skills = this.getUpdateResume.skills;
+                this.hobbies = this.getUpdateResume.hobbies;
+                this.aboutSelf = this.getUpdateResume.aboutSelf;
+            }
         }
     },
     mounted() {

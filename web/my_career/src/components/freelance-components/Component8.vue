@@ -235,7 +235,7 @@ export default {
         saveToStore: Boolean
     },
     methods: {
-        ...mapActions(['setComponent8Data']),
+        ...mapActions(['setComponent8Data', 'setUpdateResume']),
         select(num) {
             this.selectedTemplate = num;
             document.querySelectorAll('.frame').forEach(elem => {
@@ -247,7 +247,11 @@ export default {
             let obj = {
                 selectedTemplate: this.selectedTemplate
             };
-            this.setComponent8Data(obj);
+            if(this.getIsUpdate === false) {
+                this.setComponent8Data(obj);
+            } else {
+                this.setUpdateResume(obj);
+            }
             this.$emit('nextPrevPage', null);
         }
     },
@@ -259,11 +263,17 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getComponent8Data']),
+        ...mapGetters(['getComponent8Data', 'getIsUpdate', 'getUpdateResume']),
         getComponentData() {
-            if(this.getComponent8Data)
+            let templateNo;
+            if(this.getIsUpdate === false) {
+                templateNo = this.getComponent8Data.selectedTemplate;
+            } else {
+                templateNo = this.getUpdateResume.selectedTemplate;
+            }
+            if(templateNo)
             {
-                this.selectedTemplate = this.getComponent8Data.selectedTemplate;
+                this.selectedTemplate = templateNo;
                 console.log(this.selectedTemplate);
                 if(parseInt(this.selectedTemplate) > 0) {
                     this.select(this.selectedTemplate);

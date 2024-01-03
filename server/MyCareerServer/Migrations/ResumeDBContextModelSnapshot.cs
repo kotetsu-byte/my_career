@@ -222,9 +222,6 @@ namespace MyCareerServer.Migrations
                     b.Property<string>("Hobbies")
                         .HasColumnType("text");
 
-                    b.Property<string>("ImageURL")
-                        .HasColumnType("text");
-
                     b.Property<string>("Instagram")
                         .HasColumnType("text");
 
@@ -234,11 +231,17 @@ namespace MyCareerServer.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("text");
 
+                    b.Property<string>("Photo")
+                        .HasColumnType("text");
+
                     b.Property<string>("Position")
                         .HasColumnType("text");
 
                     b.Property<string>("Region")
                         .HasColumnType("text");
+
+                    b.Property<int?>("SelectedTemplate")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Skills")
                         .HasColumnType("text");
@@ -248,9 +251,6 @@ namespace MyCareerServer.Migrations
 
                     b.Property<string>("Telegram")
                         .HasColumnType("text");
-
-                    b.Property<int?>("TemplateNo")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Twitter")
                         .HasColumnType("text");
@@ -280,11 +280,9 @@ namespace MyCareerServer.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

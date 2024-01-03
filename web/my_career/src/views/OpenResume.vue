@@ -21,7 +21,7 @@
                     :dateOfBirth="resumeData.dateOfBirth"
                     :skills="resumeData.skills"
                     :hobbies="resumeData.hobbies"
-                    :selfDescription="resumeData.aboutSelf"
+                    :aboutSelf="resumeData.aboutSelf"
                     :languages="languageData"
                     :experience="experienceData"
                     :education="educationData"
@@ -121,6 +121,7 @@ export default {
             'setComapnyComponent5Data'
         ]),
         getResumeFromServer(obj) {
+            console.log(obj);
             switch(obj.type) {
                 case 'freelance':
                     API.get(`/api/Resume/${obj.id}`)
@@ -238,91 +239,15 @@ export default {
             switch(this.resumeType) {
                 case 'freelance':
                     this.setUpdateResume(this.resumeData);
+                    console.log(this.resumeData);
                     this.setUpdateEducation(this.educationData);
                     this.setUpdateExperience(this.experienceData);
                     this.setUpdateLanguage(this.languageData);
-                    let comp1Obj = {
-                        photo: this.resumeData.imageURL,
-                        firstName: this.resumeData.firstName,
-                        lastName: this.resumeData.lastName,
-                        email: this.resumeData.email,
-                        phoneNumber: this.resumeData.phoneNumber
-                    }
-                    this.setComponent1Data(comp1Obj);
-                    let comp2Obj = {
-                        country: this.resumeData.country,
-                        region: this.resumeData.region,
-                        street: this.resumeData.street
-                    }
-                    this.setComponent2Data(comp2Obj);
-                    let comp3Obj = {
-                        position: this.resumeData.position,
-                        dateOfBirth: this.resumeData.dateOfBirth,
-                        skills: this.resumeData.skills,
-                        hobbies: this.resumeData.hobbies,
-                        selfDescription: this.resumeData.aboutSelf
-                    }
-                    this.setComponent3Data(comp3Obj);
-                    this.setComponent4Data(this.languageData);
-                    this.removeAllComponent5Data();
-                    this.experienceData.forEach(elem => {
-                        this.setComponent5Data(elem);
-                    })
-                    this.removeAllComponent6Data();
-                    this.educationData.forEach(elem => {
-                        this.setComponent6Data(elem);
-                    })
-                    let comp7Obj = {
-                        website: this.resumeData.website,
-                        whatsapp: this.resumeData.whatsapp,
-                        facebook: this.resumeData.facebook,
-                        instagram: this.resumeData.instagram,
-                        telegram: this.resumeData.telegram,
-                        github: this.resumeData.github,
-                        twitter: this.resumeData.twitter,
-                    }
-                    this.setComponent7Data(comp7Obj);
-                    let comp8Obj = {
-                        selectedTemplate: this.resumeData.templateNo
-                    }
-                    this.setComponent8Data(comp8Obj);
                     this.setSectionNo(1);
                     this.$router.push('/freelance')
                     break;
                 case 'company:':
                     this.setUpdateCompanyResume(this.companyResumeData);
-                    let company1Obj = {
-                        firstName: this.companyResumeData.firstName,
-                        lastName: this.companyResumeData.lastName,
-                        email: this.companyResumeData.email,
-                        phoneNumber: this.companyResumeData.phoneNumber,
-                    }
-                    this.setComapnyComponent1Data(company1Obj);
-                    let company2Obj = {
-                        photo: this.companyResumeData.photo,
-                        companyName: this.companyResumeData.companyName,
-                        companyPhoneNumber: this.companyResumeData.companyPhoneNumber
-                    }
-                    this.setComapnyComponent2Data(company2Obj);
-                    let company3Obj = {
-                        address: this.companyResumeData.address,
-                        description: this.companyResumeData.description
-                    }
-                    this.setComapnyComponent3Data(company3Obj);
-                    let company4Obj = {
-                        website: this.companyResumeData.website,
-                        whatsapp: this.companyResumeData.whatsapp,
-                        facebook: this.companyResumeData.facebook,
-                        instagram: this.companyResumeData.instagram,
-                        telegram: this.companyResumeData.telegram,
-                        github: this.companyResumeData.github,
-                        twitter: this.companyResumeData.twitter
-                    }
-                    this.setComapnyComponent4Data(company4Obj);
-                    let company5Obj = {
-                        selectedTemplate: this.companyResumeData.templateNo
-                    }
-                    this.setComapnyComponent5Data(company5Obj);
                     this.setCompanySectionNo(1);
                     this.router.push('/company');
                     break;
